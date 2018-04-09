@@ -1,0 +1,53 @@
+#table_new,
+#table_set {
+	border-bottom: 1px solid #EFEFEF;
+	height: auto;
+	overflow:auto;
+	box-shadow: 0 0 2px #333333;
+	border-radius: 3px;
+	margin:0 7px 0 7px;
+}
+#p_index{
+	padding-left:16px; 
+	padding-top:10px;
+	padding-bottom:10px;
+}
+#check_table{
+	margin-right:10px;
+	float:right;
+}
+#cancel_table{
+	margin-right:12px;
+	float:right;
+}
+#set_index:hover,
+#new_index:hover{
+	font-size:15px;
+}
+#num_set{
+	margin-right:12px;
+	float:right;
+}
+#input0,#input_out{
+	margin-top:15px;
+	margin-right:12px;
+	float:right;
+}
+
+.group_col,
+.input_name{
+	width:150px;
+}
+.form_input,
+.form_select{
+	height:30px
+}
+#btn_set{
+	box-shadow: 0 0 2px #333333;
+}
+#input_out:hover{
+	background-color: #b3b3b3;
+}
+.div_col:hover{
+	background-color: #b3b3b3;
+}

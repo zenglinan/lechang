@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>平台设计系统</title>
+
+<script type="text/javascript" src="../js/jquery-3.3.1.js"></script> 
+<script src="../js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="../js/jquery.pagination.min.js"></script>
+<script type="text/javascript" src="../js/project/wrap_1.js"></script>
+<script type="text/javascript" src="../js/project/wrap_2.js"></script>
+<!--wrap_3.js-->
+<script type="text/javascript" src="../js/project/wrap_4.js"></script>
+<script type="text/javascript" src="../js/project/wrap_5.js"></script>
+<script type="text/javascript" src="../js/project/wrap_6.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/data_platform.css"/>
+<link rel="stylesheet" href="../css/jquery.pagination.css" />
+<link rel="stylesheet" href="../css/wrap_2.css">
+</head>
+
+<body>
+
+<div id="header">
+  <div id="logo"><h3 style="color:#06C">平台设计系统</h3></div>
+  <div id="user">
+  <i class="fa fa-search" style="font-size:18px"></i>
+  <i class="fa fa-comment-o" style="font-size:18px"></i>
+  <i class="fa fa-bars" style="font-size:18px; margin-left:60px"></i>
+  </div>
+</div>
+
+<div id="main">
+  <div id="menu_area" >
+     <div class="panel-heading menu_heading">
+     <a href="#"><i class="fa fa-chevron-circle-left " style="font-size:20px;"></i>
+     <i class="fa fa-chevron-circle-right " style="float:right; font-size:20px; margin-right:15px;"></i></a>
+     </div>
+     <div id="menu_table">
+     
+       <!--<div class="container-fluid">
+	     <div class="row-fluid">-->
+		   <div class="span12">
+		     <ul class="nav nav-list">
+				<li class="active">
+					<a href="#" class="li_1"><i class="fa fa-minus" style="margin-right:18px;"></i>平台信息管理
+                    <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
+				</li>
+				<li>
+					<a href="http://localhost:8080/WebRoot/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
+                    <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
+				</li>
+				<li>
+					<a href="http://localhost:8080/WebRoot/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
+                    <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
+				</li>
+                <li>
+					<a href="#" class="li_4"><i class="fa fa-database" style="margin-right:15px;"></i>数据项关系管理
+                    <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
+				</li>
+				<li>
+					<a href="#" class="li_5"><i class="fa fa-check-circle" style="margin-right:15px;"></i>界面定义管理
+                    <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
+				</li>
+                <li>
+					<a href="#" class="li_6"><i class="fa fa-user-plus" style="margin-right:11px;"></i>用户管理
+                    <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
+				</li>
+			  </ul>
+            </div>
+	    
+        <!--</div>
+	  </div>-->
+    </div>
+  </div>
+  
+  <div id="container">
+  <div id="table_nav">
+  平台信息管理
+    <!--导航组件-->
+    
+    <!--<ul class="nav nav-tabs" contenteditable="true">
+	<li class="active"><a href="#">数据库</a></li>
+	<li><a href="#">导入</a></li>
+	<li><a href="#">导出 </a></li>
+    </ul>-->
+  </div>
+  
+  <!--wrap_1-->
+  <div id="wrap_1" style="display:none">1
+  </div>
+
+  <!--wrap_2-->
+  <div id="wrap_2" style="display:block">
+  <div id="p_index" style="white-space:nowrap"><label id="new_index">新建数据表</label></div>
+  <div id="table_new">
+	    <div class="panel-heading bg-primary"><!--数据库初设--></div>
+        <div class="panel-body ">
+	    <div class="form-inline col-xs-11 " style="padding-left: 0px;">
+		  <label class="form-inline col-sm-3" style="padding-left: 0px;padding-right: 0px">数据表名：&nbsp;<input id="table_name" class="form-control" style="width:60%; " type="text" /></label>
+		  <label class="form-inline col-sm-3" style="padding-left: 0px;padding-right: 0px">字段数：&nbsp;&nbsp;&nbsp;&nbsp;<input id="field_num" class="form-control" style="width:60%; " type="number" /></label>
+        <label class="col-sm-3"></label>
+        <label class="col-sm-3"><a id="chevron"><i class="fa fa-chevron-left" style="width: 15%;"></i>详细</a></label>
+        </div>
+            <div class="col-xs-1"></div>
+        <div id="table-new-2">
+            <div class="form-inline col-xs-11 " style="padding-left: 0px;">
+                <label class="control-label col-sm-3" for="table_name" style="padding-left: 0px;padding-right: 0px">表的类型：
+                    <select id="jformType" class="form-control" style="width: 60%; margin-top:5px"></select>
+                </label>
+                <label class="control-label col-sm-3" for="field_num" style="padding-left: 0px;padding-right: 0px">主键类型：
+                    <select id="jformPkType" class="form-control" style="width: 60%; margin-top:5px"></select>
+                </label>
+                <label class="control-label col-sm-3" for="table_name" style="padding-left: 0px;padding-right: 0px">表的说明：
+                    <input id="tablecontent" class="form-control" style="width: 60%; margin-top:5px" type="text" />
+                </label>
+                <label class="control-label col-sm-3" for="table_name" style="padding-left: 0px;padding-right: 0px">查询模式：
+                    <select id="querymode" class="form-control" style="width: 60%; margin-top:5px"></select>
+                </label>
+            </div>
+            <div class="col-xs-1">&nbsp;</div>
+        </div>
+
+        <hr />
+      <div>
+          <div class="col-xs-12" style="margin-top: 15px;">
+            <button id="check_table" type="button" class="btn btn-primary" >检测</button>
+            <button id="cancel_table" type="button" class="btn btn-primary" >删除</button>
+            <button id="num_set" type="button" class="btn btn-primary" >确定</button>
+          </div>
+      </div>
+        </div>
+		<div class="panel-heading bg-primary"></div>
+		<div class="panel-body " id="table_show">
+            <div id="div_set"></div>
+            <div class="br_ col-sm-12">&nbsp;</div>
+      <hr />
+      <div id="pagination3" class="page fl col-sm-12"></div> <!-- 翻页控件-->
+	    </div>
+  </div>
+  </div>
+   
+  <!--wrap_3-->
+  <div id="wrap_3" style="display:none">3
+  </div>
+  <!--wrap_4-->
+  <div id="wrap_4" style="display:none">4
+  </div>
+  <!--wrap_5-->
+  <div id="wrap_5" style="display:none">5
+  </div>
+  <!--wrap_6-->
+  <div id="wrap_6" style="display:none">6
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+            </div>
+            <div class="modal-body">按下 ESC 按钮退出。</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+</body>
+</html>
