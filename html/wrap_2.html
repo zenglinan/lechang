@@ -50,11 +50,11 @@
                     <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
 				</li>
 				<li>
-					<a href="http://localhost:8080/WebRoot/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
+					<a href="http://localhost:63342/WebRoot/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
                     <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
 				</li>
 				<li>
-					<a href="http://localhost:8080/WebRoot/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
+					<a href="http://localhost:63342/WebRoot/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
                     <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
 				</li>
                 <li>
@@ -108,17 +108,32 @@
             <div class="col-xs-1"></div>
         <div id="table-new-2">
             <div class="form-inline col-xs-11 " style="padding-left: 0px;">
-                <label class="control-label col-sm-3" for="table_name" style="padding-left: 0px;padding-right: 0px">表的类型：
+                <label class="control-label col-sm-3" for="jformType" style="padding-left: 0px;padding-right: 0px">表的类型：
                     <select id="jformType" class="form-control" style="width: 60%; margin-top:5px"></select>
                 </label>
-                <label class="control-label col-sm-3" for="field_num" style="padding-left: 0px;padding-right: 0px">主键类型：
+                <label class="control-label col-sm-3" for="jformPkType" style="padding-left: 0px;padding-right: 0px">主键类型：
                     <select id="jformPkType" class="form-control" style="width: 60%; margin-top:5px"></select>
                 </label>
-                <label class="control-label col-sm-3" for="table_name" style="padding-left: 0px;padding-right: 0px">表的说明：
+                <label class="control-label col-sm-3" for="tablecontent" style="padding-left: 0px;padding-right: 0px">表识别名：
                     <input id="tablecontent" class="form-control" style="width: 60%; margin-top:5px" type="text" />
                 </label>
-                <label class="control-label col-sm-3" for="table_name" style="padding-left: 0px;padding-right: 0px">查询模式：
+                <label class="control-label col-sm-3" for="querymode" style="padding-left: 0px;padding-right: 0px">查询模式：
                     <select id="querymode" class="form-control" style="width: 60%; margin-top:5px"></select>
+                </label>
+            </div>
+            <div class="col-xs-1">&nbsp;</div>
+            <div class="form-inline col-xs-11 " style="padding-left: 0px;">
+                <label class="control-label col-sm-3" for="jformCategory" style="padding-left: 0px;padding-right: 0px">表的目录：
+                    <select id="jformCategory" class="form-control" style="width: 60%; margin-top:5px"></select>
+                </label>
+                <label class="control-label col-sm-3" for="formTemplate" style="padding-left: 0px;padding-right: 0px">表的模板：
+                    <select id="formTemplate" class="form-control" style="width: 60%; margin-top:5px"></select>
+                </label>
+                <label class="control-label col-sm-3" for="description" style="padding-left: 0px;padding-right: 0px">表的说明：
+                    <input id="description" class="form-control" style="width: 60%; margin-top:5px" type="text" />
+                </label>
+                <label class="control-label col-sm-3" for="formTemplateMobile" style="padding-left: 0px;padding-right: 0px">Mobile：&nbsp;&nbsp;
+                    <select id="formTemplateMobile" class="form-control" style="width: 60%; margin-top:5px"></select>
                 </label>
             </div>
             <div class="col-xs-1">&nbsp;</div>
@@ -163,9 +178,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                <h4 class="modal-title" id="myModalLabel"></h4>
             </div>
-            <div class="modal-body">按下 ESC 按钮退出。</div>
+            <div class="modal-body" id="field_div"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary">提交更改</button>

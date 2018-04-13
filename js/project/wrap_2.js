@@ -166,8 +166,9 @@ function num_set(num){
             var input4 = create_input("主表", "text", "form-control form_input", "input4_" + m, 100, 6);
             var input5 = create_input("主字段", "text", "form-control form_input", "input5_" + m, 100, 6);
             var input6 = create_select("为空", select_item5, "form-control form_select", "input6_" + m, 100, 1);
-            var input7 = create_input("注释", "text", "form-control form_input", "input7_" + m, 200, 2);
-            var input8 = create_input("字段默认值", "text", "form-control form_input", "input8_" + m, 200, 2);
+            var input7 = create_input("注释", "text", "form-control form_input", "input7_" + m, 200, 4);
+            var input8 = create_input("字段默认值", "text", "form-control form_input", "input8_" + m, 200, 4);
+            var input9=create_input("识别名","text","form-control form_input","input8_"+m,200,4);
             //
             var div_o = document.createElement("div");
             div_o.setAttribute("class", "form-horizontal");
@@ -175,6 +176,9 @@ function num_set(num){
             var div_oo = document.createElement("div");
             div_oo.setAttribute("class", "col-md-3");
             div_oo.setAttribute("style", "padding-left:0px;padding-right:0px;");
+            var div_oo2=document.createElement("div");
+            div_oo2.setAttribute("class","col-md-4");
+            div_oo2.setAttribute("style","padding-left:0px;padding-right:0px;");
             div_o.appendChild(input1);
             div_o.appendChild(input2);
             div_o.appendChild(input3);
@@ -182,8 +186,10 @@ function num_set(num){
             div_oo.appendChild(input5);
             div_o.appendChild(div_oo);
             div_o.appendChild(input6);
-            div_o.appendChild(input7);
-            div_o.appendChild(input8);
+            div_oo2.appendChild(input7);
+            div_oo2.appendChild(input8);
+            div_oo2.appendChild(input9);
+            div_o.appendChild(div_oo2);
             //
             $("#set_field").append(div_o);
             div_o.setAttribute("id", "div_" + m);
@@ -242,7 +248,7 @@ function num_set(num){
 	alert("添加"+num_add+"行");
     if(num_add>0){
 		for(var i=0;i<num_add;i++){
-	    var n=parseInt(num)+parseInt(i);
+	    var n=num+i;
 		if(num==0){
 		var input1=create_input("字段名(主键）","text","form-control form_input","input1_"+n,100,2);
 		}else{
@@ -253,14 +259,18 @@ function num_set(num){
 		var input4=create_input("主表","text","form-control form_input","input4_"+n,100,6);
 		var input5=create_input("主字段","text","form-control form_input","input5_"+n,100,6);
 		var input6=create_select("为空",select_item5,"form-control form_select","input6_"+n,100,1);
-		var input7=create_input("注释","text","form-control form_input","input7_"+n,200,2);
-		var input8=create_input("字段默认值","text","form-control form_input","input8_"+n,200,2);
+		var input7=create_input("注释","text","form-control form_input","input7_"+n,200,4);
+		var input8=create_input("字段默认值","text","form-control form_input","input8_"+n,200,4);
+		var input9=create_input("识别名","text","form-control form_input","input8_"+n,200,4);
 		var div_o=document.createElement("div");
 		div_o.setAttribute("class","form-horizontal");
 		div_o.setAttribute("id","div_o");
 		var div_oo=document.createElement("div");
 		div_oo.setAttribute("class","col-md-3");
 		div_oo.setAttribute("style","padding-left:0px;padding-right:0px;");
+		var div_oo2=document.createElement("div");
+		div_oo2.setAttribute("class","col-md-4");
+		div_oo2.setAttribute("style","padding-left:0px;padding-right:0px;");
 		div_o.appendChild(input1);
 		div_o.appendChild(input2);
 		div_o.appendChild(input3);
@@ -268,8 +278,10 @@ function num_set(num){
 		div_oo.appendChild(input5);
 		div_o.appendChild(div_oo);
 		div_o.appendChild(input6);
-		div_o.appendChild(input7);
-		div_o.appendChild(input8);
+		div_oo2.appendChild(input7);
+		div_oo2.appendChild(input8);
+		div_oo2.appendChild(input9);
+		div_o.appendChild(div_oo2);
 		$("#input0").remove();
 		$("#input_out").remove();
 		$("#set_field").append(div_o);
@@ -350,20 +362,25 @@ function ajax_0(num) {
             jformPkType:$("#jformPkType").val(),
             content:$("#tablecontent").val(),
             querymode:$("#querymode").val(),
+			jformCategory:"",
+			formTemplate:"",
+			formTemplateMobile:"",
+			jformVersion:"1",
+			description:$("#description").val(),
             columns:datas(num)
         }
     };
     //数据传输
     $.ajax({
         type:"POST",
-        url: "http://localhost:8080/lechang-bpm/cgFormHeadController?doDbSynch&synMethod=normal",
+        url: "http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?doDbSynch&synMethod=normal",
         data: JSON.stringify(data_json,null,4),
         //dataType: "json",
         success: function(recieve_json){
             recieve=JSON.parse(recieve_json);
             if(recieve.success){
                 alert(recieve.msg);
-                top.location='http://localhost:8080/project_2/show_table.html#';/* 成功即跳转  */
+                //top.location='http://47.106.76.115:8080/project_2/show_table.html#';/* 成功即跳转  */
             }
         }
     });
@@ -392,7 +409,8 @@ function datas(num){
 	
 	for(j=0;j<num;j++){
 		//alert($("#input2_"+j).val());
-		setCookie("input1_"+j,$("#input1_"+j).val(),1);
+		setCookie("input9_"+j,$("#input9_"+j).val(),1);
+        setCookie("input1_"+j,$("#input1_"+j).val(),1);
 		setCookie("input2_"+j,$("#input2_"+j).val(),1);
 		setCookie("input3_"+j,$("#input3_"+j).val(),1);
 		//setCookie("input8_"+j,$("#input8_"+j).val(),1);
@@ -404,8 +422,9 @@ function datas(num){
 				mainTable:$("#input4_"+j).val(),
 				mainField:$("#input5_"+j).val(),
 				isNull:$("#input6_"+j).val(),
-				content:$("#input7_"+j).val(),
-				fieldDefault:$("input8_"+j).val()
+				description:$("#input7_"+j).val(),
+				fieldDefault:$("#input8_"+j).val(),
+				content:$("#input9_"+j).val()
 		}
 		data_array[j]=data_element;
 	}
@@ -425,7 +444,7 @@ function datas(num){
         }
 		$.ajax({
 			   type:"POST",
-			   url: "http://localhost:8080/lechang-bpm/cgFormHeadController?judge",
+			   url: "http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?judge",
 			   data: JSON.stringify(data_json),
 			   //dataType: "json",
 			   success: function(recieve_json){
@@ -444,7 +463,7 @@ function datas(num){
         }
 		$.ajax({
 			   type:"POST",
-			   url: "http://localhost:8080/lechang-bpm/cgFormHeadController?rem",
+			   url: "http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?rem",
 			   data: JSON.stringify(data_json),
 			   //dataType: "json",
 			   success: function(recieve_json){
@@ -485,24 +504,110 @@ function datas(num){
         }
     });
 
-    var data_j=[{id:1,tableName:"like"},{id:2,tableName:"CC"},{id:3,tableName:"jj"}];
-    function insert_table_div(recieve) {       //回掉函数所获json数据的处理
-    	var number=recieve.length;
+    var data_j=[{id:1,content:"嘻嘻",tableName:"xixi"},{id:2,content:"CC",tableName:"xixi"},{id:3,content:"jj",tableName:"xixi"}];
+    function insert_table_div(obj) {       //回掉函数所获json数据的处理
+    	var number=obj.length;
     	for(var j=0;j<number;j++){
     		var div_col=document.createElement("div");
     		var i_col=document.createElement("i");
     		var span_col=document.createElement("span");
     		div_col.setAttribute("class","col-xs-12 div_col");
+            div_col.setAttribute("data-toggle","modal");
+            div_col.setAttribute("data-target","#myModal");
     		i_col.setAttribute("class","fa fa-list-alt");
-    		span_col.innerHTML=recieve[j].tableName;
+            i_col.setAttribute("style","margin-right:20px;");
+    		span_col.innerHTML=obj[j].content;
+    		div_col.setAttribute("id",obj[j].id);
+    		div_col.setAttribute("name",obj[j].tableName);
     		div_col.append(i_col);
     		div_col.append(span_col);
+    		div_col.addEventListener('click',field_show);
     		$("#div_set").append(div_col);
+
 		}
     }
-    insert_table_div(data_j)
+
+    function insert_tableField_div(obj) {       //回掉函数所获json数据的处理
+        var number=obj.length;
+        for(var j=0;j<number;j++){
+            var div_col=document.createElement("div");
+            var i_col=document.createElement("i");
+            var span_col=document.createElement("span");
+            var span_col2=document.createElement("span");
+            var span_col3=document.createElement("span");
+            var span_col4=document.createElement("span");
+            div_col.setAttribute("class","col-xs-12 div_col");
+            //div_col.setAttribute("data-toggle","modal");
+            //div_col.setAttribute("data-target","#myModal");
+            i_col.setAttribute("class","fa fa-list-alt col-sm-1");
+            //i_col.setAttribute("style","margin-right:20px;");
+            //span_col.setAttribute("style","margin-right:20px;");
+            span_col.setAttribute("class","col-sm-3");
+            //span_col2.setAttribute("style","margin-right:20px;");
+            span_col2.setAttribute("class","col-sm-2");
+            //span_col3.setAttribute("style","margin-right:20px;");
+            span_col3.setAttribute("class","col-sm-3");
+            //span_col4.setAttribute("style","margin-right:20px;");
+            span_col4.setAttribute("class","col-sm-3");
+            span_col.innerHTML="字段名:"+obj[j].content;
+            span_col2.innerHTML="长度:"+obj[j].length;
+            span_col3.innerHTML="类型:"+obj[j].type;
+            span_col4.innerHTML="是否为空:"+obj[j].isNull;
+            div_col.setAttribute("id",obj[j].fieldName);
+            div_col.setAttribute("name",obj[j].fieldName);
+            div_col.append(i_col);
+            div_col.append(span_col);
+            div_col.append(span_col2);
+            div_col.append(span_col3);
+            div_col.append(span_col4);
+            //div_col.addEventListener('click',field_show);
+            $("#field_div").append(div_col);
+            $("#field_div").append("<br/>");
+
+        }
+    }
+    insert_table_div(data_j);
+    function field_show() {
+    	//alert(this.id);
+    	//$("#myModal").show();
+		$("#field_div").empty();
+		var data_x=[{length:1,content:"嘻嘻",type:"xixi",isNull:"Y",fieldName:"id"},{length:3,content:"dans",type:"tt",isNull:"N",fieldName:"ui"},{length:4,content:"安装",type:"tx",isNull:"Y",fieldName:"kd"}]
+        insert_tableField_div(data_x);          //获取当前表的字段信息，验证用
+        var data_json={
+            tableId:this.id
+        }
+		$.ajax({
+			type:"GET",
+			url:"http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?showTableField",
+			data:JSON.stringify(data_json,null,4),
+			success:function (recieve_json) {
+				recieve=JSON.parse(recieve_json);
+                if(recieve.success) {
+                    insert_tableField_div(recieve.obj);
+                }
+            }
+		})
+    }
 
     //$('#myModal').modal('show');
+
+
+    $.ajax({
+        type:"GET",
+        url: "http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?showTables",
+        data: "",
+        //dataType: "json",
+        success: function(recieve_json){
+            var recieve=JSON.parse(recieve_json);
+            if(recieve.success){
+                alert(recieve.msg);
+                insert_table_div(recieve.obj);
+            }
+        }
+    });
 })
+
+
+
 
 

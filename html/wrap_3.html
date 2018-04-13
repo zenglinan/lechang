@@ -45,11 +45,11 @@
                             <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
                     </li>
                     <li>
-                        <a href="http://localhost:8080/WebRoot/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
+                        <a href="http://localhost:63342/WebRoot/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
                             <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
                     </li>
                     <li>
-                        <a href="http://localhost:8080/WebRoot/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
+                        <a href="http://localhost:63342/WebRoot/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
                             <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
                     </li>
                     <li>
@@ -107,11 +107,17 @@
             <div id="table_data" style="display: none">
                 <div class="container-fluid">
                     <div class="control-group col-sm-12" style="margin-bottom: 20px">
-                        <div class=col-md-1>
+                        <div class="col-md-1">
                             <button id="insert" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="insert-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增缓存</button>
                         </div>
                         <div class="col-md-1">
                             <button id="cancel" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">删除</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="cancel-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">删除缓存</button>
                         </div>
                         <div class="col-md-1">
                             <button id="check" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">查找</button>
@@ -119,7 +125,7 @@
                         <div class="col-md-1">
                             <button id="replace" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">修改</button>
                         </div>
-                        <div class="col-sm-8"></div>
+                        <div class="col-md-4"></div>
                     </div>
                     <br>
                     <div class="row-fluid">
@@ -131,7 +137,7 @@
                                 <tbody>
 
                                 </tbody>
-                                 <thead>
+                              <!--   <thead>
                                             <tr>
                                                 <th>
                                                     编号
@@ -218,8 +224,9 @@
                                                     Call in to confirm
                                                 </td>
                                             </tr>
-                                        </tbody>
+                                        </tbody> -->
                             </table>
+                            <div id="pagination" class="page fl col-sm-12"></div> <!-- 翻页控件-->
                         </div>
                     </div>
                 </div>
@@ -254,7 +261,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary table-btn">
                     提交更改
                 </button>
             </div>
