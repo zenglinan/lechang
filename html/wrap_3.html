@@ -45,11 +45,11 @@
                             <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
                     </li>
                     <li>
-                        <a href="http://localhost:63342/WebRoot/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
+                        <a href="http://47.106.76.115:8080/WebRoot/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
                             <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
                     </li>
                     <li>
-                        <a href="http://localhost:63342/WebRoot/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
+                        <a href="http://47.106.76.115:8080/WebRoot/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
                             <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
                     </li>
                     <li>
@@ -110,20 +110,20 @@
                         <div class="col-md-1">
                             <button id="insert" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增</button>
                         </div>
-                        <div class="col-md-2">
-                            <button id="insert-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增缓存</button>
-                        </div>
-                        <div class="col-md-1">
-                            <button id="cancel" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">删除</button>
-                        </div>
-                        <div class="col-md-2">
-                            <button id="cancel-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">删除缓存</button>
-                        </div>
                         <div class="col-md-1">
                             <button id="check" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">查找</button>
                         </div>
-                        <div class="col-md-1">
-                            <button id="replace" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">修改</button>
+
+                        <!-- <div class="col-md-1">
+                            <button id="cancel" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">删除</button>
+                        </div> -->
+                        <div class="col-md-6 btn-group">
+                            <button id="insert-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增缓存</button>
+
+                            <button id="cancel-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">删除缓存</button>
+
+
+                            <button id="replace-accept" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">修改缓存</button>
                         </div>
                         <div class="col-md-4"></div>
                     </div>
@@ -137,94 +137,7 @@
                                 <tbody>
 
                                 </tbody>
-                              <!--   <thead>
-                                            <tr>
-                                                <th>
-                                                    编号
-                                                </th>
-                                                <th>
-                                                    产品
-                                                </th>
-                                                <th>
-                                                    交付时间
-                                                </th>
-                                                <th>
-                                                    状态
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    TB - Monthly
-                                                </td>
-                                                <td>
-                                                    01/04/2012
-                                                </td>
-                                                <td>
-                                                    Default
-                                                </td>
-                                            </tr>
-                                            <tr class="success">
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    TB - Monthly
-                                                </td>
-                                                <td>
-                                                    01/04/2012
-                                                </td>
-                                                <td>
-                                                    Approved
-                                                </td>
-                                            </tr>
-                                            <tr class="error">
-                                                <td>
-                                                    2
-                                                </td>
-                                                <td>
-                                                    TB - Monthly
-                                                </td>
-                                                <td>
-                                                    02/04/2012
-                                                </td>
-                                                <td>
-                                                    Declined
-                                                </td>
-                                            </tr>
-                                            <tr class="warning">
-                                                <td>
-                                                    3
-                                                </td>
-                                                <td>
-                                                    TB - Monthly
-                                                </td>
-                                                <td>
-                                                    03/04/2012
-                                                </td>
-                                                <td>
-                                                    Pending
-                                                </td>
-                                            </tr>
-                                            <tr class="info">
-                                                <td>
-                                                    4
-                                                </td>
-                                                <td>
-                                                    TB - Monthly
-                                                </td>
-                                                <td>
-                                                    04/04/2012
-                                                </td>
-                                                <td>
-                                                    Call in to confirm
-                                                </td>
-                                            </tr>
-                                        </tbody> -->
+
                             </table>
                             <div id="pagination" class="page fl col-sm-12"></div> <!-- 翻页控件-->
                         </div>
