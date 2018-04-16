@@ -95,7 +95,7 @@ $(".li_3").click(function(){
         }
     }
 
-    $("#pagination3").pagination({
+    /*$("#pagination3").pagination({
         currentPage: 1,// 当前页数
         totalPage: 2,// 总页数
         isShow: true,// 是否显示首尾页
@@ -107,7 +107,7 @@ $(".li_3").click(function(){
         callback: function(current) {
             // 回调,current(当前页数)
         }
-    });
+    });*/
     function page_set(current_page,total_page,page_size) {
         $("#pagination").pagination({
             currentPage: parseInt(current_page),// 当前页数
@@ -164,11 +164,7 @@ $(".li_3").click(function(){
         $(".modal-content").removeClass("modal-lg").addClass("modal-sm");
         $(".table-btn").attr("id","insert-btn");
         $("#insert-btn").bind('click',insert_btn);
-        //dlg.html("Hello <b>world</b>!");
-        //var input=create_input("yes","text","form-control","insert_input",100,12);
-        //dlg.append(input);
         for(var j=1;j<n;j++){
-            //alert(field_num);
             var input1=getCookie("input1_"+j);
             var input2=getCookie("input2_"+j);
             var input9=getCookie("input9_"+j);
@@ -180,7 +176,6 @@ $(".li_3").click(function(){
             }
             $('#dlg').append(input);
         }
-        //$('#dlg').dialog('open');
     });
 
     $("#insert-accept").click(function(){
@@ -189,14 +184,12 @@ $(".li_3").click(function(){
         dlg.empty();
         $(".table-btn").removeAttr("id");
         dlg.css("height",2*50+30+"px");
-        //dlg.css("width",700+"px");
         $("#myModalLabel").html("新增缓存区");
         $(".modal-dialog").attr("style","width:300px;");
         $(".modal-content").removeClass("modal-lg").addClass("modal-sm");
         $(".table-btn").attr("id","insert_accept-btn");
         $("#insert_accept-btn").on('click',insert_accept_btn);
         var number=data_index.length;
-        //var fields=Object.keys(data_index[0]);
         for(var j=0;j<number;j++){
             var field_s=Object.keys(data_index[j]);
             var data_s=Object.values(data_index[j]);
@@ -212,11 +205,9 @@ $(".li_3").click(function(){
                 span_col.innerHTML=field_s[i];
                 span_col2.innerHTML=data_s[i];
                 div_col.setAttribute("id",field_s[i]);
-                //div_col.setAttribute("name",obj[j].fieldName);
                 div_col.append(i_col);
                 div_col.append(span_col);
                 div_col.append(span_col2);
-                //div_col.addEventListener('click',field_show);
                 $("#dlg").append(div_col);
             }
             var div_br=document.createElement("div");
@@ -225,60 +216,20 @@ $(".li_3").click(function(){
             span_br.innerHTML=" ";
             div_br.append(span_br);
             $("#dlg").append(div_br);
-            //$("#field_div").append("<br/>");
-
         }
-
-        //$('#dlg').dialog('open');
     });
-/*
-    $("#cancel").click(function(){
-        $(".table-btn").unbind('click');
-        var dlg=$('#dlg');
-        dlg.empty();
-        $(".table-btn").removeAttr("id");
-        dlg.css("height",2*50+30+"px");
-        $("#myModalLabel").html("删除");
-        $(".table-btn").attr("id","cancel-btn");
-        $("#cancel-btn").on('click',cancel_btn);
-        //dlg.html("Hello <b>world</b>!");
-        //var input=create_input("yes","text","form-control","insert_input",100,12);
-        //dlg.append(input);
-        /*var select_item=new Array();
-        var select_item2=new Array();
-        for(var j=0;j<field_num;j++){                    //field_num注意
-            select_item[j]=getCookie("input9_"+j);
-            select_item2[j]=getCookie("input1_"+j);
-        }
-
-        //var name="字段名";
-        //var input=create_select(name,select_item,select_item2,"form-control","cancel_input0",100,12);
-        //var input2=getCookie
-        //if(input2=="int"){
-        var input=create_input("id","number","form-control","cancel_input0","cancel0",100,12);
-        //}else if(input2=="varchar"){
-        //var input2=create_input("值","text","form-control","cancel_input1","cancel1",100,12);
-        //}
-        $('#dlg').append(input);
-        //$('#dlg').append(input2);
-
-        //$('#dlg').dialog('open');
-    });
-*/
     $("#cancel-accept").click(function() {
         $(".table-btn").unbind('click');
         var dlg = $('#dlg');
         dlg.empty();
         $(".table-btn").removeAttr("id");
         dlg.css("height", 2 * 50 + 30 + "px");
-        //dlg.css("width",700+"px");
         $("#myModalLabel").html("删除缓存区");
         $(".modal-dialog").attr("style","width:900px;");
         $(".modal-content").removeClass("modal-sm").addClass("modal-lg");
         $(".table-btn").attr("id", "cancel_accept-btn");
         $("#cancel_accept-btn").on('click', cancel_accept_btn);
         var number = data_cancel.length;
-        //var fields=Object.keys(data_index[0]);
         for (var j = 0; j < number; j++) {
             var data_s = data_cancel[j];
                 var div_col = document.createElement("div");
@@ -293,12 +244,9 @@ $(".li_3").click(function(){
                 }
                 span_col.innerHTML = str;
                 div_col.setAttribute("id", data_s[j]);
-                //div_col.setAttribute("name",obj[j].fieldName);
                 div_col.append(i_col);
                 div_col.append(span_col);
-                //div_col.addEventListener('click',field_show);
                 $("#dlg").append(div_col);
-            //$("#field_div").append("<br/>");
         }
     })
 
@@ -313,9 +261,6 @@ $(".li_3").click(function(){
         $(".modal-content").removeClass("modal-lg").addClass("modal-sm");
         $(".table-btn").attr("id","check-btn");
         $("#check-btn").on('click',check_btn);
-        //dlg.html("Hello <b>world</b>!");
-        //var input=create_input("yes","text","form-control","insert_input",100,12);
-        //dlg.append(input);
         var select_item=new Array();
         var select_item2=new Array();
         for(var j=1;j<getCookie("field_num");j++){                    //field_num注意
@@ -323,16 +268,9 @@ $(".li_3").click(function(){
             select_item2[j]=getCookie("input1_"+j);
         }
         var input=create_select("字段名",select_item,select_item2,"form-control","check_input0",100,12);
-        //var input2=getCookie
-        //if(input2=="int"){
-        //var input2=create_input("����","number","form-control","insert_input"+(j+1),100,12);
-        //}else if(input2=="varchar"){
         var input2=create_input("值","text","form-control","check_input1","check21",100,12);
-        //}
         $('#dlg').append(input);
         $('#dlg').append(input2);
-
-        //$('#dlg').dialog('open');
     });
 
     $("#replace-accept").click(function () {
@@ -349,7 +287,6 @@ $(".li_3").click(function(){
         $("#replace_accept-btn").on('click', replace_accept_btn);
 
         var number = data_replace.length;
-        //var fields=Object.keys(data_index[0]);
         for (var j = 0; j < number; j++) {
             var data_s = data_replace[j];
             var div_col = document.createElement("div");
@@ -367,12 +304,9 @@ $(".li_3").click(function(){
             }
             span_col.innerHTML = str;
             div_col.setAttribute("id", data_s[j]);
-            //div_col.setAttribute("name",obj[j].fieldName);
             div_col.append(i_col);
             div_col.append(span_col);
-            //div_col.addEventListener('click',field_show);
             $("#dlg").append(div_col);
-            //$("#field_div").append("<br/>");
         }
     });
 
@@ -387,10 +321,6 @@ $(".li_3").click(function(){
         $(".modal-content").removeClass("modal-lg").addClass("modal-sm");
         $(".table-btn").attr("id","replace-btn");
         $("#replace-btn").on('click',replace_btn);
-        //dlg.html("Hello <b>world</b>!");
-        //var input=create_input("yes","text","form-control","insert_input",100,12);
-        //dlg.append(input);
-
         var select_item=new Array();
         var select_item2=new Array();
         for(var j=1;j<getCookie("field_num");j++){                    //field_num注意
@@ -401,7 +331,6 @@ $(".li_3").click(function(){
         var input2=create_input("值","text","form-control","replace_input1","replace1",100,12);
         $('#dlg').append(input1);
         $('#dlg').append(input2);
-
         var data=new Object();
         var num=$(this).attr("id");
         data["id"]=parseInt(num);
@@ -410,10 +339,8 @@ $(".li_3").click(function(){
             if(data_replace[i].id==parseInt(num)){
                 return 0;
             }
-            //alert(JSON.stringify(data_replace));
         }
         data_replace.push(data);
-        //$('#dlg').dialog('open');
     }
 
     function change_p_index() {
@@ -436,8 +363,6 @@ $(".li_3").click(function(){
             var i_col=document.createElement("i");
             var span_col=document.createElement("span");
             div_col.setAttribute("class","col-xs-12 div_col");
-            //div_col.setAttribute("data-toggle","modal");
-            //div_col.setAttribute("data-target","#myModal");
             i_col.setAttribute("class","fa fa-list-alt");
             i_col.setAttribute("style","margin-right:20px;");
             span_col.innerHTML=obj[j].content+"  /  "+obj[j].tableName;
@@ -445,7 +370,6 @@ $(".li_3").click(function(){
             div_col.setAttribute("name",obj[j].tableName);
             div_col.append(i_col);
             div_col.append(span_col);
-            //div_col.addEventListener('click',field_show);
             $("#div_set").append(div_col);
 
         }
@@ -460,9 +384,6 @@ $(".li_3").click(function(){
             setCookie("input9_"+j,obj[j].content,1);
         }
         var tr=document.createElement("tr");
-        //var th=document.createElement("th");
-        //th.innerHTML="id";
-        //tr.appendChild(th);
         for(var j=1;j<number;j++){
             //alert(obj[j].content);
             var input9 = obj[j].content+"/"+obj[j].fieldName;         //到时改为obj【j】.content
@@ -563,16 +484,7 @@ $(".li_3").click(function(){
         }
         data_index.push(data);
     }
-/*
-    function cancel_btn() {
-        var data=new Object();
-        var num=$("#cancel_input0").val();
-        alert(num);
-        data["id"]=num;
-        data_cancel.push(data);
-        alert(JSON.stringify(data_cancel,null,4));
-    }
-*/
+
     function check_btn() {
         var field_check=$("#check_input0").val();
         var data_check=$("#check_input1").val();
@@ -590,13 +502,17 @@ $(".li_3").click(function(){
             data:JSON.stringify(data_json,null,4),
             contentType:"application/json",
             success:function (recieve) {
-                if(recieve.success){
-                    data_table_recieve=recieve.obj;
-                    $("tbody").empty();
-                    insert_table_data(recieve.obj);
-                    var map=recieve.attributes;
-                    setCookie("totalNum",map.page.totalNum,1);
-                    page_set(map.page.currentPage,map.page.totalPage,map.page.pageSize);
+                if(recieve.success) {
+                    if (recieve.obj.length != 0) {
+                        data_table_recieve = recieve.obj;
+                        $("tbody").empty();
+                        insert_table_data(recieve.obj);
+                        var map = recieve.attributes;
+                        setCookie("totalNum", map.page.totalNum, 1);
+                        page_set(map.page.currentPage, map.page.totalPage, map.page.pageSize);
+                    }else {
+                        alert("匹配项不存在");
+                    }
                 }
             }
         })
@@ -623,6 +539,8 @@ $(".li_3").click(function(){
             success:function (recieve) {
                 if (recieve.success) {
                     alert(recieve.msg);
+                    data_index=[];
+                    $("#dlg").empty();
                     flash_table();
                 }
             }
@@ -698,18 +616,14 @@ $(".li_3").click(function(){
         change_p_index();
         $("#table_new").attr("style", "display:none;");
         $("#table_data").attr("style", "display:block;");
-        //alert($(this).attr('name'));
-        //insert_tableField(data_x);             //验证用---------------------------------------
         setCookie("table_name", $(this).attr('name'), 1);
         $.ajax({
             type: "GET",
             url: "http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?showTableField",
             data: {tableId: $(this).attr('id')},
             success: function (recieve) {
-                //recieve=JSON.parse(recieve_json);
                 if (recieve.success) {
                     data_field_recieve=recieve.obj;
-                    //alert(JSON.stringify(data_field_recieve));
                     insert_tableField(recieve.obj);
                 }
             }

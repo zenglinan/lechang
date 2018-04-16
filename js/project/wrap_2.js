@@ -65,13 +65,10 @@ function select_add(select,select_array){
 		select.append(new Option(select_array[i],select_array[i]));
 	}
 }
-	var select1=new Array();
-	var select2=new Array();
-	var select3=new Array();
 	
-	select1=["1","2"];
-	select2=["NATIVE","。。。"];
-	select3=["single","。。。"];
+	var select1=["1","2"];
+	var select2=["NATIVE","。。。"];
+	var select3=["single","。。。"];
 	select_add($("#jformType"),select1);
 	select_add($("#jformPkType"),select2);
 	select_add($("#querymode"),select3);
@@ -87,17 +84,10 @@ function num_set(num){
     p_index.append(p_sym);
     p_index.append(p_set);
 	alert("正在加载..");
-	
-    //
+
 	var select_item=new Array();
-	var select_item2=new Array();
-	var select_item3=new Array();
-	var select_item4=new Array();
 	var select_item5=new Array();
 	select_item=["string","int"];
-	select_item2=["1","2"];
-	select_item3=["1","2"];
-	select_item4=["1","2"];
 	select_item5=["Y","N"];
 	
 	
@@ -174,7 +164,6 @@ function num_set(num){
             //
             var div_o = document.createElement("div");
             div_o.setAttribute("class", "form-horizontal");
-            //div_o.setAttribute("id", "div_o"+j);
             var div_oo = document.createElement("div");
             div_oo.setAttribute("class", "col-md-3");
             div_oo.setAttribute("style", "padding-left:0px;padding-right:0px;");
@@ -315,48 +304,32 @@ function num_set(num){
         $("#input7_0").attr("value", " ").attr("readonly", true);
         $("#input8_0").attr("value", " ").attr("readonly", true);
         $("#input9_0").attr("value", " ").attr("readonly", true);
-		$("#input0").click(function(){
-			if ($("#table_name").val()!="" && $("#table_name").val()!=null){
-	    		setCookie("table_name",$("#table_name").val(),1);
-	    	if (num >0){
-	    		alert(n);
-	    		setCookie("field_num",n+1,1);
-	    		}
-	    	}
-	    	ajax_0(n+1);   //ajax发送
-		/* $.ajax({       //刷新页面请求
-                type:"post",
-                url: "D:\Workspaces\MyEclipse10\project_2\WebRoot\html\design_platform.html",
-                data: data_j,
-                dataType: "json",
-                cache:"false",
-                async:"true",
-                success: function(recieve_json){
-                    alert("right");
-                    recieve=JSON.parse(recieve_json);
-                    if(recieve.success){
-                        alert(recieve.msg);
-                        //top.location='http://localhost:8080/project_2/show_table.html#';
-					}
-					}
-				});*/
-            //insert_table_div(data_j);
-		 });
-		$("#input_out").click(function () {
-            var p_index=$("#p_index");
-            p_index.empty();
-            var p_set=document.createElement("label");
-            p_set.innerHTML="新建数据表";
-            p_set.setAttribute("id","new_index");
-            p_index.append(p_set);
-            $("#table_set").remove();
-            $("#table_new").attr("style","display:block");
-            $("#num_set").removeAttr("disabled");
-        });
-	   };
+		$("#input0").click(function() {
+            if ($("#table_name").val() != "" && $("#table_name").val() != null) {
+                setCookie("table_name", $("#table_name").val(), 1);
+                if (num > 0) {
+                    alert(n);
+                    setCookie("field_num", n + 1, 1);
+                }
+            }
+            ajax_0(n + 1);   //ajax发送
+
+            $("#input_out").click(function () {
+                var p_index = $("#p_index");
+                p_index.empty();
+                var p_set = document.createElement("label");
+                p_set.innerHTML = "新建数据表";
+                p_set.setAttribute("id", "new_index");
+                p_index.append(p_set);
+                $("#table_set").remove();
+                $("#table_new").attr("style", "display:block");
+                $("#num_set").removeAttr("disabled");
+            });
+        })
 	   num=parseInt(num)+parseInt(num_add);//更新
 	   };
-       });
+       }
+    });
 
 }
 
@@ -377,18 +350,14 @@ function ajax_0(num) {
         }
     };
     //数据传输
-	//var dj=JSON.stringify(data_json,null,4);
     $.ajax({
         type:"POST",
         url: "http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?doDbSynch&synMethod=normal",
         data: JSON.stringify(data_json,null,4),
-        //dataType: "json",
 		contentType:"application/json;charset=UTF-8",
         success:function (recieve) {
-            //recieve=JSON.parse(recieve_json);
             if(recieve.success){
                 alert(recieve.msg);
-                //top.location='http://47.106.76.115:8080/project_2/show_table.html#';/* 成功即跳转  */
             }
         }
     });
@@ -399,7 +368,6 @@ function setCookie(cname,cvalue,exdays){
 	d.setTime(d.getTime()+(exdays*24*60*60*1000));
 	var expires = "expires="+d.toGMTString();
 	document.cookie = cname+"="+cvalue+"; "+expires;
-	//alert("?");
 }
 
 function getCookie(cname){
@@ -415,12 +383,10 @@ function getCookie(cname){
 function datas(num){
 	var data_array=new Array();
 	for(var j=0;j<num;j++){
-		//alert($("#input2_"+j).val());
 		setCookie("input9_"+j,$("#input9_"+j).val(),1);
         setCookie("input1_"+j,$("#input1_"+j).val(),1);
 		setCookie("input2_"+j,$("#input2_"+j).val(),1);
 		setCookie("input3_"+j,$("#input3_"+j).val(),1);
-		//setCookie("input8_"+j,$("#input8_"+j).val(),1);
 		var data_element={
 				id:(j+1).toString(),
 				fieldName:$("#input1_"+j).val(),
@@ -463,9 +429,7 @@ function datas(num){
 			   type:"POST",
 			   url: "http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?judge",
 			   data: {tableName:name},
-			   //dataType: "json",
             success:function (recieve) {
-                //recieve=JSON.parse(recieve_json);
 			     if(recieve.success){
 			     	alert(recieve.msg);
 			     }
@@ -483,9 +447,7 @@ function datas(num){
 			   url: "http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?rem",
 			   data: JSON.stringify(data_json,null,4),
 				contentType:"application/json",
-			   //dataType: "json",
             success:function (recieve) {
-                //recieve=JSON.parse(recieve_json);
 			     if(recieve.success){
 			     	alert(recieve.msg);
 			     }
@@ -556,17 +518,10 @@ function datas(num){
             var span_col3=document.createElement("span");
             var span_col4=document.createElement("span");
             div_col.setAttribute("class","col-xs-12 div_col");
-            //div_col.setAttribute("data-toggle","modal");
-            //div_col.setAttribute("data-target","#myModal");
             i_col.setAttribute("class","fa fa-list-alt col-sm-1");
-            //i_col.setAttribute("style","margin-right:20px;");
-            //span_col.setAttribute("style","margin-right:20px;");
             span_col.setAttribute("class","col-sm-3");
-            //span_col2.setAttribute("style","margin-right:20px;");
             span_col2.setAttribute("class","col-sm-2");
-            //span_col3.setAttribute("style","margin-right:20px;");
             span_col3.setAttribute("class","col-sm-3");
-            //span_col4.setAttribute("style","margin-right:20px;");
             span_col4.setAttribute("class","col-sm-3");
             span_col.innerHTML="字段名:"+obj[j].content+"/"+obj[j].fieldName;
             span_col2.innerHTML="长度:"+obj[j].length;
@@ -579,26 +534,19 @@ function datas(num){
             div_col.append(span_col2);
             div_col.append(span_col3);
             div_col.append(span_col4);
-            //div_col.addEventListener('click',field_show);
             $("#field_div").append(div_col);
             $("#field_div").append("<br/>");
 
         }
     }
-    //insert_table_div(data_j);
     function field_show() {
-    	//alert(this.id);
-    	//$("#myModal").show();
 		$("#field_div").empty();
 		$(".modal-header").html("字段信息");
-		//var data_x=[{length:1,content:"嘻嘻",type:"xixi",isNull:"Y",fieldName:"id"},{length:3,content:"dans",type:"tt",isNull:"N",fieldName:"ui"},{length:4,content:"安装",type:"tx",isNull:"Y",fieldName:"kd"}]
-        //insert_tableField_div(data_x);          //获取当前表的字段信息，验证
 		$.ajax({
 			type:"GET",
 			url:"http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?showTableField",
 			data:{tableId:$(this).attr("id")},
             success:function (recieve) {
-                //recieve=JSON.parse(recieve_json);
                 if(recieve.success) {
                     insert_tableField_div(recieve.obj);
                 }
@@ -606,18 +554,14 @@ function datas(num){
 		})
     }
 
-    //$('#myModal').modal('show');
 
 
     $.ajax({
         type:"GET",
         url: "http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?showTables",
         data: "",
-        //dataType: "json",
         success:function (recieve) {
-            //recieve=JSON.parse(recieve_json);
             if(recieve.success){
-                //alert(recieve.msg);
                 insert_table_div(recieve.obj);
             }
         }
