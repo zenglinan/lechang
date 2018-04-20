@@ -1,5 +1,18 @@
 // JavaScript Document
 $(document).ready(function(){
+	
+//-----------------------实验用--------------------------------
+	function add_input() {
+    }
+    add_input.prototype={
+		
+	}
+	
+	function add_div() {
+
+    }
+//------------------------全局---------------------------------
+	var field_data=new Array(); //字段对象数组
 
 //-----------------------CSS实现-------------------------------
 
@@ -163,7 +176,7 @@ function num_set(num){
             var input9=create_input("识别名","text","form-control form_input","input9_"+m,200,4);
             //
             var div_o = document.createElement("div");
-            div_o.setAttribute("class", "form-horizontal");
+            div_o.setAttribute("class", "form-horizontal  read_only");
             var div_oo = document.createElement("div");
             div_oo.setAttribute("class", "col-md-3");
             div_oo.setAttribute("style", "padding-left:0px;padding-right:0px;");
@@ -219,8 +232,9 @@ function num_set(num){
                     setCookie("field_num", num, 1);
                 }
             }
-            ajax_0(num);   //ajax发送
+            //ajax_0(num);   //ajax发送
         });
+
         $("#input_out").click(function () {    //退出按钮
             var p_index=$("#p_index");
             p_index.empty();
@@ -255,7 +269,7 @@ function num_set(num){
 		var input8=create_input("字段默认值","text","form-control form_input","input8_"+n,200,4);
 		var input9=create_input("识别名","text","form-control form_input","input9_"+n,200,4);
 		var div_o=document.createElement("div");
-		div_o.setAttribute("class","form-horizontal");
+		div_o.setAttribute("class","form-horizontal  read_only");
 		div_o.setAttribute("id","div_o");
 		var div_oo=document.createElement("div");
 		div_oo.setAttribute("class","col-md-3");
@@ -303,16 +317,21 @@ function num_set(num){
         $("#input5_0").attr("value", " ").attr("readonly", true);
         $("#input7_0").attr("value", " ").attr("readonly", true);
         $("#input8_0").attr("value", " ").attr("readonly", true);
-        $("#input9_0").attr("value", " ").attr("readonly", true);
-		$("#input0").click(function() {
-            if ($("#table_name").val() != "" && $("#table_name").val() != null) {
-                setCookie("table_name", $("#table_name").val(), 1);
-                if (num > 0) {
-                    alert(n);
-                    setCookie("field_num", n + 1, 1);
-                }
-            }
-            ajax_0(n + 1);   //ajax发送
+        $("#input9_0").attr("value", " ").attr("readonly", true)
+		if ($("#table_name").val() != "" && $("#table_name").val() != null) {
+			setCookie("table_name", $(".input_name").val(), 1);
+			if (num > 0) {
+				alert(n);
+				setCookie("field_num", n + 1, 1);
+			}
+		}
+		if($("#input1_1").attr("readonly")=="readonly"){
+			$("#input0").bind('click',ajax_1);
+		}else{
+            $("#input0").bind('click',ajax_0);
+
+        }
+            //ajax_0(n + 1);   //ajax发送
 
             $("#input_out").click(function () {
                 var p_index = $("#p_index");
@@ -325,7 +344,7 @@ function num_set(num){
                 $("#table_new").attr("style", "display:block");
                 $("#num_set").removeAttr("disabled");
             });
-        })
+
 	   num=parseInt(num)+parseInt(num_add);//更新
 	   };
        }
@@ -333,10 +352,11 @@ function num_set(num){
 
 }
 
-function ajax_0(num) {
+function ajax_0() {
+	var num=getCookie("field_num");
     var data_json={
         cgFormHead:{
-            tableName:$("#table_name").val(),
+            tableName:$(".input_name").val(),
             jformType:parseInt($("#jformType").val()),
             jformPkType:$("#jformPkType").val(),
             content:$("#tablecontent").val(),
@@ -362,6 +382,37 @@ function ajax_0(num) {
         }
     });
 }
+
+    function ajax_1() {
+        var num=getCookie("field_num");
+        var data_json={
+            cgFormHead:{
+                tableName:getCookie("table_name"),
+                jformType:parseInt($("#jformType").val()),
+                jformPkType:$("#jformPkType").val(),
+                content:getCookie("table_content"),
+                querymode:$("#querymode").val(),
+                jformCategory:" ",
+                formTemplate:" ",
+                formTemplateMobile:" ",
+                jformVersion:"1",
+                description:$("#description").val(),
+                columns:datas(num)
+            }
+        };
+        //数据传输
+        $.ajax({
+            type:"POST",
+            url: "http://47.106.76.115:8080/lechang-bpm/cgFormHeadController?doAlter&synMethod=normal",
+            data: JSON.stringify(data_json,null,4),
+            contentType:"application/json;charset=UTF-8",
+            success:function (recieve) {
+                if(recieve.success){
+                    alert(recieve.msg);
+                }
+            }
+        });
+    }
 
 function setCookie(cname,cvalue,exdays){
 	var d = new Date();
@@ -421,7 +472,27 @@ function datas(num){
 		var num = $("#field_num").val();
 		$("#set_field").empty();
 		num_set(num);
+		$("#input0").unbind('click');
+		$("#input0").bind('click',ajax_0);
 	});
+
+	$("#table_add").click(function () {
+        $("#set_field").empty();
+        num_set(field_data.length-1);
+        $(".input_name").attr("value",getCookie("table_name"));
+        for (var i=1;i<field_data.length-1;i++){
+        	$("#input1_"+i).attr("value",field_data[i].fieldName);
+            $("#input2_"+i+" > option[value='"+field_data[i].type+"']").attr("selected",true);
+        	$("#input3_"+i).attr("value",field_data[i].length);
+        	$("#input6_"+i).attr("value",field_data[i].isNull);
+        	$("#input9_"+i).attr("value",field_data[i].content);
+        	$("#div_"+i+" > div > input").attr('readonly',true);
+        	$("#div_"+i+" > div > select").attr('disabled',true);
+            $("#div_"+i+" > div > div > input").attr('readonly',true);
+		}
+        $("#input0").unbind('click');
+        $("#input0").bind('click',ajax_1);
+	})
 	
 	$("#check_table").click(function(){
 		var name = $("#table_name").val();
@@ -498,6 +569,7 @@ function datas(num){
     		i_col.setAttribute("class","fa fa-list-alt");
             i_col.setAttribute("style","margin-right:20px;");
     		span_col.innerHTML=obj[j].content+"  /  "+obj[j].tableName;
+    		span_col.setAttribute("name",obj[j].content);
     		div_col.setAttribute("id",obj[j].id);
     		div_col.setAttribute("name",obj[j].tableName);
     		div_col.append(i_col);
@@ -506,6 +578,10 @@ function datas(num){
     		$("#div_set").append(div_col);
 
 		}
+    }
+
+    function fill_field(obj) {
+
     }
 
     function insert_tableField_div(obj) {       //回掉函数所获json数据的处理
@@ -541,6 +617,9 @@ function datas(num){
     }
     function field_show() {
 		$("#field_div").empty();
+		//alert(this.attr('name'));
+        setCookie("table_name", $(this).attr('name'), 1);
+        setCookie("table_content", $(this).find("span").attr('name'), 1);
 		$(".modal-header").html("字段信息");
 		$.ajax({
 			type:"GET",
@@ -548,6 +627,7 @@ function datas(num){
 			data:{tableId:$(this).attr("id")},
             success:function (recieve) {
                 if(recieve.success) {
+                	field_data=recieve.obj;
                     insert_tableField_div(recieve.obj);
                 }
             }

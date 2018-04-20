@@ -1,0 +1,89 @@
+/* CSS Document */
+#header {
+	position: absolute;
+	width: 100%;
+	/*border: 1px solid #06C;*/
+	height: 50px;
+	background-color:#F8F8F8;
+}
+#logo{
+	width: 18.5%;
+	height: 100%;
+	text-align:center;
+	margin-left:18px;
+	float:left;
+	/*border: 1px solid #06C;*/
+}
+#user{
+	width: 10%;
+	height: 100%;
+    margin-left:16px;
+	padding-top:25px;
+	float:right;
+}
+
+#main {
+	position: absolute;
+	width: 100%;
+	border-top: 1px solid #CCC;
+	height: 665px;
+	top:50px;
+	background-color:#F6F6F6;
+	/*background-image:url(../images/foxtail.png);*/
+	/*background-image:url(../images/presence-ii.png);*/
+}
+#menu_area{
+	width: 17%;
+	/*border: 1px solid #06C;*/
+	padding:2px;
+	height: 650px;
+	float: left;
+	margin-left:28px;
+	margin-top:12px;
+	background-color:#001529;
+}
+#menu_table{
+	/*border: 4px solid #FFF;*/
+	box-shadow: 0 0 2px #444444;
+}
+.span12 ul li{
+	margin:0px;
+	/*border-bottom: 1px solid #EFEFEF;
+	/*background-color:#F6F6F6;*/
+}
+#container {
+	width: 78.8%;
+	/*border: 1px solid #06C;*/
+	height: 650px;
+	float: right;
+	overflow: auto;
+	margin-top: 12px;
+	background-color: #FFF;
+	/*border-radius: 5px;*/
+	margin-right:12px;
+}
+#table_nav {
+	width: 99.6%;
+	height: 50px;
+	padding: 14px;
+	margin: 2px;
+	box-shadow: 0 0 3px #97928F;
+	font-weight:600;
+	font-size: 16px;
+	color:#666;
+}
+
+.div_col{
+	width: 99.6%;
+	height: 30px;
+	padding: 8px;
+	margin: 2px;
+	box-shadow: 0 0 5px #97928F;
+	font-weight:600;
+	font-size: 14px;
+	color:#666;
+}
+
+.br_{
+    height: 15px;
+}
