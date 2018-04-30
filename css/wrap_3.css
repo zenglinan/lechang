@@ -1,2 +1,5 @@
 /* CSS Document */
+.insertThead > tr > th{
+    font-size: small;
+}
 

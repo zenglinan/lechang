@@ -20,12 +20,26 @@
 </head>
 <body>
 <div id="header">
-    <div id="logo"><h3 style="color:#06C">平台设计系统</h3></div>
-    <div id="user">
-        <i class="fa fa-search" style="font-size:18px"></i>
-        <i class="fa fa-comment-o" style="font-size:18px"></i>
-        <i class="fa fa-bars" style="font-size:18px; margin-left:60px"></i>
-    </div>
+  <div id="logo"><h3 style="color:#06C">平台设计系统</h3></div>
+  <div id="user">
+      <div class="col-sm-2">
+          <i class="fa fa-search" ></i>
+      </div>
+      <div class="col-sm-2">
+          <i class="fa fa-comment-o"></i>
+      </div>
+      <div class="col-sm-7 " id="user_menu">
+      <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown" style="margin-left: 20px"></i>
+              <ul class="dropdown-menu pull-right" role="menu">
+                  <li><a href="#">选项一</a></li>
+                  <li><a href="#">选项二</a></li>
+                  <li class="divider"></li>
+                  <li><a href="http://47.106.76.115:8080/lechang-bpm/logout.action">注销</a></li>
+                  <li><a href="#">退出</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
 </div>
 
 <div id="main">
@@ -45,11 +59,11 @@
                             <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
                     </li>
                     <li>
-                        <a href="http://47.106.76.115:8080/WebRoot/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
+                        <a href="http://47.106.76.115:8080/lechang-bpm/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
                             <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
                     </li>
                     <li>
-                        <a href="http://47.106.76.115:8080/WebRoot/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
+                        <a href="http://47.106.76.115:8080/lechang-bpm/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
                             <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
                     </li>
                     <li>
@@ -107,35 +121,34 @@
             <div id="table_data" style="display: none">
                 <div class="container-fluid">
                     <div class="control-group col-sm-12" style="margin-bottom: 20px">
-                        <div class="col-md-1">
+                        <div class="col-sm-1">
                             <button id="insert" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增</button>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-sm-1">
                             <button id="check" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">查找</button>
+                        </div>
+                        <div class="col-sm-1">
+                            <button id="export" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">导出</button>
                         </div>
 
                         <!-- <div class="col-md-1">
                             <button id="cancel" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">删除</button>
                         </div> -->
-                        <div class="col-md-6 btn-group">
-                            <button id="insert-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增缓存</button>
-
+                        <div class="col-sm-4 btn-group">
+                            <!--<button id="insert-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增缓存</button>-->
                             <button id="cancel-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">删除缓存</button>
-
 
                             <button id="replace-accept" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">修改缓存</button>
                         </div>
-                        <div class="col-md-4"></div>
+                        <div class="col-sm-5"></div>
                     </div>
                     <br>
                     <div class="row-fluid">
                         <div class="col-md-12">
                             <table class="table">
-                                <thead>
-
+                                <thead class="data_show">
                                 </thead>
-                                <tbody>
-
+                                <tbody class="data_show">
                                 </tbody>
 
                             </table>

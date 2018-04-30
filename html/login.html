@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>平台登录</title>
+
+<script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+<script type="text/javascript" src="../js/project/login.js"></script> 
+<link rel="stylesheet" type="text/css" href="../css/login.css"/>
+
+    <script type="text/javascript">
+        $(function(){
+            $(".login_bg").height($(window).height());
+        });
+    </script> 
+</head>
+
+<body>
+
+<div class="login_bg"> 
+    <form  class="login_wrap" action="/lechang-bpm/loginController/login" method="post">
+        <div class="login_title"><label><i class="fa fa-user-circle" style="font-size:60px; margin-right:10px"></i></label></div>
+        <hr />
+        <div class="form-inline">
+        <label class="username form-inline">Username<input class="input_username form-control required" id="username" name="username" type="text" placeholder="邮箱/手机号"/></label>
+        </div>
+        <div class="form-inline">
+        <label class="password form-inline">Password<input class="input_password form-control required" id="password" name="password" type="password" placeholder="请输入密码"/></label><br />
+        </div>
+        <button class="btn btn-primary btn_login" type="submit">Login</button><br />
+    </form>
+</div>
+
+</body>
+</html>

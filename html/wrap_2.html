@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>平台设计系统</title>
 
-<script type="text/javascript" src="../js/jquery-3.3.1.js"></script> 
+<script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
 <script src="../js/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
@@ -27,9 +27,23 @@
 <div id="header">
   <div id="logo"><h3 style="color:#06C">平台设计系统</h3></div>
   <div id="user">
-  <i class="fa fa-search" style="font-size:18px"></i>
-  <i class="fa fa-comment-o" style="font-size:18px"></i>
-  <i class="fa fa-bars" style="font-size:18px; margin-left:60px"></i>
+      <div class="col-sm-2">
+          <i class="fa fa-search" ></i>
+      </div>
+      <div class="col-sm-2">
+          <i class="fa fa-comment-o"></i>
+      </div>
+      <div class="col-sm-7 " id="user_menu">
+      <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown" style="margin-left: 20px"></i>
+              <ul class="dropdown-menu pull-right" role="menu">
+                  <li><a href="#">选项一</a></li>
+                  <li><a href="#">选项二</a></li>
+                  <li class="divider"></li>
+                  <li><a href="http://47.106.76.115:8080/lechang-bpm/logout.action">注销</a></li>
+                  <li><a href="#">退出</a></li>
+              </ul>
+          </div>
+      </div>
   </div>
 </div>
 
@@ -50,11 +64,11 @@
                     <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
 				</li>
 				<li>
-					<a href="http://47.106.76.115:8080/WebRoot/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
+					<a href="http://47.106.76.115:8080/lechang-bpm/html/wrap_2.html" class="li_2"><i class="fa fa-edit" style="margin-right:15px;"></i>数据表定义管理
                     <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
 				</li>
 				<li>
-					<a href="http://47.106.76.115:8080/WebRoot/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
+					<a href="http://47.106.76.115:8080/lechang-bpm/html/wrap_3.html" class="li_3"><i class="fa fa-table" style="margin-right:15px;"></i>数据信息管理
                     <i class="fa fa-angle-down" style="float:right; font-size:18px"></i></a>
 				</li>
                 <li>
@@ -153,7 +167,7 @@
             <div id="div_set"></div>
             <div class="br_ col-sm-12">&nbsp;</div>
       <hr />
-      <div id="pagination3" class="page fl col-sm-12"></div> <!-- 翻页控件-->
+      <!--<div id="pagination3" class="page fl col-sm-12"></div> <!-- 翻页控件-->
 	    </div>
   </div>
   </div>

@@ -15,11 +15,19 @@
 	/*border: 1px solid #06C;*/
 }
 #user{
-	width: 10%;
+	width: 12%;
 	height: 100%;
     margin-left:16px;
 	padding-top:25px;
 	float:right;
+}
+
+#user > div >i{
+	font-size: 18px;
+}
+
+.dropdown-menu > li:hover{
+	background-color: #2b669a;
 }
 
 #main {
