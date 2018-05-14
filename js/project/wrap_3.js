@@ -17,8 +17,7 @@ $(document).ready(function(){
         var field_num=getCookie("field_num");
         insert_table_data(data_x);
     */
-    /*
-    var data_field_recieve=[
+    /*var data_field_recieve=[
         {
             fieldName:"id",
             length:36,
@@ -49,6 +48,7 @@ $(document).ready(function(){
         }
         ];
         */
+
 //----------------全局------------------------
     var replace_id=null;
     var data_index=new Array();
@@ -128,6 +128,11 @@ $(document).ready(function(){
         var num=parseInt($(event.target).attr("name"));
         //alert(event.keyCode);
         if(event.keyCode==13&&$(event.target).prop("tagName")=="INPUT") {
+            var maxNum=parseInt($(event.target).val());
+            if(maxNum>parseInt($(event.target).attr("max")||maxNum<0)){
+                alert("超出限制！正数且最大数为："+parseInt($(event.target).attr("max")));
+                return 0;
+            }
             $(event.target).parent().next().children().select();
             if($(event.target).parent().next().children().prop("tagName")=="BUTTON"){
                 $(event.target).parent().next().children().focus();
@@ -141,12 +146,15 @@ $(document).ready(function(){
                     $(".insertTbody").children("tr:eq("+num+")").children("td:eq("+j+")").children("input").attr("value",valueUp);
                 }
                 $(".insertTbody").children("tr:eq("+num+")").children("td:eq(1)").children("input").select();
-                $("#dlg").css("height",(num+1)*38+60+"px");       //样式注意
+                $("#dlg").css({"height":(num+1)*38+120+"px","padding-top":"0px"});       //样式注意
             }else {
                 $(".insertTbody").children("tr:eq("+num+")").children("td:eq(1)").children("input").select();
             }
+            $("#dlg").animate({scrollLeft:0},500);
         }else if(event.keyCode==8&&$(event.target).prop("tagName")=="BUTTON"){
             $(".insertTbody").children("tr:eq("+(num-1)+")").children("td:eq(1)").children("input").select();
+            $("#dlg").animate({scrollLeft:0},500);
+            event.preventDefault();
         }
     }
 
@@ -161,9 +169,14 @@ $(document).ready(function(){
         for(var j=1;j<n;j++){
             var td=new el_new("td","","");
             var input=new el_new("input","form-control","insert_"+j,data_field_recieve[j].fieldName);
-            if(data_field_recieve[j].type=="int")
+            if(data_field_recieve[j].type=="int") {
                 input.append_input("number");
-            else input.append_input("text");
+                input.dom.setAttribute("max",data_field_recieve[j].length);
+            }
+            else {
+                input.append_input("text");
+                input.dom.setAttribute("maxlength",data_field_recieve[j].length);
+            }
             input.append_style("height:21px;");
             td.dom.append(input.dom);
             tr.dom.append(td.dom);
@@ -273,117 +286,45 @@ $(document).ready(function(){
         location.reload();
     })
 
-    $("#insert").click(function(){
+    $("#insert").click(function() {
         $(".table-btn").unbind('click');
-        var n=getCookie("field_num");
-        var dlg=$('#dlg');
+        var n = getCookie("field_num");
+        var dlg = $('#dlg');
         dlg.empty();
         $(".table-btn").removeAttr("id");
         $("#insert-btn").unbind('click');
-        dlg.css("height",1*38+60+"px");       //样式注意
+        dlg.css({"height":38+120+"px","padding-top":"0px","overflow-x":"scroll"});       //样式注意
         $("#myModalLabel").html("插入");
-        $(".modal-dialog").attr("style","width:900px;");
-        $(".modal-content").removeClass("modal-sm").addClass("modal-lg");
-        $(".table-btn").attr("id","insert-btn");
-        $("#insert-btn").bind('click',insert_btn);
-        var table=new el_new("table","table","insertTable");
-        var thead=new el_new("thead","insertThead","insertThead");
-        var tbody=new el_addEvent("tbody","insertTbody","insertTbody");
+        $(".modal-dialog").attr("style", "width:1200px;");
+        $(".modal-content").removeClass("modal-sm").addClass("modal-lg").removeAttr("style");
+        $(".modal-content").css({"width":"1200px"});
+
+        $(".table-btn").attr("id", "insert-btn");
+        $("#insert-btn").bind('click', insert_btn);
+        var div= new el_new("div","insertDlg","insertDlg");
+        var table = new el_new("table", "table", "insertTable");
+        var thead = new el_new("thead", "insertThead", "insertThead");
+        var tbody = new el_addEvent("tbody", "insertTbody", "insertTbody");
         tbody.addKeypress();
         table.dom.append(thead.dom);
-        $("#dlg").append(table.dom);
+        div.dom.append(table.dom);
+        $("#dlg").append(div.dom);
         $("#insertTable").append(tbody.dom);
-        insert_tableField(data_field_recieve,"#insertThead");
+        if(data_field_recieve.length>10){
+            $(".insertDlg").css({"width":data_field_recieve.length*90+150+"px"});
+        }
+        insert_tableField(data_field_recieve, "#insertThead");
         create_insert(1);
-        //$(".insertTbody").children("tr").children("td:eq(1)").children("input").focus();
-        /*var tr=new el_new("tr","","");
-        var td_num=new el_new("td","","");
-        //var input=new el_new("input","form-control","insert_0",data_field_recieve[j].fieldName);
-        td_num.dom.innerHTML="1";
-        //td_num.dom.append();
-        tr.dom.append(td_num.dom);
-        for(var j=1;j<n;j++){
-            var td=new el_new("td","","");
-            var input=new el_new("input","form-control","insert_"+j,data_field_recieve[j].fieldName);
-            if(data_field_recieve[j].type=="int")
-            input.append_input("number");
-            else input.append_input("text");
-            input.append_style("height:21px;");
-            td.dom.append(input.dom);
-            tr.dom.append(td.dom);
-        }
-        var td_bt=new el_new("td","","");
-        var button=new el_new("button","btn btn-primary","insert_"+n,1);
-        //button.dom.addEventListener('click',insert_btn);
-        button.dom.innerHTML="确定(enter)/重写(n)";
-        button.append_style("height:21px;font-size:12px;");
-        td_bt.dom.append(button.dom);
-        tr.dom.append(td_bt.dom);
-        $("#insertTbody").append(tr.dom);*/
-        /*for(var j=1;j<n;j++){
-            var input1=getCookie("input1_"+j);
-            var input2=getCookie("input2_"+j);
-            var input9=getCookie("input9_"+j);
-            //alert(input1);
-            if(input2=="int"){
-                var input=create_input(input9,"number","form-control","insert_input"+j,input1,100,12);
-            }else if(input2=="string"){
-                var input=create_input(input9,"text","form-control","insert_input"+j,input1,100,12);
-            }
-            $('#dlg').append(input);
-        }*/
     });
-    /*
-    $("#insert-accept").click(function(){
-        $(".table-btn").unbind('click');
-        var dlg=$('#dlg');
-        dlg.empty();
-        $(".table-btn").removeAttr("id");
-        dlg.css("height",2*50+30+"px");
-        $("#myModalLabel").html("新增缓存区");
-        $(".modal-dialog").attr("style","width:300px;");
-        $(".modal-content").removeClass("modal-lg").addClass("modal-sm");
-        $(".table-btn").attr("id","insert_accept-btn");
-        $("#insert_accept-btn").on('click',insert_accept_btn);
-        var number=data_index.length;
-        for(var j=0;j<number;j++){
-            var field_s=Object.keys(data_index[j]);
-            var data_s=Object.values(data_index[j]);
-            for (var i=0;i<field_s.length;i++){
-                var div_col=document.createElement("div");
-                var i_col=document.createElement("i");
-                var span_col=document.createElement("span");
-                var span_col2=document.createElement("span");
-                div_col.setAttribute("class","col-xs-12 div_col");
-                i_col.setAttribute("class","fa fa-list-alt col-sm-1");
-                span_col.setAttribute("class","col-sm-5");
-                span_col2.setAttribute("class","col-sm-5");
-                span_col.innerHTML=field_s[i];
-                span_col2.innerHTML=data_s[i];
-                div_col.setAttribute("id",field_s[i]);
-                div_col.append(i_col);
-                div_col.append(span_col);
-                div_col.append(span_col2);
-                $("#dlg").append(div_col);
-            }
-            var div_br=document.createElement("div");
-            div_br.setAttribute("class","col-xs-12 div_col");
-            var span_br=document.createElement("span");
-            span_br.innerHTML=" ";
-            div_br.append(span_br);
-            $("#dlg").append(div_br);
-        }
-    });
-    */
     $("#cancel-accept").click(function() {
         $(".table-btn").unbind('click');
         var dlg = $('#dlg');
         dlg.empty();
         $(".table-btn").removeAttr("id");
-        dlg.css("height", 2 * 50 + 30 + "px");
+        dlg.css({"height": 2 * 50 + 30 + "px","overflow-x":"hidden"});
         $("#myModalLabel").html("删除缓存区");
         $(".modal-dialog").attr("style","width:900px;");
-        $(".modal-content").removeClass("modal-sm").addClass("modal-lg");
+        $(".modal-content").removeClass("modal-sm").addClass("modal-lg").removeAttr("style");
         $(".table-btn").attr("id", "cancel_accept-btn");
         $("#cancel_accept-btn").on('click', cancel_accept_btn);
         var number = data_cancel.length;
@@ -412,10 +353,10 @@ $(document).ready(function(){
         var dlg=$('#dlg');
         dlg.empty();
         $(".table-btn").removeAttr("id");
-        dlg.css("height",2*50+30+"px");
+        dlg.css({"height":2*50+30+"px","overflow-x":"hidden"});
         $("#myModalLabel").html("查找");
         $(".modal-dialog").attr("style","width:300px;");
-        $(".modal-content").removeClass("modal-lg").addClass("modal-sm");
+        $(".modal-content").removeClass("modal-lg").addClass("modal-sm").removeAttr("style");
         $(".table-btn").attr("id","check-btn");
         $("#check-btn").on('click',check_btn);
         var select_item=new Array();
@@ -435,10 +376,10 @@ $(document).ready(function(){
         var dlg=$('#dlg');
         dlg.empty();
         $(".table-btn").removeAttr("id");
-        dlg.css("height",2*50+30+"px");
+        dlg.css({"height":2*50+30+"px","overflow-x":"hidden"});
         $("#myModalLabel").html("导出");
         $(".modal-dialog").attr("style","width:300px;");
-        $(".modal-content").removeClass("modal-lg").addClass("modal-sm");
+        $(".modal-content").removeClass("modal-lg").addClass("modal-sm").removeAttr("style");
         $(".table-btn").attr("id","export-btn").html("确认导出");
         $("#export-btn").on('click',export_btn);
         var select_item=["Excel"];
@@ -454,11 +395,11 @@ $(document).ready(function(){
         var dlg = $('#dlg');
         dlg.empty();
         $(".table-btn").removeAttr("id");
-        dlg.css("height", 2 * 50 + 30 + "px");
+        dlg.css({"height":2*50+30+"px","overflow-x":"hidden"});
         //dlg.css("width",700+"px");
         $("#myModalLabel").html("修改缓存区");
         $(".modal-dialog").attr("style","width:900px;");
-        $(".modal-content").removeClass("modal-sm").addClass("modal-lg");
+        $(".modal-content").removeClass("modal-sm").addClass("modal-lg").removeAttr("style");
         $(".table-btn").attr("id", "replace_accept-btn");
         $("#replace_accept-btn").on('click', replace_accept_btn);
 
@@ -568,7 +509,7 @@ $(document).ready(function(){
             var input9 = obj[j].content+"/"+obj[j].fieldName;         //到时改为obj【j】.content
             var th=document.createElement("th");
             if(j==0){
-                th.setAttribute("style","width:5%;");
+                th.setAttribute("style","width:50px;");
                 input9="序号";
             }
             th.innerHTML=input9;
@@ -854,7 +795,11 @@ $(document).ready(function(){
             success: function (recieve) {
                 if (recieve.success) {
                     data_field_recieve=recieve.obj;
-                    insert_tableField(recieve.obj,"thead .data_show");
+                    if((data_field_recieve.length*90+150)>parseInt($("#table_div1").width())){
+                        $("#table_div2").css({"width":data_field_recieve.length*120+150+"px"});
+                        $("#table_div1").css({"overflow-x":"scroll"});
+                    }
+                    insert_tableField(data_field_recieve,"thead.data_show");
                     table_data_show();
                 }
             }
