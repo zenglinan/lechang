@@ -1,0 +1,104 @@
+#logo{
+    margin-left: 0px;
+    width: auto;
+}
+.rightControlRow:after,#table_div1:after,#table_div2:after,.rightControlSet:after{
+    clear: both;
+}
+.rightControlRow > div{
+    float: left;
+    width: 100px;
+    min-width: -moz-fit-content;
+    max-width: -webkit-fit-content;
+}
+.rightControlRow input{
+    width: 100px;
+    color: #0f0f0f;
+}
+#user_menu{
+    position: relative;
+    float: right;
+}
+.item_1 > tr >th>button {
+    width: 100%;
+}
+.left-tree ul,.right-tree ul{
+    list-style-type: none;
+}
+.left-tree i,.right-tree i{
+    padding: 5px;
+}
+.left-tree span,.right-tree span{
+    font-size: medium;
+    font-family: '微软雅黑 Light', serif;
+    font-weight: 100;
+}
+.left-tree,.right-control,.right-tree,.right-panel{
+    color: #95B8E7;
+    border-style:solid;
+    background-color: #1F529A;
+    padding: 0px;
+    margin: 0px 0px ;
+    border-color: #216dc2;
+    border-width: 0px 3px;
+}
+.right-control .td{
+    min-height: 25px;
+}
+.left-tree{
+    position: relative;
+    float: inherit;
+    height: 500px;
+}
+.right-control,.right-tree,.right-panel,.left-tree-div-count{
+    position: relative;
+    float:right;
+}
+.right-control > div,.right-tree .btn-group>div{
+    position: relative;
+    float: left;
+    padding: 1px 3px;
+}
+.right-control button,.right-tree button{
+    height: 2em;
+    padding: 0px 12px;
+    background-color: #216dc2;
+    border-radius: 1px;
+}
+.right-tree,.right-panel{
+    margin-top: 3px;
+    background-color: #1f529a;
+}
+.left-tree-div,.right-tree-div{
+    position: relative;
+    float: inherit;
+    margin: 5px 0px;
+    height: 2.2em;
+    line-height: 2.2em;
+}
+.left-tree-div{
+    background-color: #1F529A;
+}
+.right-tree-div{
+    background-color: #1f529a;
+}
+.left-tree-div:hover,.right-tree-div:hover,.left-tree-div-parent{
+    background-color: #1a4289;
+    box-shadow: 0px 5px 6px #0a275f;
+}
+.left-tree-div-child,.left-tree-div-parent + ul,left-tree-div-parent + ul > div{
+    background-color: #216dc2;
+}
+table,tbody{
+    width: 100%;
+}
+.left-tree ul,.right-tree ul{
+    position: relative;
+    padding: 0px;
+    margin: auto 0px;
+}
+#table_div1,#table_div2,.rightControlSet{
+    min-height: -webkit-fit-content;
+    min-height: -moz-fit-content;
+}
+

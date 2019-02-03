@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<html lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>模板</title>
+		<script src="../../js/jquery.pagination.min.js"></script>
+		<script src="../../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="../../js/wrap_5_temp.js"></script>
+		<script type="text/javascript" src="../../js/project/client.js"></script>
+		<script type="text/javascript" src="lechangbpm666"></script>
+
+		<!--<link rel="stylesheet" href="../css/wrap_5_temp.css">-->
+		<link rel="stylesheet" href="../../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+		<link rel="stylesheet" href="../../css/jquery.pagination.css" />
+
+		<script type="text/javascript" src="./bower_components/mockjs/dist/mock.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../css/data_platform.css" />
+		<link rel="stylesheet" href="../../css/wrap_2.css">
+		<link rel="stylesheet" href="../../css/wrap_5_temp.css">
+
+	</head>
+
+	<body>
+		<div id="header" class="col-sm-12">
+			<div id="logo" class="col-sm-2">
+				<h3 style="color:#06C">用户操作界面</h3></div>
+			<div id="user" class="col-sm-9">
+				<div class="col-sm-2">
+					<i class="fa fa-search"></i>
+				</div>
+				<div class="col-sm-2">
+					<i class="fa fa-comment-o"></i>
+				</div>
+				<div class="col-sm-7" id="user_menu">
+					<i class="fa fa-bars dropdown-toggle" data-toggle="dropdown" style="margin-left: 20px"></i>
+					<ul class="dropdown-menu pull-right" role="menu">
+						<li>
+							<a href="#">选项一</a>
+						</li>
+						<li>
+							<a href="#">选项二</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="http://119.23.253.225:8080/lechang-bpm/logout.action">注销</a>
+						</li>
+						<li>
+							<a href="#">退出</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="main">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-10">
+				<table class="table">
+					<thead class="item_1">
+						<tr>
+							<th>
+								<button class="btn btn-primary">组织</button>
+							</th>
+							<th>
+								<button class="btn btn-primary">人事</button>
+							</th>
+							<th>
+								<button class="btn btn-primary">任务</button>
+							</th>
+							<th>
+								<button class="btn btn-primary">薪酬</button>
+							</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="col-sm-2">
+				<div class="col-sm-12 left-tree">
+					<ul class="open-tap-top">
+						<li class="open-tap">
+							<div class="col-sm-12 left-tree-div">
+								<i></i>
+								<span>北京</span>
+								<strong class="left-tree-div-count">1</strong>
+							</div>
+							<ul>
+								<li class="open-tap">
+									<div class="col-sm-12 left-tree-div">
+										<i></i>
+										<span>东城</span>
+										<strong class="left-tree-div-count">2</strong>
+									</div>
+									<ul></ul>
+								</li>
+								<li class="open-tap">
+									<div class="col-sm-12 left-tree-div">
+										<i></i>
+										<span>西城</span>
+										<strong class="left-tree-div-count">2</strong>
+									</div>
+									<ul></ul>
+								</li>
+								<li class="open-tap">
+									<div class="col-sm-12 left-tree-div">
+										<i></i>
+										<span>朝阳</span>
+										<strong class="left-tree-div-count">2</strong>
+									</div>
+									<ul>
+										<li class="open-tap">
+											<div class="col-sm-12 left-tree-div">
+												<i></i>
+												<span>朝阳小学</span>
+												<strong class="left-tree-div-count">3</strong>
+											</div>
+											<ul></ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="open-tap">
+							<div class="col-sm-12 left-tree-div">
+								<i></i>
+								<span>广州</span>
+								<strong class="left-tree-div-count">1</strong>
+							</div>
+							<ul>
+								<li class="open-tap">
+									<div class="col-sm-12 left-tree-div">
+										<i></i>
+										<span>天河</span>
+										<strong class="left-tree-div-count">2</strong>
+									</div>
+									<ul></ul>
+								</li>
+								<li class="open-tap">
+									<div class="col-sm-12 left-tree-div">
+										<i></i>
+										<span>越秀</span>
+										<strong class="left-tree-div-count">2</strong>
+									</div>
+									<ul></ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-10">
+				<div class="col-sm-12 right-control btn-group">
+					<div class="col-xs-12 rightControlRow">
+						<div class="td"><label id="dd" class=" rightControlSet" name="">dd</label></div>
+						<div class="td"><input id="ui" class=" rightControlSet" name="" max="90" placeholder="45" type="number"></div>
+						<div class="td"><button id="ii" class=" rightControlSet" name="" style="width: 50px; height: 25px;">ii</button></div>
+					</div>
+					<div class="col-xs-12 rightControlRow">
+						<div class="td"><label id="nn" class=" rightControlSet" name="">dd</label></div>
+						<div class="td"><input id="uu" class=" rightControlSet" name="" max="90" placeholder="45" type="number"></div>
+					</div>
+					<div class="col-xs-12 rightControlRow">
+						<div class="td">
+							<div id="iu" class=" rightControlSet" name="" style="width: 750px; height: 25px;">
+								<div class="row-fluid col-md-12" id="table_div1">
+									<div class="col-md-12" id="table_div2">
+										<table class="table">
+											<thead class="data_show">
+											</thead>
+											<tbody class="data_show">
+											</tbody>
+										</table>
+										<div id="pagination" class="page fl col-sm-12 page_iu"></div>
+										<!-- 翻页控件-->
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="td">[control-2]</div>
+						<div class="td">[control-3]</div>
+					</div>
+					<div class="col-xs-12 rightControlRow">
+						<div class="td">[control-4]</div>
+						<div class="td">[control-5]</div>
+						<div class="td">[control-6]</div>
+						<div class="td">[control-7]</div>
+					</div>
+					<table>
+						<tbody>
+							<!--<tr><td>[control-1]</td><td>[control-2]</td><td>[control-3]</td></tr>
+        <tr><td>[control-4]</td><td>[control-5]</td><td>[control-6]</td><td>[control-7]</td></tr>-->
+							<tr>
+								<td>
+									<div>
+										<button class="btn">按钮一</button>
+									</div>
+								</td>
+								<td>
+									<div>
+										<button class="btn">按钮二</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-12 right-tree">
+					<div class="btn-group">
+					</div>
+					<ul class="open-tap-top">
+						<li class="open-tap">
+							<div class="col-sm-12 right-tree-div">
+								<i></i>
+								<span>北京市政府</span>
+								<strong class="left-tree-div-count">1</strong>
+							</div>
+							<ul>
+								<li class="open-tap">
+									<div class="col-sm-12 right-tree-div">
+										<i></i>
+										<span>北京图书馆</span>
+										<strong class="left-tree-div-count">2</strong>
+									</div>
+									<ul></ul>
+								</li>
+								<li class="open-tap">
+									<div class="col-sm-12 right-tree-div">
+										<i></i>
+										<span>北京故宫博物院</span>
+										<strong class="left-tree-div-count">2</strong>
+									</div>
+									<ul></ul>
+								</li>
+								<li class="open-tap">
+									<div class="col-sm-12 right-tree-div">
+										<i></i>
+										<span>北京地铁</span>
+										<strong class="left-tree-div-count">2</strong>
+									</div>
+									<ul>
+										<li class="open-tap">
+											<div class="col-sm-12 right-tree-div">
+												<i></i>
+												<span>五道口站台</span>
+												<strong class="left-tree-div-count">3</strong>
+											</div>
+											<ul></ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="open-tap">
+							<div class="col-sm-12 right-tree-div">
+								<i></i>
+								<span>北京高等法院</span>
+								<strong class="left-tree-div-count">1</strong>
+							</div>
+							<ul>
+								<li class="open-tap">
+									<div class="col-sm-12 right-tree-div">
+										<i></i>
+										<span>朝阳区中等法院</span>
+										<strong class="left-tree-div-count">2</strong>
+									</div>
+									<ul></ul>
+								</li>
+								<li class="open-tap">
+									<div class="col-sm-12 right-tree-div">
+										<i></i>
+										<span>西城区中等法院</span>
+										<strong class="left-tree-div-count">2</strong>
+									</div>
+									<ul></ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-12 right-panel">
+					<div style="height: 100px"></div>
+					<div style="height: 100px"></div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content modal-lg">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+						<h4 class="modal-title" id="myModalLabel">
+
+                </h4>
+					</div>
+					<div id="dlg" class="modal-body">
+						<div class="row-fluid">
+							<div class="col-md-12">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>
+												编号
+											</th>
+											<th>
+												产品
+											</th>
+											<th>
+												交付时间
+											</th>
+											<th>
+												状态
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												1
+											</td>
+											<td>
+												TB - Monthly
+											</td>
+											<td>
+												01/04/2012
+											</td>
+											<td>
+												Default
+											</td>
+										</tr>
+										<tr class="success">
+											<td>
+												1
+											</td>
+											<td>
+												TB - Monthly
+											</td>
+											<td>
+												01/04/2012
+											</td>
+											<td>
+												Approved
+											</td>
+										</tr>
+										<tr class="error">
+											<td>
+												2
+											</td>
+											<td>
+												TB - Monthly
+											</td>
+											<td>
+												02/04/2012
+											</td>
+											<td>
+												Declined
+											</td>
+										</tr>
+										<tr class="warning">
+											<td>
+												3
+											</td>
+											<td>
+												TB - Monthly
+											</td>
+											<td>
+												03/04/2012
+											</td>
+											<td>
+												Pending
+											</td>
+										</tr>
+										<tr class="info">
+											<td>
+												4
+											</td>
+											<td>
+												TB - Monthly
+											</td>
+											<td>
+												04/04/2012
+											</td>
+											<td>
+												Call in to confirm
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+						<button type="button" class="btn btn-primary table-btn">
+                    提交更改
+                </button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</body>
+
+	</html>

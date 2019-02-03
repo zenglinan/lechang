@@ -1,0 +1,88 @@
+body {
+	background: #fff;
+	font: 14px/1.5 'Microsoft Yahei', Tahoma, '微软雅黑';
+	color: #000;
+}
+
+#table_new>.table-heading {
+	height: 22px;
+}
+
+#table_new,
+#table_set {
+	border-bottom: 1px solid #EFEFEF;
+	height: auto;
+	overflow: auto;
+	box-shadow: 0 0 2px #333333;
+	margin: 0 7px 0 7px;
+}
+
+#p_index {
+	height: 30px;
+	line-height: 30px;
+	margin: 15px 0 15px 9px;
+	border-left: solid 3px #0e8bc5;
+	padding-left: 8px;
+	color: #101010;
+}
+
+#check_table {
+	margin-right: 10px;
+	float: right;
+}
+
+#cancel_table {
+	margin-right: 12px;
+	float: right;
+}
+
+#num_set {
+	margin-right: 12px;
+	float: right;
+}
+
+#input0,
+#input_out {
+	margin-top: 15px;
+	margin-right: 12px;
+	float: right;
+}
+
+.group_col,
+.input_name {
+	width: 150px;
+}
+
+.form_input,
+.form_select {
+	height: 30px
+}
+
+#btn_set {
+	box-shadow: 0 0 2px #333333;
+}
+
+#input_out:hover {
+	background-color: #b3b3b3;
+}
+
+.div_col:hover {
+	background-color: #b3b3b3;
+}
+
+.page {
+	margin: 0px auto;
+	padding: 0px;
+}
+
+.insertThead>tr>th {
+	font-size: small;
+}
+
+td>input {
+	padding: 1px 12px;
+}
+
+td>button:focus {
+	background-color: #00ee00!important;
+}

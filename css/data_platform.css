@@ -1,0 +1,149 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,ul,li {
+    margin: 0;
+    padding: 0;
+}
+
+ul,ol { list-style: none; }
+
+html,
+body {
+    height: 100%;
+    min-height: 100%;
+    font-size: 16px;
+}
+
+@media only screen and (min-width: 1800px) {
+	html {  font-size: 20px; }
+	.dt-sidebar .function-item>a { font-size: 0.8rem; }
+	
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1024px) {
+	html { font-size: 14px; }
+}
+
+body {
+    font: 16px/1.5 'Microsoft Yahei', Tahoma, '微软雅黑';
+    color: #000;
+    background: #f5f5f5;
+    overflow: hidden;
+}
+
+/*命名空間 dt*/
+
+.dt-header {
+    position: relative;
+    height: 2.2rem;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+    color: #fff;
+    background: rgba(54,169,225,0.8);
+}
+
+.dt-logo {
+    width: 12rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 2.2rem;
+    text-align: center;
+}
+
+.dt-setting {
+    width: 8rem;
+    height: 2.2rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.dt-setting>i {
+    height: 2.2rem;
+    width: 2.2rem;
+    font-size: 1rem;
+    line-height: 2.2rem;
+    text-align: center;
+}
+
+.dt-setting>i:hover,
+.dt-setting>i:visited { 
+	background: rgba(173,216,230,0.5); 	
+	/*background-size: 80% 80%;*/
+}
+
+.dt-main {
+    display: flex;
+    justify-content: center;
+    background-color: #F6F6F6;
+}
+
+/*側欄*/
+
+.dt-sidebar {
+    position: relative;
+    top: -2.2rem;
+    height: 100vh;
+    z-index: 1;
+    width: 14rem;
+    /*width: 14.5%;*/
+    background-color: #383e4b;
+}
+
+
+/*側欄内容區*/
+
+.sidebar__content {
+    margin-top: 46px;
+}
+
+.function-item>a {
+    height: 2.9rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.function-item i{ margin-right: 1rem; }
+
+.function-item:first-child i{ margin-right: 1.2rem; }
+
+.function-item:last-child i{ margin-right: 0.75rem; }
+
+.function-menu .function-item :hover,
+.function-menu .function-item :visited {  background: #2d323d; }
+
+
+/*功能内容欄*/
+
+.dt-container {
+    width: 81rem;
+    /*width: 85.5%;*/
+    height: 92vh;
+    margin: 1.2rem 0.5em 0 1.2em;
+    background-color: #F5F5F5;
+    overflow: auto;
+}
+
+.dt-title {
+    display: flex;
+    height: 50px;
+    margin: 0 7px 0 7px;
+    padding: 14px;
+    box-shadow: 0 0 3px #97928F;
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    background: #fff;
+}
+
+.dt-content {
+    height: 100vh;
+    margin: 0 7px 0 7px;
+    box-shadow: 0 0 2px #333333;
+    border-radius: 3px;
+}
+
+.dt-content  .panel-heading {
+    border-bottom: solid 1px #f5f5f5;
+}

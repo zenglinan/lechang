@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+	<head>
+		<meta charset="utf-8">
+		<title>平台设计系统</title>
+
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script src="../js/jquery.pagination.min.js"></script>
+		<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+		<script src="../js/project/wrap_2.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/data_platform.css" />
+		<link rel="stylesheet" href="../css/jquery.pagination.css" />
+		<link rel="stylesheet" href="../css/wrap_2.css">
+	</head>
+
+	<body>
+
+		<header class="dt-header">
+			<h1 class="dt-logo">平台设计系统</h1>
+			<div class="dt-setting">
+				<i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+				<i class="fa fa-commenting"></i>
+				<i class="fa fa-mail-reply"></i>
+				<i class="fa fa-search"></i>
+				<ul class="dropdown-menu pull-right" role="menu">
+					<li>
+						<a href="#">选项一</a>
+					</li>
+					<li>
+						<a href="#">选项二</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="http://119.23.253.225:8080/lechang-bpm/logout.action">注销</a>
+					</li>
+					<li>
+						<a href="#">退出</a>
+					</li>
+				</ul>
+			</div>
+		</header>
+		</div>
+		</div>
+
+		<div class="dt-main">
+			<div class="dt-sidebar">
+				<div class="sidebar__content">
+					<div class="panel-heading">
+						<a href="#">&nbsp;
+							<i class="fa fa-angle-double-left" style="float:right; font-size:26px; margin-right:4px;"></i></a>
+					</div>
+					<div class="function-menu">
+						<ul class="nav nav-list ">
+							<li class="function-item">
+								<a href="#" class="li_1">
+									<i class="fa fa-minus"></i>
+									<span>平台信息管理</span>
+								</a>
+							</li>
+							<li class="function-item">
+								<a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_2.html" class="li_2">
+									<i class="fa fa-edit"></i>
+									<span>数据表定义管理</span>
+								</a>
+							</li>
+							<li class="function-item">
+								<a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_3.html" class="li_3">
+									<i class="fa fa-table"></i>
+									<span>数据信息管理</span>
+								</a>
+							</li>
+							<li class="function-item">
+								<a href="#" class="li_4">
+									<i class="fa fa-database"></i>
+									<span>数据项关系管理</span>
+								</a>
+							</li>
+							<li class="function-item">
+								<a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_5.html" class="li_5">
+									<i class="fa fa-check-circle"></i>
+									<span>界面定义管理</span>
+								</a>
+							</li>
+							<li class="function-item">
+								<a href="#" class="li_6">
+									<i class="fa fa-user-plus"></i>
+									<span>用户管理</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="dt-container">
+				<div class="dt-title">平台信息管理</div>
+				<div id="wrap_2" style="display:block">
+					<div id="p_index" style="white-space:nowrap"><label id="new_index">新建数据表</label></div>
+
+					<div id="table_new">
+						<div class="table-heading bg-primary"></div>
+						<div class="panel-body ">
+							<div class="form-inline col-xs-11 " style="padding-left: 0px;">
+								<label class="form-inline col-sm-3" style="padding-left: 0px;padding-right: 0px">数据表名：&nbsp;<input id="table_name" class="form-control" style="width:60%; " type="text" /></label>
+								<label class="form-inline col-sm-3" style="padding-left: 0px;padding-right: 0px">字段数：&nbsp;&nbsp;&nbsp;&nbsp;<input id="field_num" class="form-control" style="width:60%; " type="number" /></label>
+								<label class="col-sm-3"></label>
+								<label class="col-sm-3"><a id="chevron"><i class="fa fa-chevron-left" style="width: 15%;"></i>详细</a></label>
+							</div>
+							<div class="col-xs-1"></div>
+							<div id="table-new-2">
+								<div class="form-inline col-xs-11 " style="padding-left: 0px;">
+									<label class="control-label col-sm-3" for="jformType" style="padding-left: 0px;padding-right: 0px">表的类型：
+                        <select id="jformType" class="form-control" style="width: 60%; margin-top:5px"></select>
+                    </label>
+									<label class="control-label col-sm-3" for="jformPkType" style="padding-left: 0px;padding-right: 0px">主键类型：
+                        <select id="jformPkType" class="form-control" style="width: 60%; margin-top:5px"></select>
+                    </label>
+									<label class="control-label col-sm-3" for="tablecontent" style="padding-left: 0px;padding-right: 0px">表识别名：
+                        <input id="tablecontent" class="form-control" style="width: 60%; margin-top:5px" type="text" />
+                    </label>
+									<label class="control-label col-sm-3" for="querymode" style="padding-left: 0px;padding-right: 0px">查询模式：
+                        <select id="querymode" class="form-control" style="width: 60%; margin-top:5px"></select>
+                    </label>
+								</div>
+								<div class="col-xs-1">&nbsp;</div>
+								<div class="form-inline col-xs-11 " style="padding-left: 0px;">
+									<label class="control-label col-sm-3" for="jformCategory" style="padding-left: 0px;padding-right: 0px">表的目录：
+                        <select id="jformCategory" class="form-control" style="width: 60%; margin-top:5px"></select>
+                    </label>
+									<label class="control-label col-sm-3" for="formTemplate" style="padding-left: 0px;padding-right: 0px">表的模板：
+                        <select id="formTemplate" class="form-control" style="width: 60%; margin-top:5px"></select>
+                    </label>
+									<label class="control-label col-sm-3" for="description" style="padding-left: 0px;padding-right: 0px">表的说明：
+                        <input id="description" class="form-control" style="width: 60%; margin-top:5px" type="text" />
+                    </label>
+									<label class="control-label col-sm-3" for="formTemplateMobile" style="padding-left: 0px;padding-right: 0px">Mobile：&nbsp;&nbsp;
+                        <select id="formTemplateMobile" class="form-control" style="width: 60%; margin-top:5px"></select>
+                    </label>
+								</div>
+								<div class="col-xs-1">&nbsp;</div>
+							</div>
+							<hr />
+
+							<div>
+								<div class="col-xs-12" style="margin-top: 15px;">
+									<button id="check_table" type="button" class="btn btn-primary">检测</button>
+									<button id="cancel_table" type="button" class="btn btn-primary">删除</button>
+									<button id="num_set" type="button" class="btn btn-primary">确定</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="table-heading bg-primary"></div>
+						<div class="panel-body " id="table_show">
+							<div id="div_set"></div>
+							<div class="br_ col-sm-12">&nbsp;</div>
+							<hr />
+							<!--<div id="pagination3" class="page fl col-sm-12"></div> <!-- 翻页控件-->
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div class="modal-body" id="field_div"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" id="table_add">增加字段</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+	</body>
+
+</html>

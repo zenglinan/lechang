@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+	<head>
+		<meta charset="utf-8">
+		<title>平台设计系统</title>
+
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script src="../js/jquery.pagination.min.js"></script>
+		<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+		<script src="../js/project/wrap_3.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/data_platform.css" />
+		<link rel="stylesheet" href="../css/jquery.pagination.css" />
+		<link rel="stylesheet" href="../css/wrap_2.css">
+		<link rel="stylesheet" href="../css/wrap_3.css">
+	</head>
+
+	<body>
+
+		<header class="dt-header">
+			<h1 class="dt-logo">平台设计系统</h1>
+			<div class="dt-setting">
+				<i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+				<i class="fa fa-commenting"></i>
+				<i class="fa fa-mail-reply"></i>
+				<i class="fa fa-search"></i>
+				<ul class="dropdown-menu pull-right" role="menu">
+					<li>
+						<a href="#">选项一</a>
+					</li>
+					<li>
+						<a href="#">选项二</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="http://119.23.253.225:8080/lechang-bpm/logout.action">注销</a>
+					</li>
+					<li>
+						<a href="#">退出</a>
+					</li>
+				</ul>
+			</div>
+		</header>
+
+		<div class="dt-main">
+			<div class="dt-sidebar">
+				<div class="sidebar__content">
+					<div class="panel-heading">
+						<a href="#">&nbsp;
+							<i class="fa fa-angle-double-left" style="float:right; font-size:26px; margin-right:4px;"></i></a>
+					</div>
+					<div class="function-menu">
+						<ul class="nav nav-list ">
+							<li class="function-item">
+								<a href="#" class="li_1">
+									<i class="fa fa-minus"></i>
+									<span>平台信息管理</span>
+								</a>
+							</li>
+							<li class="function-item">
+								<a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_2.html" class="li_2">
+									<i class="fa fa-edit"></i>
+									<span>数据表定义管理</span>
+								</a>
+							</li>
+							<li class="function-item">
+								<a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_3.html" class="li_3">
+									<i class="fa fa-table"></i>
+									<span>数据信息管理</span>
+								</a>
+							</li>
+							<li class="function-item">
+								<a href="#" class="li_4">
+									<i class="fa fa-database"></i>
+									<span>数据项关系管理</span>
+								</a>
+							</li>
+							<li class="function-item">
+								<a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_5.html" class="li_5">
+									<i class="fa fa-check-circle"></i>
+									<span>界面定义管理</span>
+								</a>
+							</li>
+							<li class="function-item">
+								<a href="#" class="li_6">
+									<i class="fa fa-user-plus"></i>
+									<span>用户管理</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="dt-container">
+				<div class="dt-title">数据信息管理 </div>
+
+				<div id="wrap_3" style="display:block">
+					<div id="p_index" style="white-space:nowrap"><label id="new_index">数据信息管理</label></div>
+					<div id="table_new" style="display: block">
+						<div class="table-heading bg-primary">
+							<!--数据库初设-->
+						</div>
+						<div class="panel-body " id="table_show">
+							<div id="div_set"></div>
+							<div class="br_ col-sm-12">&nbsp;</div>
+							<hr />
+							<div id="pagination3" class="page fl col-sm-12"></div>
+							<!-- 翻页控件-->
+						</div>
+					</div>
+					<div id="table_data" style="display: none">
+						<div class="container-fluid">
+							<div class="control-group col-sm-12" style="margin-bottom: 20px">
+								<div class="col-sm-1">
+									<button id="insert" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">新增</button>
+								</div>
+								<div class="col-sm-1">
+									<button id="check" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">查找</button>
+								</div>
+								<div class="col-sm-1">
+									<button id="export" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">导出</button>
+								</div>
+
+								<div class="col-sm-4 btn-group">
+									<!--<button id="insert-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增缓存</button>-->
+									<button id="cancel-accept" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">删除缓存</button>
+									<button id="replace-accept" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">修改缓存</button>
+								</div>
+								<div class="col-sm-5"></div>
+							</div>
+							<br>
+							<div class="row-fluid col-md-12" id="table_div1">
+								<div class="col-md-12" id="table_div2">
+									<table class="table">
+										<thead class="data_show"></thead>
+										<tbody class="data_show"></tbody>
+									</table>
+									<div id="pagination" class="page fl col-sm-12"></div>
+									<!-- 翻页控件-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content modal-sm">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+						<h4 class="modal-title" id="myModalLabel">
+
+                </h4>
+					</div>
+					<div id="dlg" class="modal-body">
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+						<button type="button" class="btn btn-primary table-btn">
+                    提交更改
+                </button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+
+	</body>
+
+</html>

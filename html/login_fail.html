@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+	<head>
+		<meta charset="utf-8">
+		<title>平台登录</title>
+
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+		<script type="text/javascript" src="../js/project/login.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/login.css" />
+	</head>
+
+	<body>
+
+		<div class="login-bg">
+			<form class="login-wrap" action="/lechang-bpm/loginController/login" method="post">
+				<hr />
+				<div class="login-content fail-content">
+					<div class="row">
+						<i class="fa fa-exclamation-triangle warning-icon col-sm-3"></i>
+						<div class="warning-content col-sm-9">
+							<p class="w-fail"><strong>登录失败！</strong></p>
+							<p class="w-check"><strong>请返回页面检查用户名 密码是否正确</strong></p>
+						</div>
+					</div>
+					<div class="row">
+						<a href="#" class="aflesh">重新加载</a>
+						<a href="login.html" class="reback">返回首页</a>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</body>
+
+</html>

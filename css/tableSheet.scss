@@ -1,0 +1,291 @@
+/*
+
+RESPONSTABLE 2.0 by jordyvanraaij
+  Designed mobile first!
+
+If you like this solution, you might also want to check out the 1.0 version:
+  https://gist.github.com/jordyvanraaij/9069194
+
+*/
+
+// Default options for table style
+$table-breakpoint: 480px;
+$table-background-color: #FFF;
+$table-text-color: #024457;
+$table-outer-border: 1px solid #167F92;
+$table-cell-border: 1px solid #D9E4E6;
+
+// Extra options for table style (parse these arguments when including your mixin)
+$table-border-radius: 0;
+$table-highlight-color: #EAF3F3;
+$table-header-background-color: #2693c2;
+$table-header-text-color: #FFF;
+$table-header-border: 1px solid #FFF;
+$table-outside-background:#167F92;
+// The Responstable mixin
+
+@mixin btns ($background : #2693c2, $textcolor : white, $size : medium, $fullWidth : false)   //btn类的样式函数
+{
+  background: $background;
+  color: #fdfcff;
+  &:hover
+  {
+    box-shadow: 0 0 4px rgba(0,0,0,.03), inset 0 -1px 2px rgba(102,190,255,0.75), inset 0 1px 2px rgba(0,0,0,0.5);
+    background: #2ab2e5;
+  }
+  &:active
+  {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.03), 0px -1px 3px rgba(102, 190, 255, .5) inset, 0px 3px 2px rgba(0, 0, 0, 0.5) inset;
+  }
+  // Background
+  @if ($background == #216dc2)
+  {
+    background: #667cff;
+  }
+  @else if ($background == 'grey')
+  {
+    background: grey;
+  }
+  // Sizes
+  @if $size == small
+  {
+  }
+  @if $size == medium
+  {
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 10px;
+  }
+  @if $size == large
+  {
+  }
+  @if $fullWidth == true
+  {
+    display: block;
+    width: 100%;
+  }
+}
+
+@mixin responstable(      //表格的样式函数
+  $breakpoint: $table-breakpoint,
+  $background-color: $table-background-color,
+  $text-color: $table-text-color,
+  $outer-border: $table-outer-border,
+  $cell-border: $table-cell-border,
+  $border-radius: none,
+  $highlight-color: none,
+  $header-background-color: $table-background-color,
+  $header-text-color: $table-text-color,
+  $header-border: $table-cell-border) {
+
+  .responstable {
+    position: relative;
+    margin:0 0;
+    width: 100%;
+    overflow: hidden;
+    background: $background-color;
+    color: $text-color;
+    border-radius: $border-radius;
+    border: $outer-border;
+
+    tr {
+      border: $cell-border;
+      &:nth-child(odd) { // highlight the odd rows with a color
+        background-color: $highlight-color;
+      }
+    }
+
+    th {
+      display: none; // hide all the table header for mobile
+      border: $header-border;
+      background-color: $header-background-color;
+      color: $header-text-color;
+      padding: 1em;
+      &:first-child { // show the first table header for mobile
+        display: table-cell;
+        text-align: center;
+      }
+      &:nth-child(2) { // show the second table header but replace the content with the data-th from the markup for mobile
+        display: table-cell;
+        span {display:none;}
+        &:after {content:attr(data-th);}
+      }
+      @media (min-width: $breakpoint) {
+        &:nth-child(2) { // hide the data-th and show the normal header for tablet and desktop
+          span {display: block;}
+          &:after {display: none;}
+        }
+      }
+    }
+
+    td {
+      display: block; // display the table data as one block for mobile
+      word-wrap: break-word;
+      max-width: 7em;
+      &:first-child {
+        display: table-cell; // display the first one as a table cell (radio button) for mobile
+        text-align: center;
+        border-right: $cell-border;
+      }
+      @media (min-width: $breakpoint) {
+        border: $cell-border;
+      }
+    }
+
+    th, td {
+      text-align: left;
+      margin: .5em 1em;
+      @media (min-width: $breakpoint) {
+        display: table-cell; // show the table as a normal table for tablet and desktop
+        padding: 1em;
+      }
+    }
+  }
+}
+
+@mixin headleBlock($headle-background:#fbfbfb){
+  .headleBlock{
+    line-height: 24px;
+    overflow: hidden;
+    padding: 10px 6px;
+    background: $headle-background;
+    color: #8590a6;
+    font-size: 15px;
+    border: 1px solid #e7eaf1;
+    box-shadow: 0 1px 3px rgba(0,37,55,.05);
+    box-sizing: border-box;
+  }
+}
+
+@mixin buttonStyle($group-margin:0px){    //按钮原生样式函数
+  .btn{
+    @include btns();
+    .col-md-6{}
+  }
+}
+
+@mixin tablePre($headle-background:#fbfbfb){    //table预处理样式函数
+  @include headleBlock();
+  .table-with-btn{
+    transition: 0.3s box-shadow ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    &:hover {
+      box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px rgba(0, 0, 0, 0.19);
+    }
+  }
+  .headleBlock{
+    @include controlGroup();
+    @include buttonStyle();
+  }
+  .contentBlock{
+    @include responstable(
+      $border-radius: $table-border-radius,
+      $highlight-color: $table-highlight-color,
+      $header-background-color: $table-header-background-color,
+      $header-text-color: $table-header-text-color,
+      $header-border: $table-header-border);
+    overflow: scroll;
+    margin: 0 0 3em  0;
+  }
+}
+@mixin controlGroup($group-margin:0px){
+  .control-group{
+    margin: $group-margin;
+  }
+}
+
+$max-tab-count: 5;
+$tab-wrap-border-radius: 6px;
+.tab-wrap {
+  transition: 0.3s box-shadow ease;
+  border-radius: $tab-wrap-border-radius;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  list-style: none;
+  background-color: #fff;
+  margin: 40px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  &:hover {
+    box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px rgba(0, 0, 0, 0.19);
+  }
+}
+
+@mixin tabPre(){
+  .tab {
+    display: none;
+    @for $i from 1 through $max-tab-count {
+      &:checked:nth-of-type(#{$i}) ~ .tab__content:nth-of-type(#{$i}) {
+        opacity: 1;
+        transition: 0.5s opacity ease-in, 0.8s transform ease;
+        position: relative;
+        top: 0;
+        z-index: 100;
+        transform: translateY(0px);
+        text-shadow: 0 0 0;
+      }
+    }
+    &:first-of-type:not(:last-of-type) + label {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:not(:first-of-type):not(:last-of-type) + label {
+      border-radius: 0;
+    }
+    &:last-of-type:not(:first-of-type) + label {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &:checked + label {
+      background-color: #fff;
+      box-shadow: 0 -1px 0 #fff inset;
+      cursor: default;
+      &:hover {
+        box-shadow: 0 -1px 0 #fff inset;
+        background-color: #fff;
+      }
+    }
+    + label {
+      box-shadow: 0 -1px 0 #eee inset;
+      border-radius: $tab-wrap-border-radius $tab-wrap-border-radius 0 0;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      color: #333;
+      flex-grow: 3;
+      text-align: center;
+      background-color: #f2f2f2;
+      user-select: none;
+      transition: 0.3s background-color ease, 0.3s box-shadow ease;
+      height: 50px;
+      box-sizing: border-box;
+      padding: 15px;
+      &:hover {
+        background-color: #f9f9f9;
+        box-shadow: 0 1px 0 #f4f4f4 inset;
+      }
+    }
+    &__content {
+      padding: 10px 25px;
+      background-color: transparent;
+      position: absolute;
+      width: 100%;
+      z-index: -1;
+      opacity: 0;
+      left: 0;
+      transform: translateY(-3px);
+      border-radius: $tab-wrap-border-radius;
+    }
+  }
+}
+
+@include tabPre();
+@include tablePre()
+// Include the mixin (with extra options as overrides)
+
+
+
+// General styles
+

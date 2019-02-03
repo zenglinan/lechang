@@ -1,0 +1,328 @@
+/*框架區*/
+
+.panel-body {
+	padding: 0 4px;
+	height: 100%;
+}
+
+.frame-of { 
+	width: 100%;
+	height: 95%; 
+	overflow: auto;
+}
+
+.frame-hr { margin-top: 5px; }
+
+/*title區*/
+
+.dt-title.wrap-5 { justify-content: space-between; }
+
+.page-path {
+	margin-left: 3px;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.client-setting {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.styleChoose{ position: relative; }
+
+.submitWebsite>select { width: 200px; } 
+
+.styleChoose>.btn,
+.submitWebsite>*,.submitWebsite>.btn-group>.btn {
+	height: -moz-fit-content;
+	height: -webkit-fit-content;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+	margin-top: 0px;
+}
+
+.styleChoose>.btn,
+.submitWebsite>* {
+	float: right;
+	margin: 0px 5px;
+}
+
+.submitWebsite>.btn-group {
+	position: relative;
+	top: -2px;
+}
+
+/*糢態框*/
+
+.modal-md { width: 600px; }
+
+.modal-body div { float: none; }
+
+label {
+	width: 12em;
+	text-align: left;
+	line-height: 2.2em;
+	padding-right: 5px;
+}
+.fileUpload-child>label {
+	width: 11em;
+}
+label>input,
+label>select {
+	max-width: 55%;
+	min-width: 55%;
+	float: right;
+}
+
+#formDiv,
+.modal-body,
+.modal-body div,
+.fitContent {
+	height: -moz-fit-content;
+	height: -webkit-fit-content;
+}
+
+/*floatClearBoth:after { clear: both; }*/
+
+.inputUpload { margin: 3px 0px; }
+
+.rightControlRow:hover { color: #95B8E7;}
+
+/*sidbar nav modal*/
+
+#dlg__3>.col-warp,
+.ModalBodyContents>.modal-body>.col-warp {
+	border: solid 1px #D5D5D5;
+	border-radius: 5px;
+	padding: 20px;
+	font-size: 14px;
+}
+
+#Modal_1 .modal-header h4,
+#Modal_2 .modal-header h4 {
+	display: inline; 
+	margin-left: 10px;
+}
+
+.col-warp input[type=text] {
+	width: 200px; 
+	display: inline;
+}
+
+/*上下文菜單*/
+
+.absolute { position: absolute; }
+
+.back {
+	font-size: 21px;
+	font-weight: 700;
+	line-height: 1;
+	color: #4b4b4b;
+	text-shadow: 0 1px 0 #fff;
+	filter: alpha(opacity=20);
+	opacity: .2;
+}
+
+.back:hover {
+	color: #000;
+	text-decoration: none;
+	/*cursor: pointer;*/
+	filter: alpha(opacity=50);
+	opacity: .5;
+}
+
+.backGroundAndText {
+	background-color: #fffcfc;
+	color: #000000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.menuli:hover,
+.backGroundAndText:hover {
+	background-color: #568DBD;
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.menuDivUl {
+	width: 150px;
+	padding: 10px 0;
+	border: 1px solid #eee;
+	-webkit-box-shadow: 1px 1px 2px #ccc;
+	-moz-box-shadow: 1px 1px 2px #ccc;
+	box-shadow: 1px 1px 2px #ccc;
+	margin: 0px 0px;
+}
+
+.menuli,
+.menuDivLi {
+	height: 30px;
+	line-height: 2.5em;
+	list-style: none;
+}
+
+.menua,
+.menuDivA {
+	height: 30px;
+	display: block;
+	padding-left: 30px;
+	line-height: 2.5em;
+	text-decoration: none;
+	color: #555555;
+	font-size: 13px;
+}
+
+.menuDiv {
+	background-color: #fdfcff;
+	display: none;
+}
+
+.menua:hover {
+	text-decoration: none;
+	color: #000;
+}
+
+.menudiv {
+	position: absolute;
+    width: 150px;
+	height: -moz-fit-content;
+	height: -webkit-fit-content;
+	padding: 15px 0 15px 0;
+	border: 1px solid #eee;
+	background-color: #fdfcff;
+	-webkit-box-shadow: 1px 1px 2px #ccc;
+	-moz-box-shadow: 1px 1px 2px #ccc;
+	box-shadow: 1px 1px 2px #ccc;
+}
+
+/* 树形菜单的样式添加20181126 */
+.ztree * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
+.ztree li ul{ margin:0; padding:0}
+.ztree li {line-height:30px;}
+.ztree li a {width:200px;height:30px;padding-top: 0px;}
+.ztree li a:hover {text-decoration:none; background-color: #E7E7E7;}
+.ztree li a span.button.switch {visibility:hidden}
+.ztree.showIcon li a span.button.switch {visibility:visible}
+.ztree li a.curSelectedNode {background-color:#D4D4D4;border:0;height:30px;}
+.ztree li span {line-height:30px;}
+.ztree li span.button {margin-top: -7px;}
+.ztree li span.button.switch {width: 16px;height: 16px;}
+
+.ztree li a.level0 span {font-size: 150%;font-weight: bold;}
+.ztree li span.button.switch {
+	background-image:url("../images/Client/left_menuForOutLook.png");
+	*background-image:url("../images/Client/left_menuForOutLook.gif")
+}
+.ztree li span.button.switch.level0 {width: 20px; height:20px}
+.ztree li span.button.switch.level1 {width: 20px; height:20px}
+.ztree li span.button.noline_open {background-position: 0 0;}
+.ztree li span.button.noline_close {background-position: -18px 0;}
+.ztree li span.button.noline_open.level0 {background-position: 0 -18px;}
+.ztree li span.button.noline_close.level0 {background-position: -18px -18px;}
+
+/*.modal-body #websiteUploadUserCode{*/
+    /*float:left;*/
+/*}*/
+/*.modal-body button{*/
+    /*float:right;*/
+/*}*/
+.modal-body button:after{
+    clear: both;
+}
+
+/*计算模态框20190120*/
+#calcModal .modal-body >.binddiv,#calcModal .modal-body >.exprdiv,#calcModal .modal-body >.autofilldiv,#calcModal .modal-body >.resultdiv{
+	border: solid 1px #E5E5E5;
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+.resultdiv > .returnresult,
+.autofilldiv> .autofill,
+.exprdiv > .exprtype,
+.binddiv > .bindvalue{
+	padding: 13px 0 10px 20px;
+	position: relative;
+}
+.binddiv > .bindvalue p.item>label{
+	width: 1em;
+}
+.binddiv > .bindvalue p.condition>label,
+.autofilldiv> .autofill p>label{
+	width: 6em;
+}
+.binddiv > .bindvalue>i{
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	font-size: 18px;
+	color: #4a4a4a;
+}
+/*设置和自定义一样的样式*/
+.resultdiv > .returnresult input.rightControlSet,
+.autofilldiv> .autofill input.rightControlSet,
+.binddiv > .bindvalue input.rightControlSet{
+	width: 26%;
+	height: 30px;
+	margin: 0 5px;
+	border: solid 1px;
+	border-left-color: #c5c5c5;
+	border-top-color: #c5c5c5;
+	border-right-color: #e0e0e0;
+	border-bottom-color: #e0e0e0;
+	background: url(../../images/Client/inputbg.png);
+	padding: 0 10px;
+}
+
+#calcModal .modal-body  input.rightControlSet::-webkit-input-placeholder,
+#calcModal .modal-body input.rightControlSet::-moz-placeholder{
+	font-size: 13px;
+	color: #4a4a4a;
+}
+.binddiv > .bindvalue input.rightControlSet.tb{
+	width: 22%;
+}
+.binddiv > .bindvalue p.condition>input.rightControlSet,
+.autofilldiv> .autofill input.rightControlSet{
+	width: 40%;
+}
+.resultdiv > .returnresult input.rightControlSet{
+	width: 30%;
+}
+.exprdiv > .exprtype >label{
+	display: inline-block;
+	border: solid 1px #c5c5c5;
+	color: #4a4a4a;
+	height: 25px;
+	width: 83px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	text-align: center;
+	line-height: 25px;
+	border-radius: 2px;
+}
+.exprdiv > .exprtype >span{
+	color: #a9a9a9;
+	font-size: 12px;
+}
+.exprdiv > .exprtype >label.current,
+.exprdiv > .exprtype >label:hover{
+	border: solid 1px #000000;
+	color: #000000;
+	cursor: pointer;
+}
+.resultdiv > .returnresult >.btn{
+	padding: 3px 7px 3px 7px;
+	height: 30px;
+}
+
+.ztree li span.button.switch.noline_close {
+	background-image:url("../images/Client/leftmenu.png");
+}
+.ztree li span.button.switch.noline_open {
+	background-image:url("../images/Client/leftmenu1.png");
+}

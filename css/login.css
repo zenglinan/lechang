@@ -1,0 +1,101 @@
+html,
+body {
+    height: 100%;
+    font-size: 14px;
+}
+
+.login-bg {
+    height: 100%;
+    background: url(../images/pyramid.gif) repeat;
+    font-size: 1rem;
+}
+
+.login-wrap {
+    position: relative;
+    top: 25%;
+    width: 30rem;
+    height: 29rem;
+    margin: 0 auto;
+    padding: 50px;
+    border: 1px solid #06C;
+    background-color: #FFF;
+}
+
+.login-title { text-align: center; }
+
+.login-content { padding: 5px 20px 0 20px; }
+
+.lg-username,
+.lg-password {
+    margin-bottom: 24px;
+    height: 2.8rem;
+}
+
+.lg-btn {
+    width: 100%;
+    height: 2.8rem;
+}
+
+.login-content.limit-content,
+.login-content.fail-content {
+    padding: 0px;
+}
+
+.warning-icon {
+    margin: 5px 0;
+    padding: 0px;
+    font-size: 6rem;
+    color: #900;
+}
+
+.warning-content {
+    margin: 0px;
+    padding: 0px;
+}
+
+.w-fail,
+.w-check { margin: 20px 0 0 6px; }
+
+.w-fail { font-size: 18px; }
+
+.w-check {
+    font-size: 14px;
+    color: #666;
+}
+
+.aflesh,
+.reback,
+.logout {
+    width: 7rem;
+    height: 2rem;
+    margin-top: 25px;
+    text-align: center;
+    line-height: 2rem;
+    color: #FFF;
+    text-decoration: none;
+}
+
+.logout,
+.aflesh {
+    background-color: #900;
+    float: left;
+}
+
+.logout:hover,.logout:active,.logout:visited,
+.aflesh:hover,.aflesh:active,.aflesh:visited {
+    text-decoration: none;
+    background-color: #C00;
+    color: #FFF;
+}
+
+.reback {
+    background-color: #666;
+    float: left;
+    margin-left: 20px;
+}
+
+.reback:hover {
+    text-decoration: none;
+    background-color: #CCC;
+    color: #FFF;
+}

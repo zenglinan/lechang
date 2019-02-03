@@ -1,0 +1,72 @@
+/* CSS Document */
+#header {
+	width: 100%;
+	border: 1px solid #06C;
+	height: 71px;
+}
+#main {
+	width: 100%;
+	border: 1px solid #06C;
+	height: 711px;
+}
+#footer {
+	width: 100%;
+	border: 1px solid #06C;
+	height: 32px;
+}
+#container_1 {
+	width: 100%;
+	border: 1px solid #06C;
+	height: 156px;
+}
+#container_2 {
+	position: relative;
+	width: 100%;
+	border: 1px solid #06C;
+	height: 428px;
+}
+#container_3 {
+	width: 100%;
+	border: 1px solid #06C;
+	height: 123px;
+}
+#wrap_1 {
+	position: absolute;
+	border: 1px solid #06C;
+	width: 26%;
+	height: 184px;
+	top: 4.5%;
+	left: 10%;
+}
+#wrap_2 {
+	position: absolute;
+	border: 1px solid #06C;
+	width: 26%;
+	height: 184px;
+	top: 4.5%;
+	left: 37%;
+}
+#wrap_3 {
+	position: absolute;
+	border: 1px solid #06C;
+	height: 184px;
+	width: 26%;
+	top: 4.5%;
+	left: 64%;
+}
+#aboutuswrap {
+	position: absolute;
+	border: 1px solid #06C;
+	width: 26%;
+	height: 194px;
+	bottom: 4.5%;
+	left: 64%;
+}
+#aboutnews {
+	position: absolute;
+	border: 1px solid #06C;
+	width: 53%;
+	height: 194px;
+	bottom: 4.5%;
+	left: 10%;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>广东乐昌全面深化改革一体化管理平台</title>
+
+		<script src="../../js/jquery-3.2.1.min.js"></script>
+		<script src="../../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script src="../../js/jquery.pagination.min.js"></script>
+		<script src="../../js/src/jquery.form.js"></script>
+		<script type="text/javascript" src="../../js/bootstrap-colorpicker.js"></script>
+		<script src="../../js/wrap_5_temp.js"></script>
+		<script type="text/javascript" src="../../js/jquery.ztree.all.js"></script>
+		<script src="../../js/project/client.js"></script>
+		<script src="../../js/upload/1531467095090js.js"></script>
+		<script src="lechangbpm666"></script>
+
+		<!--<link rel="stylesheet" href="../css/wrap_5_temp.css">-->
+		<link rel="stylesheet" href="../../css/bootstrap-colorpicker.css">
+		<link rel="stylesheet" href="../../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+		<link rel="stylesheet" href="../../css/jquery.pagination.css" />
+		<link rel="alternate" href="../../css/client/default.css" />
+		<link rel="stylesheet" href="../../css/client/style-1.css" />
+	</head>
+
+	<body>
+		<div class="us-container">
+			<header class="hd" id="hd">
+				<div class="hd-top">
+					<h3 class="logo">广东乐昌全面深化改革一体化管理平台</h3>
+					<div class="setting">
+						<ul class="setting-main">
+							<li>
+								<a>设置</a>
+								<i class="fa fa-caret-down"></i>
+							</li>
+							<li>
+								<a>帮助</a>
+							</li>
+							<li class="quit">
+								<a href="http://119.23.253.225:8080/lechang-bpm/logout.action"></a>
+							</li>
+						</ul>
+					</div>
+					<div class="user-info">
+						<a class="user-avatar">
+							<span class="info-num">2</span>
+						</a>
+						<span>admin</span>
+					</div>
+				</div>
+				<nav class="hd-nav">
+					<i><a href="client_index.html"></a></i>
+					<div class="nav-wrap">
+						<ul class="row-nav">
+						</ul>
+					</div>
+					<div class="nav-btn">
+						<a id="nav-prev-btn" class="nav-prev-btn"></a>
+						<a class="nav-next-btn"></a>
+					</div>
+				</nav>
+				<div class="nav-follow">
+					<div class="follow-content">
+						<div class="tab-content"><i class="tab-close"></i></div>
+					</div>
+				</div>
+			</header>
+
+			<div class="bd" id="bd">
+				<div class="bd-container">
+
+					<div class="sidebar">
+						<div class="sidebar-bg"></div>
+						<i class="sidebar-hide"></i>
+						<div class="leftcolumn-hd">
+							<a><i></i><span></span></a>
+							<!--<ul class="leftcolumn-hd-nav">
+							<li>
+								<a></a>
+							</li>
+							<li>
+								<a><span>[wrapnav]</span></a>
+							</li>
+						</ul>-->
+						</div>
+
+						<ul class="leftcolumn-nav">
+							<li class="nav-li li-target">
+								<a><i></i><span>新建项目</span></a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="main">
+						<div class="title">
+							<i class="sidebar-show"></i>
+						</div>
+						<div class="main-content">
+							<!--定义表单区-->
+							<div class="right-control">
+								<h2 class="subfild">
+			    				<span></span>
+			    			</h2>
+								<!--<div class="rightControlRow">-->
+								<!--<label class="rightControlSet">[label]</label>-->
+								<!--<input class="rightControlSet" type="text" />-->
+								<!--</div>-->
+							</div>
+						</div>
+						<!--悬浮栏-->
+						<div class="float-msg">
+							<div class="float-content">
+								<i class="fa fa-envelope-o"></i>
+								<div class="msg-hd">
+									<i class="fa fa-envelope-open-o"></i><span>消息通知</span>
+									<i class="fa fa-times"></i>
+									<i class="fa fa-arrows-h"></i>
+								</div>
+								<div class="msg-content">
+									<div class="well well-lg" id="output" style="border:1px solid #ccc;height:70%;overflow: auto;margin-left:15px;margin-right: 15px;"></div>
+									<div class="input-group" style="">
+										<input type="text" id="message" class="form-control" style="width:100%" placeholder="待发信息" onkeydown="en(event);">
+										<span class="input-group-btn">
+											<button class="btn btn-primary" type="button" onclick="doSend();">发送</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<footer class="ft" id="ft">
+
+			</footer>
+		</div>
+	</body>
+
+</html>

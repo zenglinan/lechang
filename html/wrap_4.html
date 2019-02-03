@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>平台设计系统</title>
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="../js/jquery.pagination.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <script src="../js/project/wrap_3.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/data_platform.css" />
+    <link rel="stylesheet" href="../css/jquery.pagination.css" />
+    <link rel="stylesheet" href="../css/wrap_2.css">
+    <link rel="stylesheet" href="../css/wrap_3.css">
+    <link rel="stylesheet" href="../css/tableSheet.css">
+</head>
+
+<body>
+
+<header class="dt-header">
+    <h1 class="dt-logo">平台设计系统</h1>
+    <div class="dt-setting">
+        <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+        <i class="fa fa-commenting"></i>
+        <i class="fa fa-mail-reply"></i>
+        <i class="fa fa-search"></i>
+        <ul class="dropdown-menu pull-right" role="menu">
+            <li>
+                <a href="#">选项一</a>
+            </li>
+            <li>
+                <a href="#">选项二</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="http://119.23.253.225:8080/lechang-bpm/logout.action">注销</a>
+            </li>
+            <li>
+                <a href="#">退出</a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<div class="dt-main">
+    <div class="dt-sidebar">
+        <div class="sidebar__content">
+            <div class="panel-heading">
+                <a href="#">&nbsp;
+                    <i class="fa fa-angle-double-left" style="float:right; font-size:26px; margin-right:4px;"></i></a>
+            </div>
+            <div class="function-menu">
+                <ul class="nav nav-list ">
+                    <li class="function-item">
+                        <a href="#" class="li_1">
+                            <i class="fa fa-minus"></i>
+                            <span>平台信息管理</span>
+                        </a>
+                    </li>
+                    <li class="function-item">
+                        <a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_2.html" class="li_2">
+                            <i class="fa fa-edit"></i>
+                            <span>数据表定义管理</span>
+                        </a>
+                    </li>
+                    <li class="function-item">
+                        <a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_3.html" class="li_3">
+                            <i class="fa fa-table"></i>
+                            <span>数据信息管理</span>
+                        </a>
+                    </li>
+                    <li class="function-item">
+                        <a href="#" class="li_4">
+                            <i class="fa fa-database"></i>
+                            <span>数据项关系管理</span>
+                        </a>
+                    </li>
+                    <li class="function-item">
+                        <a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_5.html" class="li_5">
+                            <i class="fa fa-check-circle"></i>
+                            <span>界面定义管理</span>
+                        </a>
+                    </li>
+                    <li class="function-item">
+                        <a href="#" class="li_6">
+                            <i class="fa fa-user-plus"></i>
+                            <span>用户管理</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-container">
+        <div class="dt-title">数据信息管理 </div>
+
+        <div id="wrap_3" style="display:block">
+            <div id="p_index" style="white-space:nowrap"><label id="new_index">数据信息</label></div>
+            <div id="table_new" style="display: none">
+                <div class="table-heading bg-primary">
+                    <!--数据库初设-->
+                </div>
+                <div class="panel-body " id="table_show">
+                    <div id="div_set"></div>
+                    <div class="br_ col-sm-12">&nbsp;</div>
+                    <hr />
+                    <div id="pagination3" class="page fl col-sm-12"></div>
+                    <!-- 翻页控件-->
+                </div>
+            </div>
+            <div id="table_data" style="display: block">
+                <div class="container-fluid">
+                    <div class="control-group col-sm-12" style="display: block">
+                        <div class="tab-wrap">
+                            <!-- active tab on page load gets checked attribute -->
+                            <input type="radio" id="tab1" name="tabGroup1" class="tab" checked>
+                            <label for="tab1">计算区</label>
+
+                            <input type="radio" id="tab2" name="tabGroup1" class="tab">
+                            <label for="tab2">合并区</label>
+
+                            <input type="radio" id="tab3" name="tabGroup1" class="tab">
+                            <label for="tab3">其他区</label>
+
+                            <div class="tab__content" style="">
+                                <!--<h3>Short Section</h3>-->
+                                <!--<p>啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</p>-->
+                                <label class="control-label col-sm-12" for="inputDefine" style="padding-left: 0px;padding-right: 0px">输入定义:
+                                    <textarea id="inputDefine" class="form-control" style="width: 100%; margin-top:5px"></textarea>
+                                </label>
+                                <label class="control-label col-sm-12" for="outputDefine" style="padding-left: 0px;padding-right: 0px">输出定义:
+                                    <textarea id="outputDefine" class="form-control" style="width: 100%; margin-top:5px"></textarea>
+                                </label>
+                                <label class="control-label col-sm-12" for="calculateDefine" style="padding-left: 0px;padding-right: 0px">计算公式:
+                                    <div class="form-inline">
+                                        <input id="calculateDefine" class="form-control" style="width: 80%; margin-top:5px">
+                                        <button id="calculateImplementation" class="btn" >执行计算</button>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="tab__content">
+                                <!--<h3>合并时的详细功能</h3>-->
+                                <!--<p>uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu</p>-->
+                                <!--<p>有有有有有有有有有有有有有有有有有有有</p>-->
+                                <div style="float: left;position: relative;width: 80%">
+                                    <div class="" style="align-items: stretch;width:100%;">
+                                        <label class="control-label" for="inputTable" style="width:45%;padding-left: 0px;padding-right: 0px">主表表名:
+                                            <input id="inputTable" class="form-control" style="width: 100%; margin-top:5px">
+                                        </label>
+                                        <label class="control-label" for="inputField" style="width:45%;padding-left: 0px;padding-right: 0px">主表索引:
+                                            <input id="inputField" class="form-control" style="width:100%; margin-top:5px">
+                                        </label>
+                                    </div>
+                                    <div class="" style="align-items: stretch;width:100%;">
+                                        <label class="control-label" for="input2Table" style="width: 45%;padding-left: 0px;padding-right: 0px">从表表名:
+                                            <input id="input2Table" class="form-control" style="width: 100%; margin-top:5px">
+                                        </label>
+                                        <label class="control-label" for="input2Field" style="width: 45%;padding-left: 0px;padding-right: 0px">从表索引:
+                                            <input id="input2Field" class="form-control" style="width: 100%; margin-top:5px">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div style="position: relative;float: right;width: 20%;">
+                                    <button id="combineImplementation" style="width:10em;height:9em;font-size: inherit" class="btn btn-success" >执行合并</button>
+                                </div>
+                            </div>
+
+                            <div class="tab__content">
+                                <h3>Long Section</h3>
+                                <p>嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+
+                                <p>呱呱呱呱呱呱呱呱呱呱呱呱呱呱呱古古怪怪</p>
+
+                                <p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+
+                                <p>哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row-fluid col-md-12" id="table_div1">
+                        <div class="col-md-12" id="table_div2">
+                            <!--<table class="table">-->
+                                <!--<thead class="data_show"></thead>-->
+                                <!--<tbody class="data_show"></tbody>-->
+                            <!--</table>-->
+                            <div class="leftInput col-md-6">
+                                <div class="table-with-btn">
+                                    <div class="headleBlock">
+                                        <div class="control-group col-sm-12" style="display: block">
+                                            <div class="col-sm-6 btn-group">
+                                                <button id="insert" class="btn" type="button" data-toggle="modal" data-target="#myModal">调用</button>
+                                                <button id="check" class="btn" type="button" data-toggle="modal" data-target="#myModal">查找</button>
+                                                <!--<button id="export" class="btn" type="button" data-toggle="modal" data-target="#myModal">导出</button>-->
+                                            </div>
+                                            <div class="col-sm-6 btn-group">
+                                                <!--<button id="insert-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增缓存</button>-->
+                                                <button id="cancel-accept" class="btn" type="button" data-toggle="modal" data-target="#myModal">删除缓存</button>
+                                                <button id="replace-accept" class="btn" type="button" data-toggle="modal" data-target="#myModal">修改缓存</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="contentBlock">
+                                        <table class="responstable">
+                                            <tr>
+                                                <th>Main driver</th>
+                                                <th data-th="Driver details"><span>First name</span></th>
+                                                <th>Surname</th>
+                                                <th>Date of birth</th>
+                                                <th>Relationship</th>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="radio"/></td>
+                                                <td>Steve</td>
+                                                <td>Foo</td>
+                                                <td>01/01/1978</td>
+                                                <td>Policyholder</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="radio"/></td>
+                                                <td>Steffie</td>
+                                                <td>Foo</td>
+                                                <td>01/01/1978</td>
+                                                <td>Spouse</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="radio"/></td>
+                                                <td>Stan</td>
+                                                <td>Foo</td>
+                                                <td>01/01/1994</td>
+                                                <td>Son</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="radio"/></td>
+                                                <td>Stella</td>
+                                                <td>Foo</td>
+                                                <td>01/01/1992</td>
+                                                <td>Daughter</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="radio"/></td>
+                                                <td>Steffie</td>
+                                                <td>Foo</td>
+                                                <td>01/01/1978</td>
+                                                <td>Spouse</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="radio"/></td>
+                                                <td>Steffie</td>
+                                                <td>Foo</td>
+                                                <td>01/01/1978</td>
+                                                <td>Spouse</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="radio"/></td>
+                                                <td>Steffie</td>
+                                                <td>Foo</td>
+                                                <td>01/01/1978</td>
+                                                <td>Spouse</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                <div id="pagination" class="page fl col-sm-12"></div>
+                                <!-- 翻页控件-->
+                                </div>
+                            </div>
+                            <div class="rightOutput col-md-6">
+                                <div class="table-with-btn">
+                                <div class="headleBlock">
+                                    <div class="control-group col-sm-12" style="display: block">
+                                        <div class="col-sm-6 btn-group">
+                                            <button id="insert2" class="btn" type="button" data-toggle="modal" data-target="#myModal">调用</button>
+                                            <button id="check2" class="btn" type="button" data-toggle="modal" data-target="#myModal">查找</button>
+                                            <!--<button id="export2" class="btn" type="button" data-toggle="modal" data-target="#myModal">导出</button>-->
+                                        </div>
+                                        <div class="col-sm-6 btn-group">
+                                            <!--<button id="insert-accept" class="btn btn-primary" type="button"  data-toggle="modal" data-target="#myModal">新增缓存</button>-->
+                                            <button id="cancel-accept2" class="btn" type="button" data-toggle="modal" data-target="#myModal">删除缓存</button>
+                                            <button id="replace-accept2" class="btn" type="button" data-toggle="modal" data-target="#myModal">修改缓存</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contentBlock">
+                                    <table class="responstable">
+                                        <tr>
+                                            <th>Main driver</th>
+                                            <th data-th="Driver details"><span>First name</span></th>
+                                            <th>Surname</th>
+                                            <th>Date of birth</th>
+                                            <th>Relationship</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="radio"/></td>
+                                            <td>Steve</td>
+                                            <td>Foo</td>
+                                            <td>01/01/1978</td>
+                                            <td>Policyholder</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="radio"/></td>
+                                            <td>Steffie</td>
+                                            <td>Foo</td>
+                                            <td>01/01/1978</td>
+                                            <td>Spouse</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="radio"/></td>
+                                            <td>Stan</td>
+                                            <td>Foo</td>
+                                            <td>01/01/1994</td>
+                                            <td>Son</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="radio"/></td>
+                                            <td>Stella</td>
+                                            <td>Foo</td>
+                                            <td>01/01/1992</td>
+                                            <td>Daughter</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="radio"/></td>
+                                            <td>Steffie</td>
+                                            <td>Foo</td>
+                                            <td>01/01/1978</td>
+                                            <td>Spouse</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="radio"/></td>
+                                            <td>Steffie</td>
+                                            <td>Foo</td>
+                                            <td>01/01/1978</td>
+                                            <td>Spouse</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="radio"/></td>
+                                            <td>Steffie</td>
+                                            <td>Foo</td>
+                                            <td>01/01/1978</td>
+                                            <td>Spouse</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="pagination2" class="page fl col-sm-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+
+                </h4>
+            </div>
+            <div id="dlg" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary table-btn">
+                    提交更改
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+</body>
+
