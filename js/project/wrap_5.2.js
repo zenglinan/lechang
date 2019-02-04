@@ -428,51 +428,222 @@ function cssControl2(e) {
  * 计算模块
  */
 
-$(FContent.window).click(function (e){
-	var tg=$(e.target);
-	if(tg.hasClass('calcbtn')){
-		$('#calcModal').modal('show');
-		var calcobj=new calcModuleConstrutObj();
-		calcobj.init();
-	}
-});
-
 function calcModuleConstrutObj(){
-	var datafield={};
-	var calcexpr='';
+	this.datafield={};
+	this.calcexpr={};
+	this.currentcondition='';
+	this.tasklist=[];
+	this.computefieldjson='';
 }
 calcModuleConstrutObj.prototype={
-	datafieldconstrut:function(){
-	},
-	interface:function(){
-		var calcmodal=$('#calcModal');
+	datafieldconstrut:function(that,calcmodal){
 		var binddiv=calcmodal.find('.binddiv');//取值区
+		var df=that.datafield;
+		var error=0;
+		binddiv.find('p.item').each(function(index, el) {
+			var index=$(el).children('label').text().charAt(0);
+			var tbget=$(el).children('input.tb').val();
+			var fieldget=$(el).children('input.field').val();
+			if(tbget=="" || fieldget=="")
+				error='error';
+			df[index]={};
+			df[index]['fromtb']=tbget;
+			df[index]['fromfield']=fieldget;
+			df[index]['equal']=`${tbget}.${fieldget}`;
+		});
+		if(!error){
+			return df;
+		}else{
+			return error;
+		}
+	},
+	calcexprconstrut:function(that,tgtext,calckeys,backkeys,currentexpr){
+		switch (tgtext) {
+			case '计算平均值':
+				that['calcexpr']['calcexpr']=`(${calckeys.join('+')})/2`;
+				that['calcexpr']['backexpr']=`(${backkeys.join('+')})/2`;
+				break;
+			case '计算和':
+				that['calcexpr']['calcexpr']=calckeys.join('+');
+				that['calcexpr']['backexpr']=backkeys.join('+');
+				break;
+			case '计算乘积':
+				that['calcexpr']['calcexpr']=calckeys.join('*');
+				that['calcexpr']['backexpr']=backkeys.join('*');
+				break;
+			case '计算差值':
+				that['calcexpr']['calcexpr']=calckeys.join('-');
+				that['calcexpr']['backexpr']=backkeys.join('-');
+				break;
+			case '计算商':
+				that['calcexpr']['calcexpr']=calckeys.join('/');
+				that['calcexpr']['backexpr']=backkeys.join('/');
+				break;
+			case '自行绑定':
+				var calcexpr=currentexpr;
+				calckeys.forEach(function(currentValue, index, arr) {
+					if(currentexpr.indexOf(currentValue)!=-1){
+						currentexpr=currentexpr.replace(currentValue,that['datafield'][currentValue]['equal'].toUpperCase());
+					}
+				});
+				that['calcexpr']['calcexpr']=calcexpr;
+				that['calcexpr']['backexpr']=currentexpr.toLowerCase();
+			default:
+				console.log('计算类型不在范围内');
+				break;
+			}
+		return that.calcexpr;
+	},
+	GetComputeFieldData:function(that){ //返回计算字段
+		var ComputeFieldData={
+			viewComputeFieldList:[],
+			condition:""
+		};
+		ComputeFieldData['viewComputeFieldList']=that.tasklist;
+		ComputeFieldData['condition']=that.currentcondition;
+		//return ComputeFieldData
+		//如果返回json
+		var ComputeFieldJson=JSON.stringify(ComputeFieldData);
+		return ComputeFieldJson;
+	},
+	interface:function(that,calcmodal){   //界面相关
+		//界面切换
+		var calcbody=calcmodal.find('.calc-body');
+		var cachebody=calcmodal.find('.cache-body');
+		var title=calcmodal.find('.modal-header');
+		var taskspan=cachebody.find('.outputtask #task_num');
+		title.find('span').on('click',function(e){
+			$(e.target).addClass('current');
+			$(e.target).siblings().removeClass('current');
+			if($(e.target).text()=='计算'){
+				calcbody.show();
+				cachebody.hide();
+			}else{
+				calcbody.hide();
+				cachebody.show();
+				taskspan.text(that.tasklist.length);
+			}
+		});
+		//缓存模块
+		cachebody.find('.calctask').on('click','.fa-close',function(e){
+			var tr=$(e.target).parent().parent();
+			that.tasklist.splice(tr.index(),1);
+			tr.remove();
+			//taskspan.text(parseInt(taskspan.text())-1);
+			taskspan.text(that.tasklist.length);
+		});
 		//增加取值序列 界面处理
+		var binddiv=calcmodal.find('.binddiv');
 		binddiv.find('.fa-plus-circle').on('click',function(e) {
 			let itemp=new el_Create('', 'item', 'p');
 			var binditemcount=binddiv.find('p.item').length;
 			var index=String.fromCharCode(97+binditemcount);//递增字母
 			$(itemp.dom).html(`<label>${index}:</label>
-        				<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet" placeholder="选取字段名"></input><input type="text" class="rightControlSet" placeholder="字段截取条件"></input>
+        				<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet field" placeholder="选取字段名"></input><input type="text" class="rightControlSet" placeholder="字段截取条件"></input>
         				<span></span>`);
 			binddiv.children('.bindvalue').append(itemp.dom);
 		});
-		//计算参数 界面处理
-		var exprdiv=calcmodal.find('.exprdiv');//计算类型区
-		var autofilldiv=calcmodal.find('.autofilldiv');//自行填充区
-		exprdiv.children('.exprtype').one('click', function(e) { //--事件委托 不妥改
-			let tg=$(e.target);
-			if(tg.text()=='字段统计'){
-				let p=new el_Create('', '', 'p');
-				$(p.dom).html(`<label>参数*:</label><input type="text" class="rightControlSet" placeholder="输入所需统计的字段"></input>`)
-				autofilldiv.children('.autofill').prepend(p.dom);
-			}
-		});
 	},
 	init:function(){
-		this.interface();//ui
+		var that=this;
+		var calcmodal=$('#calcModal');
+		var exprdiv=calcmodal.find('.exprdiv');
+		var autofilldiv=calcmodal.find('.autofilldiv');
+		calcmodal.find('.calc-body').show();//界面初始化
+		calcmodal.find('.cache-body').hide();
+		calcmodal.find('.modal-header >h5 span:first').addClass('current');
+		calcmodal.find('.modal-header >h5 span').eq(1).removeClass('current');
+		exprdiv.children('.exprtype').on('click', function(e) { //计算类型启动计算模块开始构建
+			var tg=$(e.target);
+			tg.addClass('current');
+			tg.siblings().removeClass('current');
+			var result=that.datafieldconstrut(that,calcmodal);//构建计算参数
+			if(result=='error'){
+				$(calcmodal).find('.binddiv>h5>span').text('*请完善字段信息');
+			}else{
+				$(calcmodal).find('.binddiv>h5>span').text('');
+				var df=result;
+				var calckeys=Object.keys(df);
+				var backkeys=calckeys.map(key=>df[key]['equal']);
+				var autobind=autofilldiv.find('#calc_expr');
+				if(tg.text()=='自行绑定'){
+					autobind.attr("disabled",false);
+					autobind.on('blur',function(){
+						var exprs=that.calcexprconstrut(that,tg.text(),calckeys,backkeys,autobind.val());
+						autobind.next().text('='+exprs.backexpr);
+					});
+				}else{
+					var exprs=that.calcexprconstrut(that,tg.text(),calckeys,backkeys);//构建计算类型
+					autobind.val(exprs.calcexpr);
+					autobind.next().text('='+exprs.backexpr);
+					autobind.attr("disabled",true);//禁用
+				}
+			}
+		});
+		var resultdiv=calcmodal.find('.resultdiv');//启动缓存
+		var cachebody=calcmodal.find('.cache-body');
+		resultdiv.find('#cachebtn').on('click', function(e) {
+			var fieldobj={};
+			var fieldname=$(e.target).siblings('#field_name').val();
+			var fielddesc=$(e.target).siblings('#field_desc').val();
+			fieldobj['fieldName']=fieldname;
+			fieldobj['desc']=fielddesc;
+			fieldobj['expr']=that.calcexpr.backexpr;
+			that.tasklist.push(fieldobj);
+			let tr=new el_Create('', '', 'tr');
+			$(tr.dom).html(`<td>${fieldobj['expr']}</td><td>${fieldname}</td><td>${fielddesc}</td><td><i class="fa fa-close"></i></td>`)
+			cachebody.find('.calctask').children('tbody').append(tr.dom);//显示
+			alert('缓存成功')
+		});
+		var outtask=cachebody.find('.outputtask');
+		outtask.find('#outputbtn').on('click',function(e){ //导出计算字段
+			var condition=outtask.find('#calc_condition').val();//联立条件处理
+			var p=/\w+.\w+(\w+.\w+)*/;
+			if(condition && !p.test(condition)){
+				outtask.find('#calc_condition').next().text('*输入格式不正确！');
+			}else{
+				outtask.find('#calc_condition').next().text('*注意为所有计算任务共享');
+				if(condition.indexOf(',')!=-1)
+					condition=condition.replace(',',' and ');
+				that.currentcondition=condition;
+				that.computefieldjson=that.GetComputeFieldData(that);//赋值json
+				alert('导出成功');
+			}
+		});
+		that.interface(that,calcmodal);//ui	
+	},
+	empty:function(){
+		var calcmodal=$('#calcModal');
+		//清值
+		calcmodal.find('input.rightControlSet').val("");
+		calcmodal.find('.cache-body .calctask tbody').html("");
+		calcmodal.find('.cache-body .outputtask #task_num').text("0");
+		calcmodal.find('.calc-body #calc_expr').next().text("");
+		//解除绑定
+		calcmodal.find('.calc-body #cachebtn').off("click");
+		calcmodal.find('.calc-body .exprtype').off("click");
+		calcmodal.find('.cache-body #outputbtn').off("click");
+		calcmodal.find('.modal-footer #tocalc').off("click");
 	}
 }
+
+//启用计算模块
+var computefieldjson='';//外部存放json变量字符串
+
+$(FContent.window).click(function (e){
+	var tg=$(e.target);
+	if(tg.hasClass('calcbtn')){ //启动计算
+		$('#calcModal').modal('show');
+		var calcobj=new calcModuleConstrutObj();
+		calcobj.init();
+		$('#calcModal #tocalc').click(function(e) {
+			computefieldjson=calcobj.computefieldjson;//json变量赋值
+			calcobj.empty();
+			$('#calcModal').modal('hide');
+			alert(computefieldjson); //检验用
+		});
+	}
+});
 
 //----------------CSS实现---------------------
 

@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 
-    <script src="../js/project/wrap_3.js"></script>
+    <script src="../js/project/wrap_4.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/data_platform.css" />
     <link rel="stylesheet" href="../css/jquery.pagination.css" />
     <link rel="stylesheet" href="../css/wrap_2.css">
     <link rel="stylesheet" href="../css/wrap_3.css">
+    <link rel="stylesheet" href="../css/wrap_5.css">
     <link rel="stylesheet" href="../css/tableSheet.css">
 </head>
 
@@ -130,18 +131,84 @@
                             <div class="tab__content" style="">
                                 <!--<h3>Short Section</h3>-->
                                 <!--<p>啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</p>-->
-                                <label class="control-label col-sm-12" for="inputDefine" style="padding-left: 0px;padding-right: 0px">输入定义:
-                                    <textarea id="inputDefine" class="form-control" style="width: 100%; margin-top:5px"></textarea>
-                                </label>
-                                <label class="control-label col-sm-12" for="outputDefine" style="padding-left: 0px;padding-right: 0px">输出定义:
-                                    <textarea id="outputDefine" class="form-control" style="width: 100%; margin-top:5px"></textarea>
-                                </label>
-                                <label class="control-label col-sm-12" for="calculateDefine" style="padding-left: 0px;padding-right: 0px">计算公式:
-                                    <div class="form-inline">
-                                        <input id="calculateDefine" class="form-control" style="width: 80%; margin-top:5px">
-                                        <button id="calculateImplementation" class="btn" >执行计算</button>
-                                    </div>
-                                </label>
+                                <!--<label class="control-label col-sm-12" for="inputDefine" style="padding-left: 0px;padding-right: 0px">输入定义:-->
+                                    <!--<textarea id="inputDefine" class="form-control" style="width: 100%; margin-top:5px"></textarea>-->
+                                <!--</label>-->
+                                <!--<label class="control-label col-sm-12" for="outputDefine" style="padding-left: 0px;padding-right: 0px">输出定义:-->
+                                    <!--<textarea id="outputDefine" class="form-control" style="width: 100%; margin-top:5px"></textarea>-->
+                                <!--</label>-->
+                                <!--<label class="control-label col-sm-12" for="calculateDefine" style="padding-left: 0px;padding-right: 0px">计算公式:-->
+                                    <!--<div class="form-inline">-->
+                                        <!--<input id="calculateDefine" class="form-control" style="width: 80%; margin-top:5px">-->
+                                        <!--<button id="calculateImplementation" class="btn" >执行计算</button>-->
+                                    <!--</div>-->
+                                <!--</label>-->
+                                <!-- 模态框主体 -->
+                                <div class="modal-body" id="calcModal">
+                                    <div class="calc-body">
+                                        <label class="calc-start">[重启计算模块]</label>
+                                        <div class="binddiv">
+                                            <h5><strong>[导入字段]</strong><span></span></h5>
+                                            <div class="bindvalue"><i class="fa fa-plus-circle"></i>
+                                                <p class="item">
+                                                    <label>a:</label>
+                                                    <input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet field" placeholder="选取字段名"></input><input type="text" class="rightControlSet" placeholder="字段截取条件"></input><span></span>
+                                                <p/>
+                                                <p class="item">
+                                                    <label>b:</label>
+                                                    <input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet field" placeholder="选取字段名"></input><input type="text" class="rightControlSet" placeholder="字段截取条件"></input><span></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="exprdiv">
+                                            <h5><strong>[计算类型选择]</strong></h5>
+                                            <div class="exprtype">
+                                                <label>计算平均值</label><label>计算和</label><label>计算乘积</label><label>计算差值</label><label>计算商</label>
+                                                <label>字段排序</label><label>字段统计</label><label>自行绑定</label>
+                                                <!--         			<span>*其余计算类型自行绑定计算表达式</span> -->
+                                            </div>
+                                        </div>
+                                        <div class="autofilldiv">
+                                            <h5><strong>[设置参数/计算表达式]</strong></h5>
+                                            <div class="autofill">
+                                                <p><label>字段参数*:</label><input type="text" class="rightControlSet" placeholder="输入所需统计的字段名"></input><span>*可选</span><p>
+                                                <p><label>计算表达式:</label><input type="text" class="rightControlSet calc-expr" id="calc_expr"></input><span></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="resultdiv">
+                                            <h5><strong>[设置导出字段]</strong></h5>
+                                            <div class="returnresult">
+                                                <input type="text" class="rightControlSet" id="field_name" placeholder="导出字段名"></input><input type="text" class="rightControlSet" id="field_desc" placeholder="字段描述"></input>
+                                                <button class="btn btn-primary" id="cachebtn">缓存计算任务</button>
+                                            </div>
+                                        </div>
+                                    </div><!--calc-body-->
+                                    <div class="cache-body" style="display: block">
+                                        <div class="cachediv">
+                                            <h5><strong>[已缓存以下计算任务]</strong></h5>
+                                            <table class="calctask">
+                                                <thead>
+                                                <tr>
+                                                    <th>计算表达式</th>
+                                                    <th>导出字段名</th>
+                                                    <th>导出字段描述</th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="outputdiv">
+                                            <h5><strong>[导出计算任务]</strong></h5>
+                                            <div class="outputtask">
+                                                <p><label>表联立条件:</label><input type="text" class="rightControlSet calc-condition" id="calc_condition" placeholder="表名.字段名=表名.字段名,.."></input><span>*注意为所有计算任务共享</span></p>
+                                                <p><label>共(<span id="task_num"></span>)条计算任务</label><button class="btn btn-primary" id="outputbtn">全部导出到中间表</button></p>
+                                            </div>
+                                        </div>
+                                    </div><!--cache-body-->
+                                </div>
+                                <!-- 模态框底部 -->
                             </div>
 
                             <div class="tab__content">
@@ -196,8 +263,8 @@
                                     <div class="headleBlock">
                                         <div class="control-group col-sm-12" style="display: block">
                                             <div class="col-sm-6 btn-group">
-                                                <button id="insert" class="btn" type="button" data-toggle="modal" data-target="#myModal">调用</button>
-                                                <button id="check" class="btn" type="button" data-toggle="modal" data-target="#myModal">查找</button>
+                                                <button id="setTableNode" class="btn" type="button" data-toggle="modal" data-target="#myModal">调用</button>
+                                                <button id="setFieldNode" class="btn" type="button" data-toggle="modal" data-target="#myModal">设置</button>
                                                 <!--<button id="export" class="btn" type="button" data-toggle="modal" data-target="#myModal">导出</button>-->
                                             </div>
                                             <div class="col-sm-6 btn-group">
@@ -210,11 +277,12 @@
                                     <div class="contentBlock">
                                         <table class="responstable">
                                             <tr>
-                                                <th>Main driver</th>
-                                                <th data-th="Driver details"><span>First name</span></th>
-                                                <th>Surname</th>
-                                                <th>Date of birth</th>
-                                                <th>Relationship</th>
+                                                <th>选择</th>
+                                                <th data-th="Driver details"><span>字段名</span></th>
+                                                <th>长度</th>
+                                                <th>类型</th>
+                                                <th>识别名</th>
+                                                <th>可否为空</th>
                                             </tr>
                                             <tr>
                                                 <td><input type="radio"/></td>
@@ -277,7 +345,7 @@
                                     <div class="control-group col-sm-12" style="display: block">
                                         <div class="col-sm-6 btn-group">
                                             <button id="insert2" class="btn" type="button" data-toggle="modal" data-target="#myModal">调用</button>
-                                            <button id="check2" class="btn" type="button" data-toggle="modal" data-target="#myModal">查找</button>
+                                            <button id="" class="btn" type="button" data-toggle="modal" data-target="#myModal">设置</button>
                                             <!--<button id="export2" class="btn" type="button" data-toggle="modal" data-target="#myModal">导出</button>-->
                                         </div>
                                         <div class="col-sm-6 btn-group">
@@ -367,11 +435,33 @@
                     &times;
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
-
+                    <i class="fa fa-arrows-h"></i>
                 </h4>
             </div>
             <div id="dlg" class="modal-body">
+                <div id="dlg_1" style="display: none">
+                    <div class="col-md-12">
+                        <label>表名</label>
+                        <select class="form-control" id="tableSelect" style="width:100%">
+                        </select>
+                    </div>
+                </div>
+                <div id="dlg_2">
+                    <div class="col-md-12">
+                        <label>字段名</label>
+                        <select class="form-control" id="fieldSelect" style="width:100%">
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <label>新字段名</label>
+                        <input type="text" class="form-control" id="fieldInput1" name="" style="width:100%">
+                    </div>
+                    <div class="col-md-12">
+                        <label>描述</label>
+                        <input type="text" class="form-control" id="fieldInput2" name="" style="width:100%">
+                    </div>
 
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭

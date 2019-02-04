@@ -79,7 +79,7 @@
 								</a>
 							</li>
 							<li class="function-item">
-								<a href="#" class="li_4">
+								<a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_4.html" class="li_4">
 									<i class="fa fa-database"></i>
 									<span>数据项关系管理</span>
 								</a>
@@ -147,8 +147,6 @@
 			<ul class="menu-list2 menuDivUl">
 			</ul>
 		</div>
-
-
 		<!--
 	模块1 ---三级菜单设置模块框
 -->
@@ -283,52 +281,75 @@
     <div class="modal-content">
       <!-- 模态框头部 -->
 		<div class="modal-header">
-			<h4 style="display: inline;"><strong>计算</strong></h4>
+			<h5 style="display: inline;"><span class="current">计算</span>>><span>缓存任务</span></h5>
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		</div>
         <!-- 模态框主体 -->
         <div class="modal-body">
+        <div class="calc-body">
         	<div class="binddiv">
-        		<h5><strong>导入字段</strong></h5>
+        		<h5><strong>导入字段:</strong><span></span></h5>
         		<div class="bindvalue"><i class="fa fa-plus-circle"></i>
-        			<p class="condition">
-        				<label>表联立条件:</label><input type="text" class="rightControlSet" ></input>
-        			</p>
         			<p class="item">
         				<label>a:</label>
-        				<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet" placeholder="选取字段名"></input><input type="text" class="rightControlSet" placeholder="字段截取条件"></input><span></span>
+        				<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet field" placeholder="选取字段名"></input><input type="text" class="rightControlSet" placeholder="字段截取条件"></input><span></span>
         			<p/>
         			<p class="item">
         				<label>b:</label>
-        				<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet" placeholder="选取字段名"></input><input type="text" class="rightControlSet" placeholder="字段截取条件"></input><span></span>
+        				<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet field" placeholder="选取字段名"></input><input type="text" class="rightControlSet" placeholder="字段截取条件"></input><span></span>
         			</p>
         		</div>
         	</div>
         	<div class="exprdiv">
-        		<h5><strong>计算类型</strong></h5>
+        		<h5><strong>计算类型选择:</strong></h5>
         		<div class="exprtype">
         			<label>计算平均值</label><label>计算和</label><label>计算乘积</label><label>计算差值</label><label>计算商</label>
-        			<br><label>字段排序</label><label>字段统计</label>
-        			<span>*其余计算类型自行绑定计算表达式</span>
+        			<br><label>字段排序</label><label>字段统计</label><label>自行绑定</label>
+<!--         			<span>*其余计算类型自行绑定计算表达式</span> -->
         		</div>
         	</div>
         	<div class="autofilldiv">
-        		<h5><strong>计算参数/计算表达式</strong></h5>
+        		<h5><strong>设置参数/计算表达式:</strong></h5>
         		<div class="autofill">
-        			<p><label>计算表达式:</label><input type="text" class="rightControlSet calc-expr"></input></p>
+        			<p><label>字段参数*:</label><input type="text" class="rightControlSet" placeholder="输入所需统计的字段名"></input><span>*可选</span><p>
+        			<p><label>计算表达式:</label><input type="text" class="rightControlSet calc-expr" id="calc_expr"></input><span></span></p>
         		</div>
         	</div>
         	<div class="resultdiv">
-        		<h5><strong>导出结果</strong></h5>
+        		<h5><strong>设置导出字段:</strong></h5>
         		<div class="returnresult">
-        				<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet" placeholder="选取字段名"></input>
-        				<button class="btn btn-primary">导出</button>
+        				<input type="text" class="rightControlSet" id="field_name" placeholder="导出字段名"></input><input type="text" class="rightControlSet" id="field_desc" placeholder="字段描述"></input>
+        				<button class="btn btn-primary" id="cachebtn">缓存计算任务</button>
         		</div>
         	</div>
-        </div>
+        </div><!--calc-body-->
+        <div class="cache-body">
+        	<div class="cachediv">
+        		<h5><strong>已缓存以下计算任务:</strong></h5>
+        		<table class="calctask">
+        			<thead>
+        				<tr>
+        					<th>计算表达式</th>
+        					<th>导出字段名</th>
+        					<th>导出字段描述</th>
+        					<th></th>
+        				</tr>
+        			</thead>
+        			<tbody>
+        			</tbody>
+        		</table>
+        	</div>
+        	<div class="outputdiv">
+        		<h5><strong>导出计算任务:</strong></h5>
+        		<div class="outputtask">
+        			<p><label>表联立条件:</label><input type="text" class="rightControlSet calc-condition" id="calc_condition" placeholder="表名.字段名=表名.字段名,.."></input><span>*注意为所有计算任务共享</span></p>
+        			<p><label>共(<span id="task_num"></span>)条计算任务</label><button class="btn btn-primary" id="outputbtn">全部导出到中间表</button></p>
+        		</div>
+        	</div>
+        </div><!--cache-body-->
+    	</div>
         <!-- 模态框底部 -->
         <div class="modal-footer">
-     	    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
 			<button type="button" class="btn btn-primary tocalc" id="tocalc">确定</button>
         </div>
     </div>
