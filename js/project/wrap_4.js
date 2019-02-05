@@ -1,5 +1,101 @@
 // JavaScript Document
 $(document).ready(function(){
+    function createMid(){
+
+    }
+    createMid.prototype={
+        tableList:[],
+        natureField:[],
+        computeField:[],
+        condition:'',
+        createMidAjax:function (obj) {
+            var result={};
+            $.ajax({
+                url:'http://119.23.253.225:8080/lechang-bpm/viewController/createView',
+                type:'POST',
+                data:JSON.stringify(obj,null,4),
+                contentType: 'application/json',
+                async:false,
+                success:function(recieve){
+                    if(recieve.success&&recieve.msg.indexOf("成功")){
+                        result=recieve.obj;
+                    }else{
+                        alert("删除失败!");
+                    }
+                }
+            });
+            return result;
+        },
+        showNature:function(obj,selector){
+            $(selector).empty();
+            for(var i in obj){
+                $(selector).append('<tr>\n' +
+                    '                                                <td class="fieldnameNode_crtMid1">'+obj[i].fieldName+'</td>\n' +
+                    '                                                <td>'+obj[i].fromTable+'</td>\n' +
+                    '                                                <td>'+obj[i].fromField+'</td>\n' +
+                    '                                                <td>'+obj[i].desc+'</td>\n' +
+                    '                                            </tr>')
+            }
+        },
+        showCompute:function (obj,selector) {
+            $(selector).empty();
+            for(var i in obj){
+                $(selector).append('<tr>\n' +
+                    '                                                <td class="fieldnameNode_crtMid2">'+obj[i].fieldName+'</td>\n' +
+                    '                                                <td>'+obj[i].desc+'</td>\n' +
+                    '                                                <td>'+obj[i].expr+'</td>\n' +
+                    '                                            </tr>')
+            }
+        },
+        setNatureOnce:function (obj) {      //设置viewNatureField对外接口
+            this.__proto__.natureField.push(obj);
+            this.showNature(this.natureField,'.nature-fieldlist tbody');
+        },
+        setCompute:function (Arr) {
+            this.__proto__.computeField=Arr;
+            this.showCompute(this.computeField,'.compute-fieldlist tbody');
+        },
+        setCondition:function(con){
+            this.__proto__.condition=con;
+        },
+        addCondition:function(con){
+            if(typeof con!='string'){
+                con=$(con.target).val();
+            }
+            var creMid= new createMid();
+            creMid.appendCondition(con)
+        },
+        appendCondition:function(con){
+            this.__proto__.condition+=con;
+        },
+        addTable:function(str){
+            if($.inArray(str,this.__proto__.tableList)<0){
+                this.__proto__.tableList.push(str);
+            }
+        },
+        setComputeJson:function (str) {     //设置viewComputeField对外接口
+            var obj=typeof str=='string'?JSON.parse(str):str;
+            this.setCompute(obj.viewComputeFieldList);
+            this.setCondition(obj.condition);
+        },
+        setMidTable:function () {
+            var creMid=new createMid();
+            creMid.sendMidTable();
+        },
+        sendMidTable:function () {
+            var midName=$('#midName').val();
+            var midDesc=$('#midDesc').val();
+            var setting={
+                viewName:midName,
+                desc:midDesc,
+                tableList:this.tableList,
+                viewNatureFieldList:this.natureField,
+                viewComputeFieldList:this.computeField,
+                condition:this.condition
+            }
+            this.createMidAjax(setting);
+        }
+    }
 	function tableManager(showFieldInput){
 		showFieldInput=showFieldInput||'.leftInput .responstable tbody';
 		var result=this.showTableAjax();
@@ -36,11 +132,14 @@ $(document).ready(function(){
                     var desc=$('#fieldInput2').val();
                     var tbShow=new tableManager();
                     var setting={
-                    	filedName:fieldNew,
+                    	fieldName:fieldNew,
 						fromTable:tbShow.tableNow,
-						formField:fieldOld,
+						fromField:fieldOld,
 						desc:desc
 					};
+                    var creMid=new createMid();
+                    creMid.addTable(tbShow.tableNow);
+                    creMid.setNatureOnce(setting);
                     alert(JSON.stringify(setting));
                 })
 			}
@@ -353,6 +452,8 @@ $(document).ready(function(){
                     that.currentcondition=condition;
                     computefieldjson=that.GetComputeFieldData(that);//赋值json
                     alert('导出成功');
+                    var creMid=new createMid();                 //createMid生成计算字段的行为
+                    creMid.setComputeJson(computefieldjson);
                     alert(computefieldjson);
                 }
             });
@@ -380,9 +481,12 @@ $(document).ready(function(){
         var calcobj=new calcModuleConstrutObj();
         calcobj.init()
 		var tbShow=new tableManager();
+        var creMid=new createMid();
         $('.fa-arrows-h').click(tbShow.changeShow);
         $('#setFieldNode').click(tbShow.setField);
         $('#setTableNode').click(tbShow.setTable);
+        $('#createMidBtn').click(creMid.setMidTable);
+        $('#addCondition').change(creMid.addCondition)
     }
     $('#calcModal .calc-start').on('click',function(){
         var calcobj=new calcModuleConstrutObj();
