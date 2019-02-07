@@ -57,7 +57,10 @@ $(document).ready(function(){
     var data_table_recieve=new Array();
     var data_replace=new Array();
     var cookieField=new Array();
-
+    $('#fileList').click(function () {
+        var fileObj= new fileCtrl();
+        fileObj.fileListClick();
+    });
 
 //----------------CSS实现---------------------
 
@@ -230,7 +233,183 @@ $(document).ready(function(){
             select.append(new Option(select_array[i],select_array[i]));
         }
     }
+function fileCtrl(selectorTable){
+    this.__proto__.selectorTable=selectorTable||'#table_div1';
+}
+fileCtrl.prototype= {
+    selectJson:{
+        pageNumber:1,
+        pageSize:10
+    },
+    selectorTable:null,
+    fileUploadAjax: function (fileJson,func) {
+        var forms = new FormData();
+        console.log($('#fileUploading'));
+        if ('file' in fileJson && fileJson['file']) {
+            forms.append("file", $(fileJson['file'])[0].files[0]);
+        }
+        if ('topic' in fileJson && fileJson['topic']) {
+            forms.append("topic", fileJson.topic);
+        }
+        if ('category' in fileJson && fileJson['category']) {
+            forms.append("category", fileJson.category);
+        }
 
+        var options = {
+            url: 'http://119.23.253.225:8080/lechang-bpm/FMInfoController/upload',
+            type: 'POST',
+            data: forms,
+            processData: false,
+            contentType: false,
+            encType: "multipart/form-data",
+            success: func||function () {
+                console.log('what');
+            }
+        };
+        $.ajax(options);
+    },
+    selectFile: function (arg,selectorTable,func) {
+        var that=this;
+        var arg=arg?arg:{};
+        var selector=selectorTable||this.selectorTable;
+        $("#table_new").attr("style", "display:none;");
+        $("#table_data").attr("style", "display:block;");
+        var result = [],pageInfo={};
+        if ('keyword' in arg) {
+            this.selectJson['keyword'] = arg['keyword'];
+        }
+        if ('topic' in arg) {
+            this.selectJson['topic'] = arg['topic'];
+        }
+        if ('category' in arg) {
+            this.selectJson['category'] = arg['category'];
+        }
+        $.ajax({
+            type: "GET",
+            url: "http://119.23.253.225:8080/lechang-bpm/FMInfoController/get",
+            data: this.selectJson,
+            success: typeof func=='function'?func:function (recieve) {
+                if (recieve.success) {
+                    result = recieve.obj;
+                    pageInfo = recieve.attributes.pageInfo;
+                    $("#table_div1").css({"overflow-x": "scroll"});
+                    that.tableField(selector);
+                    that.tableData(result,selector);
+                    that.page_set(pageInfo.pageNumber,pageInfo.totalPage,pageInfo.pageSize);
+                }
+            }
+        });
+        return result;
+    },
+    deleteFile:function(num){
+        $.ajax({
+            type: "POST",
+            url: "http://119.23.253.225:8080/lechang-bpm/FMInfoController/delete",
+            data: JSON.stringify({
+                fmId:parseInt(num)
+            }),
+            success: typeof func=='function'?func:function (recieve) {
+                if (recieve.success) {
+                    alert('删除成功！');
+                }
+            }
+        });
+    },
+    setPage:function(current){
+        this.selectJson.pageNumber=current;
+        this.selectFile();
+    },
+    tableField: function (field) {
+        var obj = [
+            {fieldName: 'ID'},
+            {fieldName: '文件名'},
+            {fieldName: '操作时间'},
+            {fieldName: '主题'},
+            {fieldName: '分类'},
+            {fieldName: '文件类型'}
+        ];
+        var tr = document.createElement("tr");
+        for (var j = 0; j < obj.length; j++) {
+            //alert(obj[j].content);
+            var input9 = obj[j].fieldName;         //到时改为obj【j】.content
+            var th = document.createElement("th");
+            if (j == 0) {
+                th.setAttribute("style", "width:50px;");
+                input9 = "序号";
+            }
+            th.innerHTML = input9;
+            tr.appendChild(th);
+        }
+        var th = document.createElement("th");
+        th.innerHTML = "操作";
+        tr.appendChild(th);
+        $(field).find('thead').append(tr);
+        //page_set(1,5,10);
+    },
+    tableData(obj, field) {
+        var number = obj.length;
+        for (var j = 0; j < number; j++) {
+            var t= new Date()
+            t.setTime(obj[j].operateTime);
+            var tr='<tr>' +
+                '<td>'+obj[j].fmId+'</td>'+
+                '<td>'+obj[j].fileName+'</td>'+
+                '<td>'+t.toLocaleString()+'</td>'+
+                '<td>'+obj[j].topic+'</td>'+
+                '<td>'+obj[j].category+'</td>'+
+                '<td>'+obj[j].type+'</td>'+
+                '<td><button class="table_cancel_bt btn btn-danger" style="font-size:12px;padding:1px 12px;" id="'+obj[j].fmId+'">删除</button>  <button class="table_download_bt btn btn-warning" style="font-size:12px;padding:1px 12px;"path="'+obj[j].path+'">下载</button></td>'+
+                '</tr>';
+            $(field).find('tbody').append(tr);
+        }
+
+        $(".table_cancel_bt").click(function () {
+            var num = $(this).attr("id");
+            var fileObj=new fileCtrl();
+            fileObj.deleteFile(num);
+
+        });
+        $(".table_download_bt").on('click', function () {
+            var path =$(this).attr('path');
+            window.open(path);
+        });
+    },
+    page_set:function(current_page,total_page,page_size) {
+        $("#pagination").pagination({
+            currentPage: parseInt(current_page),// 当前页数
+            totalPage: parseInt(total_page),// 总页数
+            isShow: true,// 是否显示首尾页
+            count: parseInt(page_size),// 显示个数
+            homePageText: "首页",// 首页文本
+            endPageText: "尾页",// 尾页文本
+            prevPageText: "上一页",// 上一页文本
+            nextPageText: "下一页",// 下一页文本
+            success:function (current) {
+                var set=new fileCtrl();
+                set.setPage(current);
+            }
+        })
+    },
+    fileListClick:function(){
+        $('.fileGroup').show();
+        $('.dataGroup').hide();
+        this.selectFile();
+        $('#dlg').append('<div class="col-md-12"><label>上传</label><input type="file" class="form-control" id="fileInput" style="width:100%"></div>' +
+            '<div class="col-md-12"><label>主题</label><input type="text" class="form-control" id="fileTopic" style="width:100%"></div>' +
+            '<div class="col-md-12"><label>分类</label><input type="text" class="form-control" id="fileCategory" style="width:100%"></div>');
+        $('.table-btn').off().on('click',function(){
+            var tab=new fileCtrl();
+                tab.fileUploadAjax({
+                    file:$('#fileInput'),
+                    topic:$('#fileTopic').val(),
+                    category:$('#fileCategory').val()
+                },
+                function (recieve) {
+                    alert(recieve.msg);
+                })
+        })
+    }
+}
     /*$("#pagination3").pagination({
         currentPage: 1,// 当前页数
         totalPage: 2,// 总页数
@@ -470,7 +649,7 @@ $(document).ready(function(){
         p_set.innerHTML="数据信息操作("+getCookie("table_name")+")";
         p_set.setAttribute("id","set_index");
         p_index.append(p_sym);
-        p_index.append(p_set)
+        p_index.append(p_set);
         $("#set_index").click(function () {
             flash_table();
         })

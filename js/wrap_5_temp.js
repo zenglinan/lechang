@@ -441,7 +441,7 @@ ajaxTemplate.prototype={
           var setting={
               "mMessage": "",
               "mStatus": "1",
-              "mUser": recieve.user,
+              "mUser": recieve.user.replace(/\'/g,'"'),
               "mType": "allMessage",
               "mTitle":recieve.title,
               "mTime": "20180927",
@@ -746,17 +746,16 @@ communicating.prototype={
     },
     dataParse:function(thing){
         try {
-            return JSON.parse(thing);
+            return JSON.parse(thing).join('@');
         }catch (ex){
             return thing;
         }
     },
     doSend:function(){      //输入信息与处理->ws发送信息  //信息初始化
         const dom=$('.send-msg');
-        let vArr=wsCommunicating.dataParse(dom.find('input.userList').val()),selected=dom.find('select.userList').val();
-        var mUser=vArr instanceof Array?vArr:[vArr] ;   //初始化mUser
+        let mUser=wsCommunicating.dataParse(dom.find('input.userList').val()),selected=dom.find('select.userList').val();
         if(selected){
-            mUser=[selected];
+            mUser=selected;
         }
         if (typeof this.wsObj==="undefined"){
             alert("websocket还没有连接，或者连接失败，请检测");
@@ -766,21 +765,42 @@ communicating.prototype={
             alert("websocket已经关闭，请重新连接");
             return false;
         }
-        // console.log(websocket);
-        // $("#message").val('');
-        // this.writeToScreen('<span style="color:green">你发送的信息&nbsp;'+formatDate(new Date())+'</span><br/>'+ message);
-        for(var i in mUser) {
+        var func=function (mUser,filePath) {
             let message = {
                 mStatus: $('button.btn.classify').val(),
-                mUser: mUser[i],
+                mUser: mUser,
                 mTime: dataFormat(),
                 mLink: $('input.webSend:eq(0)').val() ? $('input.webSend:eq(0)').val() : '',
                 mTitle: $('input.titleSend:eq(0)').val() ? $('input.titleSend:eq(0)').val() : '',
                 mMessage: $('textarea.contentSend:eq(0)').val() ? $('textarea.contentSend:eq(0)').val() : alert('无填充内容。'),
+                mFile:filePath
             };
-            let str=message.mStatus+'@lechang@'+message.mUser+'@lechang@'+message.mTime+'@'+message.mLink+'@'+message.mTitle+'@'+message.mMessage;
-            this.wsObj.send(str);
+            let str=message.mStatus+'@lechang@'+message.mUser+'@lechang@'+message.mTime+'@'+message.mLink+'@'+message.mFile+'@'+message.mTitle+'@'+message.mMessage;
+            wsCommunicating.wsObj.send(str);
         }
+        if($('#fileUploading')[0].files.length && $('span.file')[0].textContent){
+            var fileObj=new fileCtrl();
+            var filePath='';
+            fileObj.fileUploadAjax({
+                file:$('#fileUploading')
+            },function(){       //上传文件后
+                var fileO=new fileCtrl();
+                fileO.selectFile({
+                    keyword:$('#fileUploading')[0].files[0].name
+                    // keyword:'会成为新一代宫斗剧吗'
+                },undefined,function(recieve){      //查询到文件后
+                    filePath=recieve.obj[0].path;
+                    func(mUser,filePath);
+                })
+            });
+        }else{
+            func(mUser);
+        }
+
+        // console.log(websocket);
+        // $("#message").val('');
+        // this.writeToScreen('<span style="color:green">你发送的信息&nbsp;'+formatDate(new Date())+'</span><br/>'+ message);
+
         return true;
     },
     writeToScreen:function(message) {       //ws接收信息->显示信息与处理
@@ -884,8 +904,8 @@ messageControl.prototype={
                     } else {
                         //缓存信息为空
                         recieve.obj={
-                            3:'0@sun@2013@baidu.com@题目@xixiyo',
-                            4:'1@misubishi@2017@netease.com@title@iwillgetit'
+                            3:'0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@xixiyo',
+                            4:'1@misubishi@2017@netease.com@@title@iwillgetit'
                         };
                         msCtrlWin.__proto__.allMessage=msCtrlWin.parseWsMessageRaw(recieve.obj,'allMessage',{});
                         msCtrlWin.__proto__.userToMessage=msCtrlWin.parseWsMessage(recieve.obj,'userToMessage',{});
@@ -894,13 +914,13 @@ messageControl.prototype={
                 }else {alert('获取失败');}
             },error: function(unrecieve) {
                 messageControl.prototype.allMessage=msCtrlWin.parseWsMessageRaw({
-                    3:'3@0@sun@2013@baidu.com@题目@xixiyo',
-                    4:'4@1@misubishi@2017@netease.com@title@iwillgetit'
+                    3:'3@0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@xixiyo',
+                    4:'4@1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@title@iwillgetit'
                 },'allMessage',{});
                 msShowWin.onShowStatus='allMessage';
                 console.log("传参失败!"+unrecieve,msCtrlWin.parseWsMessageRaw({
-                    3:'3@0@sun@2013@baidu.com@题目@xixiyo',
-                    4:'4@1@misubishi@2017@netease.com@title@iwillgetit'
+                    3:'3@0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@xixiyo',
+                    4:'4@1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@title@iwillgetit'
                 },'allMessage',[]));
             }
         })
@@ -922,13 +942,13 @@ messageControl.prototype={
                     } else {
                         //缓存信息为空
                         messageControl.prototype.unReadMessage = msCtrlWin.parseWsMessageRaw({
-                            3:'0@sun@2013@baidu.com@xixiyo@iwillgetit',
-                            4:'1@misubishi@2017@netease.com@题目@iwillgetit'
+                            3:'0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@xixiyo@iwillgetit',
+                            4:'1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@iwillgetit'
                         },'unReadMessage',{});
                         msShowWin.onShowStatus='unReadMessage';
                         messageShow.prototype.unReadNum=Object.keys({
-                            3:'0@sun@2013@baidu.com@xixiyo@iwillgetit',
-                            4:'1@misubishi@2017@netease.com@题目@iwillgetit'
+                            3:'0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@xixiyo@iwillgetit',
+                            4:'1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@iwillgetit'
                         }).length;
                     }
                 }else {alert('获取失败');}
@@ -1033,10 +1053,11 @@ messageControl.prototype={
                 obji['mUser']=arr[0].replace(/^@/,'');          //用户名称
                 obji['mType']=(obji['mId'] in  this.unReadMessage?'unReadMessage':'allMessage')||type; //是否未读
                 obji['mTime']=arr[1].replace(/^@/,'');          //发送时间
-                obji['mLink']=arr[2].replace(/^@/,'');          //附件网页
-                obji['mTitle']=arr[3].replace(/^@/,'');          //附件网页
-                arr[4]=arr[4].replace(/^@/,'');
-                for(var j=4;j<arr.length;j++){                 //信息获取
+                obji['mLink']=arr[2].replace(/^@/,'');          //网页
+                obji['mFile']=arr[3].replace(/^@/,'');          //附件
+                obji['mTitle']=arr[4].replace(/^@/,'');          //题目
+                arr[5]=arr[5].replace(/^@/,'');
+                for(var j=5;j<arr.length;j++){                 //信息获取
                     obji['mMessage']=obji['mMessage']+arr[j];
                 }
             }
@@ -1052,7 +1073,182 @@ messageControl.prototype={
 
     }
 };
+function fileCtrl(selectorTable){
+    this.__proto__.selectorTable=selectorTable||'#table_div1';
+}
+fileCtrl.prototype= {
+    uploading:null,
+    selectJson:{
+        pageNumber:1,
+        pageSize:10
+    },
+    selectorTable:null,
+    fileUploadAjax: function (fileJson,func) {
+        var forms = new FormData();
+        console.log($('#fileUploading'));
+        if ('file' in fileJson && fileJson['file']) {
+            forms.append("file", $(fileJson['file'])[0].files[0]);
+        }
+        if ('topic' in fileJson && fileJson['topic']) {
+            forms.append("topic", fileJson.topic);
+        }
+        if ('category' in fileJson && fileJson['category']) {
+            forms.append("category", fileJson.category);
+        }
 
+        var options = {
+            url: 'http://119.23.253.225:8080/lechang-bpm/FMInfoController/upload',
+            type: 'POST',
+            data: forms,
+            processData: false,
+            contentType: false,
+            encType: "multipart/form-data",
+            success: func||function () {
+                console.log('what');
+            }
+        };
+        $.ajax(options);
+    },
+    selectFile: function (arg,selectorTable,func) {
+        var that=this;
+        var arg=arg?arg:{};
+        var selector=selectorTable||this.selectorTable;
+        $("#table_new").attr("style", "display:none;");
+        $("#table_data").attr("style", "display:block;");
+        var result = [],pageInfo={};
+        if ('keyword' in arg) {
+            this.selectJson['keyword'] = arg['keyword'];
+        }
+        if ('topic' in arg) {
+            this.selectJson['topic'] = arg['topic'];
+        }
+        if ('category' in arg) {
+            this.selectJson['category'] = arg['category'];
+        }
+        $.ajax({
+            type: "GET",
+            url: "http://119.23.253.225:8080/lechang-bpm/FMInfoController/get",
+            data: this.selectJson,
+            success: typeof func=='function'?func:function (recieve) {
+                if (recieve.success) {
+                    result = recieve.obj;
+                    pageInfo = recieve.attributes.pageInfo;
+                    $("#table_div1").css({"overflow-x": "scroll"});
+                    that.tableField(selector);
+                    that.tableData(result,selector);
+                    that.page_set(pageInfo.pageNumber,pageInfo.totalPage,pageInfo.pageSize);
+                }
+            }
+        });
+        return result;
+    },
+    deleteFile:function(num){
+        $.ajax({
+            type: "POST",
+            url: "http://119.23.253.225:8080/lechang-bpm/FMInfoController/delete",
+            data: JSON.stringify({
+                fmId:parseInt(num)
+            }),
+            success: typeof func=='function'?func:function (recieve) {
+                if (recieve.success) {
+                    alert('删除成功！');
+                }
+            }
+        });
+    },
+    setPage:function(current){
+        this.selectJson.pageNumber=current;
+        this.selectFile();
+    },
+    tableField: function (field) {
+        var obj = [
+            {fieldName: 'ID'},
+            {fieldName: '文件名'},
+            {fieldName: '操作时间'},
+            {fieldName: '主题'},
+            {fieldName: '分类'},
+            {fieldName: '文件类型'}
+        ];
+        var tr = document.createElement("tr");
+        for (var j = 0; j < obj.length; j++) {
+            //alert(obj[j].content);
+            var input9 = obj[j].fieldName;         //到时改为obj【j】.content
+            var th = document.createElement("th");
+            if (j == 0) {
+                th.setAttribute("style", "width:50px;");
+                input9 = "序号";
+            }
+            th.innerHTML = input9;
+            tr.appendChild(th);
+        }
+        var th = document.createElement("th");
+        th.innerHTML = "操作";
+        tr.appendChild(th);
+        $(field).find('thead').append(tr);
+        //page_set(1,5,10);
+    },
+    tableData(obj, field) {
+        var number = obj.length;
+        for (var j = 0; j < number; j++) {
+            var tr='<tr>' +
+                '<td>'+obj[j].fmId+'</td>'+
+                '<td>'+obj[j].fileName+'</td>'+
+                '<td>'+obj[j].operateTime+'</td>'+
+                '<td>'+obj[j].topic+'</td>'+
+                '<td>'+obj[j].category+'</td>'+
+                '<td>'+obj[j].type+'</td>'+
+                '<td><button class="table_cancel_bt btn btn-danger" style="font-size:12px;padding:1px 12px;" id="'+obj[j].fmId+'">删除</button>  <button class="table_download_bt btn btn-warning" style="font-size:12px;padding:1px 12px;"path="'+obj[j].path+'">下载</button></td>'+
+                '</tr>';
+            $(field).find('tbody').append(tr);
+        }
+
+        $(".table_cancel_bt").click(function () {
+            var num = $(this).attr("id");
+            var fileObj=new fileCtrl();
+            fileObj.deleteFile(num);
+
+        });
+        $(".table_download_bt").on('click', function () {
+            var path =$(this).attr('path');
+            window.open(path);
+        });
+    },
+    page_set:function(current_page,total_page,page_size) {
+        $("#pagination").pagination({
+            currentPage: parseInt(current_page),// 当前页数
+            totalPage: parseInt(total_page),// 总页数
+            isShow: true,// 是否显示首尾页
+            count: parseInt(page_size),// 显示个数
+            homePageText: "首页",// 首页文本
+            endPageText: "尾页",// 尾页文本
+            prevPageText: "上一页",// 上一页文本
+            nextPageText: "下一页",// 下一页文本
+            success:function (current) {
+                var set=new fileCtrl();
+                set.setPage(current);
+            }
+        })
+    },
+    fileListClick:function(){
+        $('.fileGroup').show();
+        $('.dataGroup').hide();
+        this.selectFile();
+        $('#dlg').append('<div class="col-md-12"><label>上传</label><input type="file" class="form-control" id="fileInput" style="width:100%"></div>' +
+            '<div class="col-md-12"><label>主题</label><input type="text" class="form-control" id="fileTopic" style="width:100%"></div>' +
+            '<div class="col-md-12"><label>分类</label><input type="text" class="form-control" id="fileCategory" style="width:100%"></div>');
+        $('.table-btn').off().on('click',function(){
+            var tab=new fileCtrl();
+            tab.fileUploadAjax({
+                    file:$('#fileInput'),
+                    topic:$('#fileTopic').val(),
+                    category:$('#fileCategory').val()
+                },
+                function (recieve) {
+                    alert(recieve.msg);
+                })
+        })
+    }
+}
 function messageShow(selector){
     if(typeof selector=='string'){      //选择器字符串和DOM对象的容器container
         this.container=$(selector);
@@ -1110,19 +1306,8 @@ messageShow.prototype={
                         mUser=$('input.userList:eq(0)').val();
                         mTitle=mTitle+'[已读]';
                     }
-                    let val={
-                        mStatus:$('button.btn.classify').val(),
-                        mUser:mUser,
-                        mTime:dataFormat(),
-                        mLink:$('input.webSend:eq(0)').val()?$('input.webSend:eq(0)').val():'',
-                        mTitle:mTitle,
-                        mMessage:$('textarea.contentSend:eq(0)').val()?$('textarea.contentSend:eq(0)').val():alert('无填充内容。'),
-                    };
-                    let strTrans='';
-                    for(var i in val){
-                        strTrans=strTrans+'@'+val[i];
-                    }
-                    if(wsCommunicating.doSend(strTrans)&&!$(e.target).hasClass('confirmMs')||true){
+
+                    if(!$(e.target).hasClass('confirmMs')||true){
                         msCtrlWin.sendMessage.push(val);
                         msShow2.cleanAll();
                         msShow2.appendArr(msCtrlWin.sendMessage);
@@ -1157,12 +1342,13 @@ messageShow.prototype={
             1:'urgency',
             2:'serious'
         };
-        var linkDomStr=obj.mLink?('<a href="javascript:linkClick('+obj.mId+')" ><i class="fa fa-mouse-pointer"></i>附件</a>'):'';
+        var linkDomStr=obj.mLink?('<a href="javascript:linkClick('+obj.mId+')" ><i class="fa fa-mouse-pointer"></i>网址</a>'):'';
+        var fileDomStr=obj.mFile?('<a href="'+obj.mFile+'" ><i class="fa fa-mouse-pointer"></i>附件</a>'):'';
         var typeDomStr=obj.mId in msCtrl.unReadMessage?'<button class="btn btn-default">待办</button>':'(已读时间)';
         var template='<tr id="'+obj.mId+'" class="'+emergenceLevel[obj.mStatus]+ ' toread '+obj.type+'">\n' +
             '\t<td><i class="fa fa-circle"></i></td>\n' +
             '\t<td>'+obj.mUser+'</td>\n' +
-            '\t<td><span class="lineTitle">'+obj.mTitle+'</span>'+linkDomStr+'</td>\n' +
+            '\t<td><span class="lineTitle">'+obj.mTitle+'</span>'+linkDomStr+fileDomStr+'</td>\n' +
             '\t<td>'+obj.mTime+'</td>\n' +
             '\t<td>'+typeDomStr+'</td>\n' +
             '\t<td><i class="fa fa-close"></i></td>\n' +

@@ -1187,7 +1187,7 @@ $(document).ready(function(){
             messageSet:function(array){
                 array=array[2];     //获取第三层对应资料
                 var set={
-                    user:array[0]||'*',
+                    user:array[0].replace(/\"/g,"'")||'*',
                     title:array[1]||'*',
                     net:array[2]||'*',
                     actionType:'messageSet'
@@ -1598,7 +1598,7 @@ $(document).ready(function(){
           elDiv.dom.append(elDiv2.dom);
           elDiv0.dom.append(elDiv.dom);
           $(elDiv2.dom).find('label').css({'width':'100%'});
-          $(elDiv2.dom).find('input').css({'max-width': '30em','width': '30em'});
+          $(elDiv2.dom).find('input').css({'max-width': '29em','width': '30em'});
           return elDiv0.dom;
       },
       rowCopy:function (controlNum) {

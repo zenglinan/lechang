@@ -73,7 +73,7 @@
 								</a>
 							</li>
 							<li class="function-item">
-								<a href="#" class="li_4">
+								<a href="http://119.23.253.225:8080/lechang-bpm/html/wrap_4.html" class="li_4">
 									<i class="fa fa-database"></i>
 									<span>数据项关系管理</span>
 								</a>
@@ -114,7 +114,7 @@
 					</div>
 					<div id="table_data" style="display: none">
 						<div class="container-fluid">
-							<div class="control-group col-sm-12" style="margin-bottom: 20px">
+							<div class="control-group col-sm-12 dataGroup" style="margin-bottom: 20px">
 								<div class="col-sm-1">
 									<button id="insert" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">新增</button>
 								</div>
@@ -130,7 +130,12 @@
 									<button id="cancel-accept" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">删除缓存</button>
 									<button id="replace-accept" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">修改缓存</button>
 								</div>
-								<div class="col-sm-5"></div>
+								<div class="col-sm-4"></div>
+							</div>
+							<div class="control-group col-sm-12 fileGroup" style="margin-bottom: 20px;display: none">
+								<div class="col-sm-1">
+									<button id="fileUpload" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">上传</button>
+								</div>
 							</div>
 							<br>
 							<div class="row-fluid col-md-12" id="table_div1">
@@ -145,6 +150,7 @@
 							</div>
 						</div>
 					</div>
+					<div id="p_index" style="white-space:nowrap"><label id="fileList">文件管理</label></div>
 				</div>
 
 			</div>
