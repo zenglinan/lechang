@@ -108,22 +108,46 @@ $(document).ready(function(){
         }
     };
     var htmlVersionClass=function() {
+        this.roles=new rolesRelative();
+        this.setSelect('default');
     };
     htmlVersionClass.prototype={
         val:[],
+        roleArr:{},
         htmlArr:{root:[{id:4,fieldName:'bird1',path:'www.baidu.com',description:'jr',delstatus:0}]},
+        selectHtmlArr:[],
+        multiL:function(children){
+            let list=[];
+            for(var i=0;i<children.length;i++){
+                list.push(children[i]);
+                if('children' in children[i]){
+                    let childList=arguments.callee(children[i].children);
+                    list=list.concat(childList);
+                }
+            }
+            return list;
+        },
+        getHtmlArr:function(){
+            var arr=[{nodeName:'默认',nodeCode:'default'}];
+            arr=arr.concat(this.multiL(this.roles.allRoles));
+            this.__proto__.roleArr=arr;
+        },
+        setRoleSelect:function(selectObj){
+            this.getHtmlArr();
+            select_add($(selectObj),this.roleArr,'nodeCode','nodeName');
+        },
         getHtml:function (obj) {
-            this.htmlArr=obj;
+            this.__proto__.htmlArr=obj;
         },
         showHtml:function (selectObj,nodeCode) {
             var arr=this.htmlArr[nodeCode],storageArr=[];
-            if(!nodeCode&&typeof this.htmlArr=='object'){//若htmlArr是个索引表 {code1:[{页面1},code2:[{页面2}{页面3}]]}
+            if(!nodeCode&&!this.htmlArr instanceof Array){//若htmlArr是个索引表 {code1:[{页面1},code2:[{页面2}{页面3}]]}
                 for(var i in this.htmlArr){
                     storageArr=storageArr.concat(this.htmlArr[i]);
                 }
                 arr=storageArr;
             }else if(!nodeCode){//若htmlArr是给数组 [{页面1}{页面2}{页面3}]
-                arr=this.htmlArr;
+                arr=this.selectHtmlArr;
             }
             selectObj.empty();
             console.log(selectObj,nodeCode);
@@ -137,10 +161,14 @@ $(document).ready(function(){
                 $('.page-path').html(globalStorage.iframeSrc);
             }
         },
+        setSelect:function(val){
+            this.__proto__.selectHtmlArr=this.htmlArr[val];
+            this.flashHtml($(".htmlShow"));
+        },
         select:function (attr,val) {
-            for(var i=0;i<this.htmlArr.length;i++){
-                if(this.htmlArr[i][attr]==val){
-                     return this.htmlArr[i].path;
+            for(var i=0 ;i< this.selectHtmlArr.length;i++){
+                if(this.selectHtmlArr[i][attr]==val){
+                     return this.selectHtmlArr[i].path;
                 }
             }
         }
@@ -2067,6 +2095,11 @@ $('.htmlShow').on('click','option',function () {
     location.reload();
 });
 
+$('.htmlShowRole').on('click','option',function(){
+   var o = new htmlVersionClass();
+   o.setSelect($(this).val());
+});
+
 $(FContent.window).mouseover(function (e) {
     var tg=$(e.target);
     if(tg.hasClass('rightControlRow')||tg.parents('.rightControlRow').length){
@@ -3078,6 +3111,7 @@ function stringSelectAll(e) {
             if(recieve.success&&recieve.msg.indexOf("成功")){
                 var o=new htmlVersionClass();
                 o.getHtml(recieve.obj);
+                o.setRoleSelect($('.htmlShowRole'));
                 o.flashHtml($(".htmlShow"));
             }else{
                 alert("上传失败!");
@@ -3154,7 +3188,7 @@ function rolesRelative(selector,setting,nodes){       //  http://www.treejs.cn/v
     this.getRolesAjax();
     if(typeof arguments[0] == 'string'){
         this.relateObj(arguments[0]);
-        this.initTree(selector,nodes||this.allRoles,arguments[1]);//(treeNodes,setting)
+        this.initTree(selector,nodes||this.allRoles[0],arguments[1]);//(treeNodes,setting)
     }
 }
 rolesRelative.prototype={
@@ -3180,7 +3214,7 @@ rolesRelative.prototype={
             success:function(recieve){
                 if(recieve.success&&recieve.msg.indexOf("成功")){
                     alert(recieve.msg);
-                    rolesRelative.prototype.allRoles=recieve.obj[0];
+                    rolesRelative.prototype.allRoles=recieve.obj;
                 }else{
                     alert("删除失败!");
                 }

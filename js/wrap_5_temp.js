@@ -123,7 +123,7 @@ ajaxTemplate.prototype={
               }else if($.inArray(selectObj['json'][i]['tableName'],key)<0&&selectObj.iterator==2){
 
               }else{
-                  if(selectObj.showCopy.tableFirst.indexOf('$')==0){
+                  if(selectObj.showCopy && selectObj.showCopy.tableFirst.indexOf('$')==0){
                       ajaxTemplate.prototype.ajaxPackage[actionTypeBase[selectObj.showCopy.tableFirst]](selectObj.json[i],function(recieve,objectBase,next){
                           if (objectBase.selectObj.iterator==2){
                               globalStorage.showCopyRowStorage[objectBase.selectObj.showCopy.copyRow]['pNum']=recieve.obj.length;
@@ -226,11 +226,12 @@ ajaxTemplate.prototype={
                               }
                           }else if(selectObj.iterator==2){
                               var showFields=selectObj['showField'][selectJson.tableName];
-                              for(var i=0;i<showFields.length;i++){
-                                  console.log(showFields[i].id,recieve.obj[0][showFields[i].fieldName],recieve,selectJson.tableName);
-                                  //对应非索引(多条相同索引条件)未确定最终方案——需要斟酌
-                                  showOf(showFields[i].id,recieve.obj[0][showFields[i].fieldName],selectJson.tableName,pack);
-                              }
+                              var cloneRow=$('.'+selectObj.showCopy.copyRow+'child:eq('+pack.i+')');
+                              ajaxTemplate.prototype.package.afterCreate(cloneRow,{
+                                  showFields:showFields,
+                                  obj:recieve.obj,
+                                  selectObj:selectObj
+                              });
                           } else{
                               for(var i=0;i<selectObj['showField'][selectJson['tableName']].length;i++){
                                   showOf(selectObj['showField'][selectJson['tableName']][i]['id'], recieve.obj[0][selectObj['showField'][selectJson['tableName']][i]['fieldName']]);
@@ -242,47 +243,6 @@ ajaxTemplate.prototype={
                       }
                   }else {alert('录入失败！');}
               },error: function(unrecieve) {
-                  // var recieve={
-                  //     "success":true,
-                  //     "msg":"请求成功!",
-                  //     "obj":[
-                  //         {"lc_0201_02_03":"陈宏宇","lc_0201_02_02":"A0001","lc_0201_02_05":"市委书记","lc_0201_02_04":"H0001","lc_0201_02_01":"领导小组组长","id":1,"delstatus":0},
-                  //         {"lc_0201_02_03":"王一","lc_0201_02_02":"A0002","lc_0201_02_05":"市委副书记、市长","lc_0201_02_04":"H0002","lc_0201_02_01":"领导小组副组长","id":2,"delstatus":0},
-                  //         {"lc_0201_02_03":"王二","lc_0201_02_02":"A0003","lc_0201_02_05":"市委常委、副市长","lc_0201_02_04":"H0003","lc_0201_02_01":"领导小组副组长","id":3,"delstatus":0},
-                  //         {"lc_0201_02_03":"王三","lc_0201_02_02":"A0004","lc_0201_02_05":null,"lc_0201_02_04":"H0004","lc_0201_02_01":"领导小组副组长","id":4,"delstatus":0},
-                  //         {"lc_0201_02_03":"王四","lc_0201_02_02":"A0005","lc_0201_02_05":null,"lc_0201_02_04":"H0005","lc_0201_02_01":"领导小组副组长","id":5,"delstatus":0}
-                  //     ],
-                  //     "attributes":{
-                  //         "page":{
-                  //             "currentPage":1,
-                  //             "pageSize":10,
-                  //             "startNum":0,
-                  //             "totalNum":5,
-                  //             "totalPage":1
-                  //         }
-                  //     },
-                  //     "jsonStr":"{\"msg\":\"请求成功!\",\"success\":true,\"obj\":[{\"lc_0201_01_03\":\"陈宏宇\",\"lc_0201_01_02\":\"A0001\",\"lc_0201_01_05\":\"市委书记\",\"lc_0201_01_04\":\"H0001\",\"lc_0201_01_01\":\"领导小组组长\",\"id\":1,\"delstatus\":0},{\"lc_0201_01_03\":\"王一\",\"lc_0201_01_02\":\"A0002\",\"lc_0201_01_05\":\"市委副书记、市长\",\"lc_0201_01_04\":\"H0002\",\"lc_0201_01_01\":\"领导小组副组长\",\"id\":2,\"delstatus\":0},{\"lc_0201_01_03\":\"王二\",\"lc_0201_01_02\":\"A0003\",\"lc_0201_01_05\":\"市委常委、副市长\",\"lc_0201_01_04\":\"H0003\",\"lc_0201_01_01\":\"领导小组副组长\",\"id\":3,\"delstatus\":0},{\"lc_0201_01_03\":\"王三\",\"lc_0201_01_02\":\"A0004\",\"lc_0201_01_04\":\"H0004\",\"lc_0201_01_01\":\"领导小组副组长\",\"id\":4,\"delstatus\":0},{\"lc_0201_01_03\":\"王四\",\"lc_0201_01_02\":\"A0005\",\"lc_0201_01_04\":\"H0005\",\"lc_0201_01_01\":\"领导小组副组长\",\"id\":5,\"delstatus\":0}],\"attributes\":{\"page\":{\"currentPage\":1,\"pageSize\":10,\"startNum\":0,\"totalNum\":5,\"totalPage\":1}}}"
-                  // };
-                  // if(!(selectObj['showField'][selectJson['tableName']] instanceof Array)){
-                  //     if(!(selectObj['showField'][selectJson['tableName']]['fieldName'] instanceof Array)) {
-                  //         showOf(selectObj['showField'][selectJson['tableName']]['id'], recieve.obj[0][selectObj['showField'][selectJson['tableName']]['fieldName']]);
-                  //         // }else if(selectObj['showField'][selectJson['tableName']]['fieldName'] instanceof Array){
-                  //         //     tableShow(recieve,{selectObj:selectObj,selectJson:selectJson},next);
-                  //         // }else if(selectObj['showField'][selectJson['tableName']]['fieldName']===''||selectObj['showField'][selectJson['tableName']]['fieldName']==='undefined'){
-                  //         //     showOf(selectObj['showField'][selectJson['tableName']]['id'], recieve,selectJson['tableName']);
-                  //     }
-                  // }else if(selectObj.iterator==2){
-                  //     var showFields=selectObj['showField'][selectJson.tableName];
-                  //     for(var i=0;i<showFields.length;i++){
-                  //         console.log(showFields[i].id,recieve.obj[0][showFields[i].fieldName],recieve,selectJson.tableName);
-                  //         showOf(showFields[i].id,recieve.obj[0][showFields[i].fieldName],selectJson.tableName,pack);
-                  //     }
-                  // } else{
-                  //     for(var i=0;i<selectObj['showField'][selectJson['tableName']].length;i++){
-                  //         showOf(selectObj['showField'][selectJson['tableName']][i]['id'], recieve.obj[0][selectObj['showField'][selectJson['tableName']][i]['fieldName']]);
-                  //     }
-                  // }
-                  // if(Object.keys(next).length){bindOf(next);}
                   console.log("上传失败!"+unrecieve);
               }
           })
@@ -317,11 +277,6 @@ ajaxTemplate.prototype={
                   }
               }
           }
-          // if(recieve.obj.length==globalStorage.pageInformation.pageSize){
-          //     pack.selectObj.json[pack.i].currentPage++;
-          //     globalStorage.pageInformation.pageNumStorage[pack.selectObj.json[pack.i].tableName]=pack.selectObj.json[pack.i].currentPage;
-          //     ajaxTemplate.prototype.ajaxPackage.selectNotAsync(pack.selectObj.json[pack.i],arguments.callee,pack,next);
-          // }
           showOf(o_id, recieve,pack.selectObj['json'][pack.i]['tableName']);
           if(Object.keys(next).length){bindOf(next);}
       },
@@ -394,8 +349,33 @@ ajaxTemplate.prototype={
               }
           }var showlist=$('.'+pack.selectObj.showCopy.copyRow+'child');
           showlist.hide();
+          $('.rmRow').remove();
           for(t=0;t<showNum;t++){
               $(showlist[t]).show();
+          }
+      },
+      afterCreate:function(rowClone,bigPack){
+          var showFields=bigPack.showFields;
+          var data=null;
+          var before=rowClone;
+          for(var j=0;j<bigPack.obj.length;j++){
+          data=bigPack.obj[j];
+          if(j>0){
+              var cloneRow=$(rowClone).clone();
+              cloneRow.removeClass(bigPack.selectObj.showCopy.copyRow+'child').addClass('rmRow').attr('id','');
+              $(before).after(cloneRow);
+              cloneRow.show();
+              before=cloneRow;
+          }
+              for(var i=0;i<showFields.length;i++){
+                  var classObj=$(before).find('.'+showFields[i].id.replace(/\./,'')+'-rowClass')[0];
+                  console.log();
+                  if(classObj.localName=='input'||classObj.localName=='button'){
+                      $(classObj).val(data[showFields[i].fieldName]);
+                  }else{
+                      $(classObj).html(data[showFields[i].fieldName]);
+                  }
+              }
           }
       },
       selectCount:function (recieve,pack,next) {
@@ -455,11 +435,8 @@ ajaxTemplate.prototype={
           $.ajax({
               type:"GET",
               url: "http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?showTables",
-              // url: "http://localhost:63342/WebRoot/test/showTables.txt",
               data: "",
               async:false,
-              // dataType:'jsonp',
-              // jsonp:'callback',
               success:function (recieve) {
                   if (recieve.success&&recieve.msg.indexOf("成功")) {
                       console.log('录入成功！');
@@ -512,8 +489,6 @@ ajaxTemplate.prototype={
           object=object||{};
           next=next||{};
           $.ajax({
-              // type:'GET',
-              // url: "http://localhost:63342/WebRoot/test/showTables.txt",
               type: "POST",
               url: "http://119.23.253.225:8080/lechang-bpm/tableCRUDController/select",
               data: JSON.stringify(data, null, 4),
