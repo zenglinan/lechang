@@ -305,6 +305,7 @@ fileCtrl.prototype= {
         $.ajax({
             type: "POST",
             url: "http://119.23.253.225:8080/lechang-bpm/FMInfoController/delete",
+            contentType:"application/json",
             data: JSON.stringify({
                 fmId:parseInt(num)
             }),
@@ -343,7 +344,7 @@ fileCtrl.prototype= {
         var th = document.createElement("th");
         th.innerHTML = "操作";
         tr.appendChild(th);
-        $(field).find('thead').append(tr);
+        $(field).find('thead').empty().append(tr);
         //page_set(1,5,10);
     },
     tableData(obj, field) {
@@ -360,7 +361,7 @@ fileCtrl.prototype= {
                 '<td>'+obj[j].type+'</td>'+
                 '<td><button class="table_cancel_bt btn btn-danger" style="font-size:12px;padding:1px 12px;" id="'+obj[j].fmId+'">删除</button>  <button class="table_download_bt btn btn-warning" style="font-size:12px;padding:1px 12px;"path="'+obj[j].path+'">下载</button></td>'+
                 '</tr>';
-            $(field).find('tbody').append(tr);
+            $(field).find('tbody').empty().append(tr);
         }
 
         $(".table_cancel_bt").click(function () {
@@ -384,7 +385,7 @@ fileCtrl.prototype= {
             endPageText: "尾页",// 尾页文本
             prevPageText: "上一页",// 上一页文本
             nextPageText: "下一页",// 下一页文本
-            success:function (current) {
+            callback:function (current) {
                 var set=new fileCtrl();
                 set.setPage(current);
             }

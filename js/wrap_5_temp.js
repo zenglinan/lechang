@@ -226,7 +226,7 @@ ajaxTemplate.prototype={
                               }
                           }else if(selectObj.iterator==2){
                               var showFields=selectObj['showField'][selectJson.tableName];
-                              var cloneRow=$('.'+selectObj.showCopy.copyRow+'child:eq('+pack.i+')');
+                              var cloneRow=$('.'+selectObj.showCopy.copyRow+'child:eq('+pack.rowNum+')');
                               ajaxTemplate.prototype.package.afterCreate(cloneRow,{
                                   showFields:showFields,
                                   obj:recieve.obj,
@@ -732,11 +732,11 @@ communicating.prototype={
         if(selected){
             mUser=selected;
         }
-        if (typeof this.wsObj==="undefined"){
+        if (typeof wsCommunicating.wsObj==="undefined"){
             alert("websocket还没有连接，或者连接失败，请检测");
             return false;
         }
-        if (this.wsObj.readyState==3) {
+        if (wsCommunicating.wsObj.readyState==3) {
             alert("websocket已经关闭，请重新连接");
             return false;
         }
@@ -761,8 +761,7 @@ communicating.prototype={
             },function(){       //上传文件后
                 var fileO=new fileCtrl();
                 fileO.selectFile({
-                    keyword:$('#fileUploading')[0].files[0].name
-                    // keyword:'会成为新一代宫斗剧吗'
+                    keyword:$('#fileUploading')[0].files[0].name.replace(/\.\S+$/,'')
                 },undefined,function(recieve){      //查询到文件后
                     filePath=recieve.obj[0].path;
                     func(mUser,filePath);
@@ -1018,28 +1017,33 @@ messageControl.prototype={
         var obj=object instanceof Array?[]:object;          ////object为{}或[]代表是否return为Array类型
         var reg=/@[^@]*/g;
         for(var i in recieveList){
-            var obji={};
-            obji['mId']=i;     //收信息id
-            obji['mMessage']='';
-            obji['mStatus']=recieveList[i].match(/^\d*[^@]/)[0];
-            if(typeof recieveList[i]=='string'){
-                var arr=recieveList[i].match(reg);
-                // obji['mStatus']=arr[0].replace(/^@/,'');        //紧急程度
-                obji['mUser']=arr[0].replace(/^@/,'');          //用户名称
-                obji['mType']=(obji['mId'] in  this.unReadMessage?'unReadMessage':'allMessage')||type; //是否未读
-                obji['mTime']=arr[1].replace(/^@/,'');          //发送时间
-                obji['mLink']=arr[2].replace(/^@/,'');          //网页
-                obji['mFile']=arr[3].replace(/^@/,'');          //附件
-                obji['mTitle']=arr[4].replace(/^@/,'');          //题目
-                arr[5]=arr[5].replace(/^@/,'');
-                for(var j=5;j<arr.length;j++){                 //信息获取
-                    obji['mMessage']=obji['mMessage']+arr[j];
+            try {
+                var obji = {};
+                obji['mId'] = i;     //收信息id
+                obji['mMessage'] = '';
+                obji['mStatus'] = recieveList[i].match(/^\d*[^@]/)[0];
+                if (typeof recieveList[i] == 'string') {
+                    var arr = recieveList[i].match(reg);
+                    // obji['mStatus']=arr[0].replace(/^@/,'');        //紧急程度
+                    obji['mUser'] = arr[0].replace(/^@/, '');          //用户名称
+                    obji['mType'] = (obji['mId'] in this.unReadMessage ? 'unReadMessage' : 'allMessage') || type; //是否未读
+                    obji['mTime'] = arr[1].replace(/^@/, '');          //发送时间
+                    obji['mLink'] = arr[2].replace(/^@/, '');          //网页
+                    obji['mFile'] = arr[3].replace(/^@/, '');          //附件
+                    obji['mTitle'] = arr[4].replace(/^@/, '');          //题目
+                    arr[5] = arr[5].replace(/^@/, '');
+                    for (var j = 5; j < arr.length; j++) {                 //信息获取
+                        obji['mMessage'] = obji['mMessage'] + arr[j];
+                    }
                 }
-            }
-            if(object instanceof Array ){
-                obj.push(obji);
-            }else {
-                obj[obji['mId']] = obji;       //Message={ messageId:messageObj,...}
+                if (object instanceof Array) {
+                    obj.push(obji);
+                } else {
+                    obj[obji['mId']] = obji;       //Message={ messageId:messageObj,...}
+                }
+            }catch (ex){
+                console.log(recieveList[i]);
+                delete recieveList[i];
             }
         }
         return Object.keys(recieveList).length>0?obj:obji;      //recieveList只输入单条信息或者输入多条信息的不同返回

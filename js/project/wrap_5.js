@@ -109,9 +109,10 @@ $(document).ready(function(){
     };
     var htmlVersionClass=function() {
         this.roles=new rolesRelative();
-        this.setSelect('default');
+        this.setSelect(this.roleVal);
     };
     htmlVersionClass.prototype={
+        roleVal:'default',
         val:[],
         roleArr:{},
         htmlArr:{root:[{id:4,fieldName:'bird1',path:'www.baidu.com',description:'jr',delstatus:0}]},
@@ -162,6 +163,7 @@ $(document).ready(function(){
             }
         },
         setSelect:function(val){
+            this.__proto__.roleVal=val;
             this.__proto__.selectHtmlArr=this.htmlArr[val];
             this.flashHtml($(".htmlShow"));
         },
