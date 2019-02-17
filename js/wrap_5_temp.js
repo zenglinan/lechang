@@ -748,11 +748,12 @@ communicating.prototype={
                 mLink: $('input.webSend:eq(0)').val() ? $('input.webSend:eq(0)').val() : '',
                 mTitle: $('input.titleSend:eq(0)').val() ? $('input.titleSend:eq(0)').val() : '',
                 mMessage: $('textarea.contentSend:eq(0)').val() ? $('textarea.contentSend:eq(0)').val() : alert('无填充内容。'),
-                mFile:filePath
+                mFile:filePath?filePath:''
             };
+            msCtrlWin.pushSend(message);
             let str=message.mStatus+'@lechang@'+message.mUser+'@lechang@'+message.mTime+'@'+message.mLink+'@'+message.mFile+'@'+message.mTitle+'@'+message.mMessage;
             wsCommunicating.wsObj.send(str);
-        }
+        };
         if($('#fileUploading')[0].files.length && $('span.file')[0].textContent){
             var fileObj=new fileCtrl();
             var filePath='';
@@ -824,28 +825,7 @@ function messageControl(){
     return dataBindFunc(this);
 }
 messageControl.prototype={
-    allMessage:{
-        3:{
-            "mId": "3",
-            "mMessage": "有很多人@你啊",
-            "mStatus": "1",
-            "mUser": "sony",
-            "mType": "allMessage",
-            "mTitle":"工作表制定",
-            "mTime": "20180927",
-            "mLink": ""
-        },
-        4:{
-            "mId": "4",
-            "mMessage": "有人@你啊",
-            "mStatus": "0",
-            "mUser": "sun",
-            "mType": "allMessage",
-            "mTime": "20180708",
-            "mTitle":"任务表制定",
-            "mLink": "www.baidu.com"
-        }
-    },      //信息编码——>所有信息
+    allMessage:{},      //信息编码——>所有信息
     unReadMessage:{
         4:{
             "mId": "4",
@@ -877,25 +857,22 @@ messageControl.prototype={
                         msShowWin.onShowStatus='allMessage';
                     } else {
                         //缓存信息为空
-                        recieve.obj={
-                            3:'0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@xixiyo',
-                            4:'1@misubishi@2017@netease.com@@title@iwillgetit'
-                        };
+                        recieve.obj={};
                         msCtrlWin.__proto__.allMessage=msCtrlWin.parseWsMessageRaw(recieve.obj,'allMessage',{});
                         msCtrlWin.__proto__.userToMessage=msCtrlWin.parseWsMessage(recieve.obj,'userToMessage',{});
                         msShowWin.onShowStatus='allMessage';
                     }
                 }else {alert('获取失败');}
             },error: function(unrecieve) {
-                messageControl.prototype.allMessage=msCtrlWin.parseWsMessageRaw({
-                    3:'3@0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@xixiyo',
-                    4:'4@1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@title@iwillgetit'
-                },'allMessage',{});
-                msShowWin.onShowStatus='allMessage';
-                console.log("传参失败!"+unrecieve,msCtrlWin.parseWsMessageRaw({
-                    3:'3@0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@xixiyo',
-                    4:'4@1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@title@iwillgetit'
-                },'allMessage',[]));
+                // messageControl.prototype.allMessage=msCtrlWin.parseWsMessageRaw({
+                //     3:'3@0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@xixiyo',
+                //     4:'4@1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@title@iwillgetit'
+                // },'allMessage',{});
+                // msShowWin.onShowStatus='allMessage';
+                // console.log("传参失败!"+unrecieve,msCtrlWin.parseWsMessageRaw({
+                //     3:'3@0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@xixiyo',
+                //     4:'4@1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@title@iwillgetit'
+                // },'allMessage',[]));
             }
         })
     },
@@ -915,15 +892,15 @@ messageControl.prototype={
                         msShowWin.onShowStatus='unReadMessage';
                     } else {
                         //缓存信息为空
-                        messageControl.prototype.unReadMessage = msCtrlWin.parseWsMessageRaw({
-                            3:'0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@xixiyo@iwillgetit',
-                            4:'1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@iwillgetit'
-                        },'unReadMessage',{});
-                        msShowWin.onShowStatus='unReadMessage';
-                        messageShow.prototype.unReadNum=Object.keys({
-                            3:'0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@xixiyo@iwillgetit',
-                            4:'1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@iwillgetit'
-                        }).length;
+                        // messageControl.prototype.unReadMessage = msCtrlWin.parseWsMessageRaw({
+                        //     3:'0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@xixiyo@iwillgetit',
+                        //     4:'1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@iwillgetit'
+                        // },'unReadMessage',{});
+                        // msShowWin.onShowStatus='unReadMessage';
+                        // messageShow.prototype.unReadNum=Object.keys({
+                        //     3:'0@sun@2013@baidu.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@xixiyo@iwillgetit',
+                        //     4:'1@misubishi@2017@netease.com@http://localhost:63342/lechang1923/bootstrap-3.3.7-dist/css/bootstrap.min.css@题目@iwillgetit'
+                        // }).length;
                     }
                 }else {alert('获取失败');}
             },error: function(unrecieve) {
@@ -987,6 +964,10 @@ messageControl.prototype={
             }
         })
     },
+    pushSend:function(message){
+        this.__proto__.sendMessage.push(message);
+        msShowWin.appendSend('.msg-tb.send',this.sendMessage);
+    },
     parseWsMessage:function(recieveList,type,object){            //用户编码——>索引信息编码——>索引信息
         var obj=typeof object=='object'?object:{};
         var reg=/@[^@]*/g;
@@ -1046,7 +1027,7 @@ messageControl.prototype={
                 delete recieveList[i];
             }
         }
-        return Object.keys(recieveList).length>0?obj:obji;      //recieveList只输入单条信息或者输入多条信息的不同返回
+        return Object.keys(recieveList).length && typeof recieveList=='object' >0?obj:obji;      //recieveList只输入单条信息或者输入多条信息的不同返回
     },
     userListOpen:function(selector,userList,userTo){
 
@@ -1314,6 +1295,12 @@ messageShow.prototype={
             $(this.container).append(this[objArr.mType](objArr));
         }
     },
+    appendSend:function(selector,arr){
+        $(selector).empty();
+        for(var i=0 ;i<arr.length;i++) {
+            $(selector).append(this.DomSendMessage(arr[i]));
+        }
+    },
     DomMessage:function(obj){            //信息的模板Dom
         var msCtrl=new messageControl();
         var emergenceLevel={
@@ -1321,8 +1308,8 @@ messageShow.prototype={
             1:'urgency',
             2:'serious'
         };
-        var linkDomStr=obj.mLink?('<a href="javascript:linkClick('+obj.mId+')" ><i class="fa fa-mouse-pointer"></i>网址</a>'):'';
-        var fileDomStr=obj.mFile?('<a href="'+obj.mFile+'" ><i class="fa fa-mouse-pointer"></i>附件</a>'):'';
+        var linkDomStr=obj.mLink?('<a href="javascript:linkClick('+obj.mId+',\'link\')" ><i class="fa fa-mouse-pointer"></i>网址</a>'):'';
+        var fileDomStr=obj.mFile?('<a href="javascript:linkClick('+obj.mId+',\'file\')" ><i class="fa fa-mouse-pointer"></i>附件</a>'):'';
         var typeDomStr=obj.mId in msCtrl.unReadMessage?'<button class="btn btn-default">待办</button>':'(已读时间)';
         var template='<tr id="'+obj.mId+'" class="'+emergenceLevel[obj.mStatus]+ ' toread '+obj.type+'">\n' +
             '\t<td><i class="fa fa-circle"></i></td>\n' +
@@ -1335,13 +1322,12 @@ messageShow.prototype={
         return template;
     },
     DomSendMessage:function(obj){            //已发信息的模板Dom
-        var msCtrl=new messageControl();
         var emergenceLevel={
             0:'common',
             1:'urgency',
             2:'serious'
         };
-        var linkDomStr=obj.mLink?('<a href="javascript:linkClick('+obj.mId+')" ><i class="fa fa-mouse-pointer"></i>附件</a>'):'';
+        var linkDomStr=obj.mLink?('<a href="'+obj.mLink+'" ><i class="fa fa-mouse-pointer"></i>附件</a>'):'';
         var typeDomStr=true?'<button class="btn btn-default">待办</button>':'<button class="btn btn-default">已办</button>';
         //保留选择。。。好像有点问题这里
         var template='<tr id="'+obj.mId+'" class="'+emergenceLevel[obj.mStatus]+ ' toread '+obj.type+'">\n' +
@@ -1532,16 +1518,19 @@ msCtrlWin.getUnreadMessage();
 msCtrlWin.getAllMessage();
 msShowWin.onshow();
 $('.send').click(wsCommunicating.doSend);
-linkClick=function(messageCode){      //点击附件跳转——外部调用函数
+linkClick=function(messageCode,type){      //点击附件跳转——外部调用函数
     var msCtrl=new messageControl();
-    var link=msCtrl.allMessage[messageCode].mLink;
+    var link={
+        link:msCtrl.allMessage[messageCode].mLink,
+        file:msCtrl.allMessage[messageCode].mFile
+    };
     if(messageCode in msCtrl.unReadMessage){
         msCtrl.confirmRead(messageCode);
         delete msCtrl.unReadMessage[messageCode];
         messageShow.prototype.unReadNum--;
         msShowWin.onshow();
     }
-    window.open(link);
+    window.open(link[type]);
 };
 $('.msg-tb tr').on('click',msShowWin.headerCtrl);
 $('.btns').on('click','button',msShowWin.onshow);

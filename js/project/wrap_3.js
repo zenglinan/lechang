@@ -349,6 +349,7 @@ fileCtrl.prototype= {
     },
     tableData(obj, field) {
         var number = obj.length;
+        $(field).find('tbody').empty();
         for (var j = 0; j < number; j++) {
             var t= new Date()
             t.setTime(obj[j].operateTime);
@@ -361,7 +362,7 @@ fileCtrl.prototype= {
                 '<td>'+obj[j].type+'</td>'+
                 '<td><button class="table_cancel_bt btn btn-danger" style="font-size:12px;padding:1px 12px;" id="'+obj[j].fmId+'">删除</button>  <button class="table_download_bt btn btn-warning" style="font-size:12px;padding:1px 12px;"path="'+obj[j].path+'">下载</button></td>'+
                 '</tr>';
-            $(field).find('tbody').empty().append(tr);
+            $(field).find('tbody').append(tr);
         }
 
         $(".table_cancel_bt").click(function () {
