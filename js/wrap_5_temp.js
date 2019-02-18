@@ -750,9 +750,9 @@ communicating.prototype={
                 mMessage: $('textarea.contentSend:eq(0)').val() ? $('textarea.contentSend:eq(0)').val() : alert('无填充内容。'),
                 mFile:filePath?filePath:''
             };
-            msCtrlWin.pushSend(message);
             let str=message.mStatus+'@lechang@'+message.mUser+'@lechang@'+message.mTime+'@'+message.mLink+'@'+message.mFile+'@'+message.mTitle+'@'+message.mMessage;
             wsCommunicating.wsObj.send(str);
+            msCtrlWin.pushSend(message);
         };
         if($('#fileUploading')[0].files.length && $('span.file')[0].textContent){
             var fileObj=new fileCtrl();
@@ -839,7 +839,18 @@ messageControl.prototype={
         }
     },   //信息编码——>未读信息
     targetUser:['sun','sakurai','ramen','pendo'],      //用户列表
-    sendMessage:[],
+    sendMessage:[
+        {
+            "mMessage": "有人@你啊",
+            "mStatus": "0",
+            "mUser": "sun",
+            "mType": "unReadMessage",
+            "mTitle":"任务表制定",
+            "mTime": "20180708",
+            "mLink": "www.baidu.com",
+            "mFile":""
+        }
+    ],
     userToMessage:{},   //用户编码——>>所有信息(含信息编码)
     userToUnRead:{},    //用户编码——>>未读信息(含信息编码)
     getAllMessage:function(){
@@ -938,7 +949,9 @@ messageControl.prototype={
         $.ajax({
             type:"POST",
             url:"http://119.23.253.225:8080/lechang-bpm/messageController/confirmRead",
-            data:JSON.stringify(data,4,false),
+            data:JSON.stringify({
+                id:data
+            },4,false),
             contentType:"application/json;charset=utf-8",
             success: function (recieve) {
                 if (recieve.success&&recieve.msg.indexOf("成功")) {
@@ -967,6 +980,9 @@ messageControl.prototype={
     pushSend:function(message){
         this.__proto__.sendMessage.push(message);
         msShowWin.appendSend('.msg-tb.send',this.sendMessage);
+    },
+    reflashSend:function(){
+        msShowWin.appendSend('.msg-tb.send',msCtrlWin.sendMessage);
     },
     parseWsMessage:function(recieveList,type,object){            //用户编码——>索引信息编码——>索引信息
         var obj=typeof object=='object'?object:{};
@@ -1027,7 +1043,7 @@ messageControl.prototype={
                 delete recieveList[i];
             }
         }
-        return Object.keys(recieveList).length && typeof recieveList=='object' >0?obj:obji;      //recieveList只输入单条信息或者输入多条信息的不同返回
+        return Object.keys(recieveList).length>0 && typeof recieveList=='object'?obj:obji;      //recieveList只输入单条信息或者输入多条信息的不同返回
     },
     userListOpen:function(selector,userList,userTo){
 
@@ -1296,9 +1312,9 @@ messageShow.prototype={
         }
     },
     appendSend:function(selector,arr){
-        $(selector).empty();
+        $(selector).find('tbody').empty();
         for(var i=0 ;i<arr.length;i++) {
-            $(selector).append(this.DomSendMessage(arr[i]));
+            $(selector).find('tbody').append(this.DomSendMessage(arr[i]));
         }
     },
     DomMessage:function(obj){            //信息的模板Dom
@@ -1327,10 +1343,10 @@ messageShow.prototype={
             1:'urgency',
             2:'serious'
         };
-        var linkDomStr=obj.mLink?('<a href="'+obj.mLink+'" ><i class="fa fa-mouse-pointer"></i>附件</a>'):'';
+        var linkDomStr=obj.mLink?('<a href="'+obj.mLink+'" ><i class="fa fa-mouse-pointer"></i>网页</a>'):'';
         var typeDomStr=true?'<button class="btn btn-default">待办</button>':'<button class="btn btn-default">已办</button>';
         //保留选择。。。好像有点问题这里
-        var template='<tr id="'+obj.mId+'" class="'+emergenceLevel[obj.mStatus]+ ' toread '+obj.type+'">\n' +
+        var template='<tr id="'+obj.mId+'" class="'+emergenceLevel[obj.mStatus]+ ' toread ">\n' +
             '\t<td><i class="fa fa-circle"></i></td>\n' +
             '\t<td>'+obj.mUser+'</td>\n' +
             '\t<td><span class="lineTitle">'+obj.mTitle+'</span>'+linkDomStr+'</td>\n' +
@@ -1517,7 +1533,7 @@ var wsCommunicating=new communicating();
 msCtrlWin.getUnreadMessage();
 msCtrlWin.getAllMessage();
 msShowWin.onshow();
-$('.send').click(wsCommunicating.doSend);
+$('.send').click(msCtrlWin.reflashSend);
 linkClick=function(messageCode,type){      //点击附件跳转——外部调用函数
     var msCtrl=new messageControl();
     var link={
