@@ -74,7 +74,9 @@ $(document).ready(function(){
             {id:'fileDeleted',text:'删除文件'},
             {id:'showTable',text:'表格'},
             {id:'showSelect',text:'显示'},
-            {id:'messageSet',text:'信息定义'}
+            {id:'messageSet',text:'信息定义'},
+            {id:'showView',text:'显示隐藏'},
+            {id:'printAct',text:'打印'}
     ], row:[
             {id:'rowCopy',text:'行区复制'},
             // {id:'showCopy',text:'显示自动'}
@@ -1223,6 +1225,9 @@ $(document).ready(function(){
                     actionType:'messageSet'
                 }
                 return set;
+            },
+            showView:function(array){
+                console.log(array);
             }
         },
         constructFunc:function (dataArr) {
@@ -1630,6 +1635,35 @@ $(document).ready(function(){
           $(elDiv2.dom).find('label').css({'width':'100%'});
           $(elDiv2.dom).find('input').css({'max-width': '29em','width': '30em'});
           return elDiv0.dom;
+      },
+      showView:function(controlNum){
+          var elDiv = new el_new("form-control ", "", "", "div");
+          var elDiv2 = new el_new("form-control showView-child", "", "", "div");
+          for (var i = 0; i < controlNum; i++) {
+              var labelDiv = new labelAndInput("form-control ", "", "", "input", "触发行数:");
+              labelDiv.inputType('number');
+              var labelDiv2 = new labelAndInput("form-control", "", "", "select",'触发模式:');
+              select_add(labelDiv2.dom,[{name:'显示隐藏',value:1},{name:'隐转显',value:2},{name:'显转隐',value:3}],'value','name');
+              $(labelDiv.dom).on('keypress',function(e){
+                  if(e.keyCode!=13){
+                      return false;
+                  }else{
+                      var val=$(e.target).val();
+                      var parent=$('.showView-child');
+                      parent.find('.showView').remove();
+                      var elDivV = new el_new("form-control showView crontolColumnBlock2", "", "showView", "div");
+                      for(var i=0;i<parseInt(val);i++){
+                          let labelDivV = new labelAndInput("form-control ", "", "", "input", "");
+                          elDivV.dom.append(labelDivV.dom);
+                      }
+                      parent.append(elDivV.dom);
+                      console.log(e);
+                  }
+              });
+              elDiv2.dom.append(labelDiv2.labelEl);
+              elDiv2.dom.append(labelDiv.labelEl);
+              elDiv.dom.append(elDiv2.dom);
+          }return elDiv.dom;
       },
       rowCopy:function (controlNum) {
           var elDiv = new el_new("form-control controlColumnBlock2", "", "", "div");

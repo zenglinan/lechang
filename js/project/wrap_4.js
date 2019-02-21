@@ -1,7 +1,6 @@
 // JavaScript Document
 $(document).ready(function(){
     function createMid(){
-
     }
     createMid.prototype={
         tableList:[],
@@ -58,7 +57,7 @@ $(document).ready(function(){
                     if(recieve.success&&recieve.msg.indexOf("成功")){
                         result=recieve.obj;
                     }else{
-                        alert("删除失败!");
+                        alert("创建中间表出错，请检查表名是否已存在");
                     }
                 }
             });
