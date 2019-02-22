@@ -48,7 +48,7 @@
 					</div>
 					<div class="user-info">
 						<a class="user-avatar">
-							<span class="info-num">2</span>
+							<span class="info-num"></span>
 						</a>
 						<span>admin</span>
 					</div>
@@ -120,24 +120,171 @@
 									<i class="fa fa-envelope-open-o"></i><span>消息通知</span>
 									<i class="fa fa-times"></i>
 									<i class="fa fa-arrows-h"></i>
-								</div>
-								<div class="msg-content">
-									<div class="well well-lg" id="output" style="border:1px solid #ccc;height:70%;overflow: auto;margin-left:15px;margin-right: 15px;"></div>
-									<div class="input-group" style="">
-										<input type="text" id="message" class="form-control" style="width:100%" placeholder="待发信息" onkeydown="en(event);">
-										<span class="input-group-btn">
-											<button class="btn btn-primary" type="button" onclick="doSend();">发送</button>
-										</span>
+									<div class="btns">
+										<button type="button" class="btn btn-default btn-xs" value="userSend">
+											<span class="glyphicon glyphicon-comment"></span>创建
+										</button>
+										<button type="button" class="btn btn-default btn-xs" value="allList">
+											<span class="glyphicon glyphicon-comment"></span>所有
+										</button>
+										<button type="button" class="btn btn-default btn-xs" value="unReadList">
+											<span class="glyphicon glyphicon-comment"></span>未读
+										</button>
 									</div>
 								</div>
-							</div>
-						</div>
+								<div class="msg-content">
+									<div class="msg-mang row">
+										<div class="msg-change col-sm-6">
+											<a class="receive">接收消息(<span>3</span>)条</a>
+											<a class="send">发送消息(<span>2</span>)条</a>
+										</div>
+										<div class="msg-control col-sm-6">
+											<button class="btn btn-default col-sm-6 all-toread">全部标为已读</button>
+											<button class="btn btn-default col-sm-5 all-delete">彻底删除</button>
+										</div>
+									</div>
+									<!-- 收件 -->
+									<table class="msg-tb receive">
+										<thead>
+											<tr>
+												<th><i class="fa fa-envelope" value="mStatus"></i></th>
+												<th value="mUser">发件人</th>
+                                                <th value="mContent">消息内容</th>
+												<th value="mTime">发送时间</th>
+												<th value="mType">消息状态</th>
+												<th><i class="fa fa-ellipsis-h"></i></th>
+											</tr>
+										</thead>
+										<tbody> <!--toread可去掉-->
+											<tr class="urgency toread">
+												<td><i class="fa fa-circle"></i></td>
+												<td>张总</td>
+												<td><span>周二下午开会</span></td>
+												<td>11月30日</td>
+												<td><button class="btn btn-default">待读</button></td>
+												<td><i class="fa fa-close"></i></td>
+											</tr>
+											<tr class="common toread">
+												<td><i class="fa fa-circle"></i></td>
+												<td>经理</td>
+												<td><span>审批报表</span> <a href="client_index.html"><i class="fa fa-mouse-pointer"></i>附件</a> </td>
+												<td>12月01日</td>
+												<td><button class="btn btn-default">待办</button></td>
+												<td><i class="fa fa-close"></i></td>
+											</tr>
+											<tr class="common toread">
+												<td><i class="fa fa-circle"></i></td>
+												<td>经理</td>
+												<td><span>审批报表</span> <a href="client_index.html"><i class="fa fa-mouse-pointer"></i>附件</a></td>
+												<td>10月12日</td>
+												<td><button class="btn btn-default">待办</button></td>
+												<td><i class="fa fa-close"></i></td>
+											</tr>
+										</tbody>
+									</table>
+									<!-- 发件 -->
+									<table class="msg-tb send" style="display: none;">
+										<thead>
+											<tr>
+												<th><i class="fa fa-envelope"></i></th>
+												<th>收件人</th>
+                                                <th>消息内容</th>
+												<th>发送时间</th>
+												<th>消息状态</th>
+												<th><i class="fa fa-ellipsis-h"></i></th>
+											</tr>
+										</thead>
+										<tbody> <!--toread可去掉-->
+											<tr class="urgency toread">
+												<td><i class="fa fa-circle"></i></td>
+												<td>职员甲</td>
+												<td><span>周二下午开会</span></td>
+												<td>11月00日</td>
+												<td>未读</td>
+												<td><i class="fa fa-close"></i></td>
+											</tr>
+											<tr class="common toread">
+												<td><i class="fa fa-circle"></i></td>
+												<td>职员乙</td>
+												<td><span>审批报表</span> <a href="client_index.html"><i class="fa fa-mouse-pointer"></i>附件</a> </td>
+												<td>12月00日</td>
+												<td>未办</td>
+												<td><i class="fa fa-close"></i></td>
+											</tr>
+											<tr class="common toread">
+												<td><i class="fa fa-circle"></i></td>
+												<td>职员丙</td>
+												<td><span>审批报表</span> <a href="client_index.html"><i class="fa fa-mouse-pointer"></i>附件</a></td>
+												<td>10月10日</td>
+												<td>已办</td>
+												<td><i class="fa fa-close"></i></td>
+											</tr>
+										</tbody>
+									</table>
+								</div><!-- msg-content -->
+							</div><!-- float-content -->
+						</div><!--悬浮栏-->
 					</div>
 				</div>
 			</div>
 
+			<!-- 发送消息模态框 -->
+			<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+					<div class="modal-header">
+						<h4><strong class="modalType">信息发送</strong></h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+			      <div class="modal-body">
+			        <table class="send-msg">
+			        	<tbody>
+			        		<tr>
+			        			<td>收件人:</td>
+			        			<td>
+									<div>
+										<input type="text" class="form-control userList" />
+										<select class="form-control userList"></select>
+									</div>
+								</td>
+			        		</tr>
+			        		<tr>
+			        			<td>内容:</td>
+			        			<td>
+			        				<input type="text" class="form-control titleSend" placeholder="不超过15个字" maxlength="15" />
+									<a class="file">上传附件<input type="file" id="fileUploading"/></a><span class="file"></span>
+									<input type="text" class="form-control webSend" placeholder="此处为附件网页框" />
+			        			</td>
+			        		</tr>
+			        		<tr>
+			        			<td>详情:</td>
+			        			<td><textarea rows="5" cols="66" class="form-control contentSend"></textarea></td>
+			        		</tr>
+			        		<tr>
+			        			<td></td>
+			        			<td>
+			        				<div class="dropdown" style="display: inline;">
+			        					<button class="btn btn-default dropdown-toggle classify" data-toggle="dropdown" value="0">普通</button>
+			                            <ul class="dropdown-menu">
+			                               <li class="common" ><a class="dropdown-item" href="#" value="0">普通</a></li>
+			                               <li class="urgency" ><a class="dropdown-item" href="#" value='1'>紧急</a></li>
+										</ul>
+									</div>
+			                        <button class="send btn btn-primary">发送</button>
+			                        <span class="addresser">发件人|<span>审核员10001</span></span>
+			        			</td>
+			        		</tr>
+			        	</tbody>
+			        </table>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+			      </div>
+			    </div>
+			  </div>
+			</div><!-- 发送消息模态框 -->
+			
 			<footer class="ft" id="ft">
-
 			</footer>
 		</div>
 	</body>
