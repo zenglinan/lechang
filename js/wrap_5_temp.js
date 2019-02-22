@@ -428,6 +428,28 @@ ajaxTemplate.prototype={
               "mLink": recieve.net||''
           };
           msShowWin.showMessageRecieve(setting);
+          if(Object.keys(next).length){bindOf(next);}
+      },
+      showView:function(recieve,object,next){
+          console.log(recieve);
+          let typeArr=['toggle','hide','show'];
+          for(var r=0;r<recieve.modal.length;r++){
+              $('#'+recieve.modal[r])[typeArr[recieve.type]]();
+          }
+          if(Object.keys(next).length){bindOf(next);}
+      },
+      printAct:function(recieve,object,next){
+          var t=new el_new('xx','kk','','div');
+          if(recieve.type=='0'){
+              console.log(recieve.modal[0]);
+              for(var r=0;r<recieve.modal.length;r++){
+                  var list=$('#'+recieve.modal[r]);
+                  $(t.dom).append(list[0]);
+              }
+              $(t.dom).jqprint();
+          }else{
+          }
+          if(Object.keys(next).length){bindOf(next);}
       }
   },
   ajaxPackage:{
