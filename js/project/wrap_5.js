@@ -2106,6 +2106,7 @@ $("#submitWebsiteBtn .timeStampUpload").on("click",function(e){
     $(labeldiv.labelEl).css({'width':'100%'});
     var labeldiv1=new labelAndInput("form-control","websiteUploadUserCode","","input","用户编码:");
     $(labeldiv1.dom).css({'width':'70%','max-width':'100%'});
+    $(labeldiv1.dom).val('default');
     $(labeldiv1.labelEl).css({'width':'50%'});
     // var labeldiv2=new el_new('form-control','websiteUploadUserCodePush','','button');
     // labeldiv2.dom.innerHTML="删除";
