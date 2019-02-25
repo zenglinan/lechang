@@ -751,6 +751,7 @@ communicating.prototype={
     doSend:function(){      //输入信息与处理->ws发送信息  //信息初始化
         const dom=$('.send-msg');
         let mUser=wsCommunicating.dataParse(dom.find('input.userList').val()),selected=dom.find('select.userList').val();
+        let rt=false;
         if(selected){
             mUser=selected;
         }
@@ -775,6 +776,7 @@ communicating.prototype={
             let str=message.mStatus+'@lechang@'+message.mUser+'@lechang@'+message.mTime+'@'+message.mLink+'@'+message.mFile+'@'+message.mTitle+'@'+message.mMessage;
             wsCommunicating.wsObj.send(str);
             msCtrlWin.pushSend(message);
+            return true;
         };
         if($('#fileUploading')[0].files.length && $('span.file')[0].textContent){
             var fileObj=new fileCtrl();
@@ -787,18 +789,17 @@ communicating.prototype={
                     keyword:$('#fileUploading')[0].files[0].name.replace(/\.\S+$/,'')
                 },undefined,function(recieve){      //查询到文件后
                     filePath=recieve.obj[0].path;
-                    func(mUser,filePath);
+                    rt=func(mUser,filePath);
                 })
             });
         }else{
-            func(mUser);
+            rt=func(mUser);
         }
 
         // console.log(websocket);
         // $("#message").val('');
         // this.writeToScreen('<span style="color:green">你发送的信息&nbsp;'+formatDate(new Date())+'</span><br/>'+ message);
-
-        return true;
+        return rt;
     },
     writeToScreen:function(message) {       //ws接收信息->显示信息与处理
         var div = "<div class='newmessage'>"+message+"</div>";
@@ -1004,7 +1005,9 @@ messageControl.prototype={
         msShowWin.appendSend('.msg-tb.send',this.sendMessage);
     },
     reflashSend:function(){
-        msShowWin.appendSend('.msg-tb.send',msCtrlWin.sendMessage);
+        if(wsCommunicating.doSend()) {
+            msShowWin.appendSend('.msg-tb.send', msCtrlWin.sendMessage);
+        }
     },
     parseWsMessage:function(recieveList,type,object){            //用户编码——>索引信息编码——>索引信息
         var obj=typeof object=='object'?object:{};
@@ -1288,12 +1291,17 @@ messageShow.prototype={
             var $event1=$._data($('input.userList')[0],'events');
             var $event2=$._data($('button.send.btn')[0],'events');
             if(!$event1||!$event1['change']){
-                $('input.userList').on('change',(e)=>{
-                    let val=$(e.target).val();
-                    let msCtrlUserList=new messageControl();
-                    let list=msCtrlUserList.getTargetUser(val);
-                    $('select.userList').empty();
-                    select_add($('select.userList'),list||msCtrlUserList.targetUser);
+                $('input.userList').on('keypress',(e)=>{
+                    console.log('www');
+                    if(e.keyCode!=13){
+
+                    }else {
+                        let val = $(e.target).val();
+                        let msCtrlUserList = new messageControl();
+                        let list = msCtrlUserList.getTargetUser(val);
+                        $('select.userList').empty();
+                        select_add($('select.userList'), list || msCtrlUserList.targetUser);
+                    }
                 })
             }
             if(!$event2||!$event2['click']){

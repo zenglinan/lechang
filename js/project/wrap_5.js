@@ -159,9 +159,11 @@ $(document).ready(function(){
         },
         flashHtml:function (selectName,nodeCode) {
             this.showHtml(selectName,nodeCode);
-            if(globalStorage.iframeVal){
-                $(selectName).val(globalStorage.iframeVal);
-                $('.page-path').html(globalStorage.iframeSrc);
+            var iframeVal=JSON.parse(sessionStorage.getItem('iframeVal'));
+            if(iframeVal){
+                var iframeSrc=JSON.parse(sessionStorage.getItem('iframeSrc'));
+                $(selectName).val(iframeVal);
+                $('.page-path').html(iframeSrc);
             }
         },
         setSelect:function(val){
@@ -1924,10 +1926,10 @@ $(document).ready(function(){
                 async:false,
                 success:function(recieve){
                     if(recieve.success&&recieve.msg.indexOf("成功")){
-                        alert(recieve.msg);
+                        // alert(recieve.msg);
                         result=recieve.obj;
                     }else{
-                        alert("删除失败!");
+                        alert("获取失败!");
                     }
                 }
             });
@@ -1947,7 +1949,7 @@ $(document).ready(function(){
                     if(recieve.success&&recieve.msg.indexOf("成功")){
                         alert(recieve.msg);
                     }else{
-                        alert("删除失败!");
+                        alert("设定失败!");
                     }
                 }
             });
@@ -1983,10 +1985,10 @@ $(document).ready(function(){
                     async: false,
                     success: function (recieve) {
                         if (recieve.success && recieve.msg.indexOf("成功")) {
-                            alert(recieve.msg);
+                            // alert(recieve.msg);
                             results=results.concat(recieve.obj);
                         } else {
-                            alert("删除失败!");
+                            alert("获取失败!");
                         }
                     }
                 });
@@ -2171,6 +2173,8 @@ $('.htmlShow').on('click','option',function () {
     var path=o.select('fileName',$(this).val());
     $(document.getElementById("iframe")).attr('src',path);
     globalStorage.iframeSrc=path;
+    sessionStorage.setItem('iframeVal',JSON.stringify($(this).val()));
+    sessionStorage.setItem('iframeSrc',JSON.stringify(path));
     sessionStorage.setItem('globalStorage',JSON.stringify(globalStorage));
     sessionStorage.setItem('jsStr',JSON.stringify(getJsAjax(globalStorage.iframeVal)));
     location.reload();
@@ -3294,10 +3298,10 @@ rolesRelative.prototype={
             async:false,
             success:function(recieve){
                 if(recieve.success&&recieve.msg.indexOf("成功")){
-                    alert(recieve.msg);
+                    // alert(recieve.msg);
                     rolesRelative.prototype.allRoles=recieve.obj;
                 }else{
-                    alert("删除失败!");
+                    alert("获取失败!");
                 }
             }
         });
