@@ -48,8 +48,12 @@ $(document).ready(function(){
             '                    </div>'}
         },
         htmlArr:[],
-        iframeSrc:'',
-        iframeVal:'',
+        htmlShow:{
+            selectRole:'',
+            selectHtmlArr:'',
+            iframeSrc:'',
+            iframeVal:''
+        },
         controlInform:{
         },
         relationStorage:{},
@@ -111,7 +115,7 @@ $(document).ready(function(){
     };
     var htmlVersionClass=function() {
         this.roles=new rolesRelative();
-        this.setSelect(this.roleVal);
+        this.__proto__.roleVal=globalStorage.htmlShow.selectRole?globalStorage.htmlShow.selectRole:'default';
     };
     htmlVersionClass.prototype={
         roleVal:'default',
@@ -136,11 +140,16 @@ $(document).ready(function(){
             this.__proto__.roleArr=arr;
         },
         setRoleSelect:function(selectObj){
+            let role=globalStorage.htmlShow.selectRole;
             this.getHtmlArr();
             select_add($(selectObj),this.roleArr,'nodeCode','nodeName');
+            if(role){
+                $(selectObj).selected(role);
+            }
         },
         getHtml:function (obj) {
             this.__proto__.htmlArr=obj;
+            this.setSelect(this.roleVal);
         },
         showHtml:function (selectObj,nodeCode) {
             var arr=this.htmlArr[nodeCode],storageArr=[];
@@ -159,16 +168,16 @@ $(document).ready(function(){
         },
         flashHtml:function (selectName,nodeCode) {
             this.showHtml(selectName,nodeCode);
-            var iframeVal=JSON.parse(sessionStorage.getItem('iframeVal'));
+            var iframeVal=globalStorage.htmlShow.iframeVal;
             if(iframeVal){
-                var iframeSrc=JSON.parse(sessionStorage.getItem('iframeSrc'));
+                var iframeSrc=globalStorage.htmlShow.iframeSrc;
                 $(selectName).val(iframeVal);
                 $('.page-path').html(iframeSrc);
             }
         },
         setSelect:function(val){
-            this.__proto__.roleVal=val;
-            this.__proto__.selectHtmlArr=this.htmlArr[val];
+            this.__proto__.roleVal=globalStorage.htmlShow.selectRole=val;
+            this.__proto__.selectHtmlArr=globalStorage.htmlShow.selectHtmlArr=this.htmlArr[val];
             this.flashHtml($(".htmlShow"));
         },
         select:function (attr,val) {
@@ -2120,7 +2129,7 @@ $("#submitWebsiteBtn .timeStampUpload").on("click",function(e){
             globalStorage.iframeVal=$(this).val();
             var path=o.select('fileName',$(this).val());
             $(document.getElementById("iframe")).attr('src',path);
-            globalStorage.iframeSrc=path;
+            globalStorage.htmlShow.iframeSrc=path;
             sessionStorage.setItem('globalStorage',JSON.stringify(globalStorage));
             sessionStorage.setItem('jsStr',JSON.stringify(getJsAjax(globalStorage.iframeVal)));
             location.reload();
@@ -2169,14 +2178,14 @@ $(FContent.window).on('mousedown',function (event) {
 });
 $('.htmlShow').on('click','option',function () {
     var o=new htmlVersionClass();
-    globalStorage.iframeVal=$(this).val();
+    globalStorage.htmlShow.iframeVal=$(this).val();
     var path=o.select('fileName',$(this).val());
     $(document.getElementById("iframe")).attr('src',path);
-    globalStorage.iframeSrc=path;
-    sessionStorage.setItem('iframeVal',JSON.stringify($(this).val()));
-    sessionStorage.setItem('iframeSrc',JSON.stringify(path));
+    globalStorage.htmlShow.iframeSrc=path;
+    // sessionStorage.setItem('iframeVal',JSON.stringify($(this).val()));
+    // sessionStorage.setItem('iframeSrc',JSON.stringify(path));
     sessionStorage.setItem('globalStorage',JSON.stringify(globalStorage));
-    sessionStorage.setItem('jsStr',JSON.stringify(getJsAjax(globalStorage.iframeVal)));
+    sessionStorage.setItem('jsStr',JSON.stringify(getJsAjax(globalStorage.htmlShow.iframeVal)));
     location.reload();
 });
 
@@ -2330,8 +2339,8 @@ function websiteSubmitTimeStamp(e) {
     $(this).attr('disabled',true);
     doitAll.removeControlInform();
     var date=new Date();
-    var valueName=(globalStorage.iframeSrc.indexOf('client_index') != -1)?'client_index':JSON.stringify(date.getTime());
-    var htmlStr=$(FContent.window.document.getElementsByTagName('html')).prop('outerHTML').replace('../../js/upload/'+globalStorage.iframeVal+'js.js','lechangbpm666');
+    var valueName=(globalStorage.htmlShow.iframeSrc.indexOf('client_index') != -1)?'client_index':JSON.stringify(date.getTime());
+    var htmlStr=$(FContent.window.document.getElementsByTagName('html')).prop('outerHTML').replace('../../js/upload/'+globalStorage.htmlShow.iframeVal+'js.js','lechangbpm666');
     data={
         html: {
             name:valueName,
