@@ -720,13 +720,7 @@ resolueData.prototype={
 };
 
 function communicating(){
-    if('WebSocket' in window){
-        this.wsObj=new WebSocket('ws://119.23.253.225:8080/lechang-bpm/websocket/socketServer');
-    }else if('MozWebSocket' in window){
-        this.wsObj=new MozWebSocket('ws://119.23.253.225:8080/lechang-bpm/websocket/socketServer');
-    }else {
-        this.wsObj=new SockJS('http://119.23.253.225:8080/lechang-bpm/socketjs/socketServer');
-    }
+    this.wsObj=this.setWsObj();
     this.wsObj.onopen=this.onOpen;
     this.wsObj.onmessage=this.onMessage;
     this.wsObj.onclose=this.onClose;
@@ -740,6 +734,16 @@ communicating.prototype={
         if (evt.keyCode==13){
             this.doSend();
         }
+    },
+    setWsObj:function(){
+        if('WebSocket' in window){
+            this.wsObj=new WebSocket('ws://119.23.253.225:8080/lechang-bpm/websocket/socketServer');
+        }else if('MozWebSocket' in window){
+            this.wsObj=new MozWebSocket('ws://119.23.253.225:8080/lechang-bpm/websocket/socketServer');
+        }else {
+            this.wsObj=new SockJS('http://119.23.253.225:8080/lechang-bpm/socketjs/socketServer');
+        }
+        return this.wsObj;
     },
     dataParse:function(thing){
         try {
@@ -833,14 +837,14 @@ communicating.prototype={
         //[保留位置]用于刷新UI控件的显示,重新挂载未读信息的资料
     },
     onClose:function(event){        //关闭链接->反应函数
-        if(confirm('是否关闭客户端:')){
-
-        }else{
-
-        }
+        // if(confirm('通信中断,确定重连:')){
+        //
+        // }else{
+        // }
     },
     onError:function(event){        //发送错误->反应函数
-        alert('在线通信中断，请刷新重连');
+        // console.log('在线通信中断，请刷新重连');
+        wsCommunicating.setWsObj();
     }
 };
 
