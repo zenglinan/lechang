@@ -10,7 +10,7 @@ $(document).ready(function(){
         getAllMidAjax:function(){
             var result={};
             $.ajax({
-                url: 'http://119.23.253.225:8080/lechang-bpm/viewController/getAllView',
+                url: 'http://119.23.253.225:8080/hzl-iomp/viewController/getAllView',
                 type: 'POST',
                 data: null,
                 contentType: 'application/json',
@@ -28,7 +28,7 @@ $(document).ready(function(){
         getThisMidAjax:function(id){
             var result={};
             $.ajax({
-                url: 'http://119.23.253.225:8080/lechang-bpm/viewController/getViewField',
+                url: 'http://119.23.253.225:8080/hzl-iomp/viewController/getViewField',
                 type: 'POST',
                 data: JSON.stringify({
                     viewId:id
@@ -48,7 +48,7 @@ $(document).ready(function(){
         createMidAjax:function (obj) {
             var result={};
             $.ajax({
-                url:'http://119.23.253.225:8080/lechang-bpm/viewController/createView',
+                url:'http://119.23.253.225:8080/hzl-iomp/viewController/createView',
                 type:'POST',
                 data:JSON.stringify(obj,null,4),
                 contentType: 'application/json',
@@ -321,7 +321,7 @@ $(document).ready(function(){
             var result=[];
             var that=this;
             $.ajax({
-                url:'http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?showTables',
+                url:'http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTables',
                 type:'GET',
                 data:null,
                 contentType: 'application/json',
@@ -343,7 +343,7 @@ $(document).ready(function(){
 		showTableFieldAjax:function(id){
 			var result={};
             $.ajax({
-                url:'http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?showTableField',
+                url:'http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTableField',
                 type:'GET',
                 data:{
                 	tableId:id

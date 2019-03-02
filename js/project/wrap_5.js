@@ -56,6 +56,7 @@ $(document).ready(function(){
         },
         controlInform:{
         },
+        styleStorage:{},
         relationStorage:{},
         showCopyRowStorage:{},
         draggabillyObj:{},
@@ -261,6 +262,8 @@ $(document).ready(function(){
           actionSet:controlAction,
           relationSet:controlRelation,
           showFieldSet:controlShowField,
+          copyStyle:controlCopyStyle,
+          pasteStyle:controlPasteStyle,
           copyRelation:controlCopyRelation,
           pasteRelation:controlPasteRelation
       },
@@ -411,7 +414,11 @@ $(document).ready(function(){
           console.log($(tg).parents('.td'),$(tg).parents('.td').children(),tg);
           // var tgAccept=$(tg).parents('.td').length?$(tg).parents('.td'):tg;
           var tgAccept=tg;
+          var tgParent=$(tg).parents('.td');
           if(data[0]){
+              if(!tgAccept.hasClass('td')&&$(tgParent).attr('style').match('width')){
+                  $(tgParent).css({'width':'auto'});
+              }
               $(tgAccept).css({'width':data[0]+(tgAccept.hasClass('td')?'%':'px')});
           }
           if(data[1]){$(tgAccept).css({'height':data[1]+'px'});}
@@ -1926,7 +1933,7 @@ $(document).ready(function(){
         getTargetUser:function(nodeCode){
             var result=[];
             $.ajax({
-                url:'http://119.23.253.225:8080/lechang-bpm/messageController/getTargetUser',
+                url:'http://119.23.253.225:8080/hzl-iomp/messageController/getTargetUser',
                 type:'POST',
                 data:JSON.stringify({
                     roleCode:nodeCode
@@ -1946,7 +1953,7 @@ $(document).ready(function(){
         },
         setGroupAjax:function(groupName,userList){
             $.ajax({
-                url:'http://119.23.253.225:8080/lechang-bpm/messageController/setGroup',
+                url:'http://119.23.253.225:8080/hzl-iomp/messageController/setGroup',
                 type:'POST',
                 data:JSON.stringify({
                     groupName:groupName,
@@ -1966,7 +1973,7 @@ $(document).ready(function(){
         getGroupAjax:function(){
             var result=[];
             $.ajax({
-                url:'http://119.23.253.225:8080/lechang-bpm/messageController/getAllGroup',
+                url:'http://119.23.253.225:8080/hzl-iomp/messageController/getAllGroup',
                 type:'POST',
                 data:null,
                 contentType: 'application/json',
@@ -1985,7 +1992,7 @@ $(document).ready(function(){
             var results=[];
             for(var i in idList) {
                 $.ajax({
-                    url: 'http://119.23.253.225:8080/lechang-bpm/messageController/getGroupUser',
+                    url: 'http://119.23.253.225:8080/hzl-iomp/messageController/getGroupUser',
                     type: 'POST',
                     data: JSON.stringify({
                         groupId: parseInt(idList[i])
@@ -2006,7 +2013,7 @@ $(document).ready(function(){
         testGroupAjax:function(groupName){
             var type=null;     //结果返回
             $.ajax({
-                url:'http://119.23.253.225:8080/lechang-bpm/messageController/testGroup',
+                url:'http://119.23.253.225:8080/hzl-iomp/messageController/testGroup',
                 type:'POST',
                 data:JSON.stringify({
                     groupName:groupName
@@ -2228,7 +2235,8 @@ var clickFunc = function (e) {                     //菜单事件函数
     testing.menuClick=tg.attr("id");
     var funcPack=new indexOfFunc();
     funcPack.doFunctionArr(testing.menuClick);
-    if(tg.attr('id')=='deleteSet'||tg.attr('id')=='copyRelation'||tg.attr('id')=='pasteRelation'||tg.attr('id')=='instanceSet'||tg.attr('id')=='formDivSet'){
+    var list=['deleteSet','copyRelation','pasteRelation','copyStyle','pasteStyle','instanceSet','formDivSet'];
+    if($.inArray(tg.attr('id'),list)>=0){
 
     }else {
         $("#myModal").modal('show');
@@ -2629,6 +2637,14 @@ contextMenuRightControl=function(e) {
             name:'修改常量',
             id:'changeConstant',
             childArr:null
+        },copyStyle:{
+            name:'样式复制',
+            id:'copyStyle',
+            childArr:null
+        },pasteStyle:{
+            name:'样式粘贴',
+            id:'pasteStyle',
+            childArr:null
         },deleteSet:{
             name:'删除该框',
             id:'deleteSet',
@@ -2681,6 +2697,14 @@ contextMenuRightControl=function(e) {
                 name:'控件资料',
                 id:'showControl',
                 childArr:null
+            },copyStyle: {
+                name: '样式复制',
+                id: 'copyStyle',
+                childArr: null
+            }, pasteStyle: {
+                name: '样式粘贴',
+                id: 'pasteStyle',
+                childArr: null
             },deleteSet:{
                 name:'删除该框',
                 id:'deleteSet',
@@ -2928,7 +2952,7 @@ function controlAction() {
     var labelDiv3 = new labelAndInput("form-control", "controlColumnType", "", "select", "触发类型:");
     var tgName=function (target) {
         try {
-            return [{id:'.' + $(target).attr('class').match(/\S+-rowClass\b/g)[0],text:'类名：'+'.' + $(target).attr('class').match(/\S+-rowClass\b/g)[0].replace(/-rowClass/g, '')},{id:'#'+$(target).attr('id'),text:'id：'+$(target).attr('id')}];
+            return [{id:'#'+$(target).attr('id'),text:'id：'+$(target).attr('id')},{id:'.' + $(target).attr('class').match(/\S+-rowClass\b/g)[0],text:'类名：'+'.' + $(target).attr('class').match(/\S+-rowClass\b/g)[0].replace(/-rowClass/g, '')}];
         } catch (ex) {
             return [{id:$(target).attr('id'),text:'id：'+$(target).attr('id')}];
         }
@@ -3049,6 +3073,20 @@ function controlShowFieldAccept() {
     var indexFunc=new indexOfFunc();
     indexFunc.setShowField(testing.menuClick,tg,data);
 }
+function controlCopyStyle(){
+    var tg=testing.target;
+    var msg=$(tg).hasClass('rightControlSet')?$(tg):$(tg).parents('.rightControlSet')||$(tg).find('.rightControlSet');
+    if(msg.hasClass('rightControlSet')){
+        var classTag=$(msg).attr('class').match(/text\S+|default|blue|gray|primary|btnstyle/g);
+        var styleTag=$(msg).attr('style');
+        globalStorage.styleStorage={
+            classTag:classTag||[],
+            styleTag:styleTag||''
+        }
+    }else {
+        alert('请选择可绑定关系控件！');
+    }
+}
 function controlCopyRelation() {
     var tg=testing.target;
     var msg=$(tg).hasClass('rightControlSet')?$(tg):$(tg).parents('.rightControlSet')||$(tg).find('.rightControlSet');
@@ -3059,6 +3097,22 @@ function controlCopyRelation() {
             globalStorage.relationStorage=obj.data;
         }else {
             alert('该控件未绑定关系！');
+        }
+    }else {
+        alert('请选择可绑定关系控件！');
+    }
+}
+function controlPasteStyle() {
+    var tg=testing.target;
+    var msg=$(tg).hasClass('rightControlSet')?$(tg):$(tg).parents('.rightControlSet')||$(tg).find('.rightControlSet');
+    if(msg.hasClass('rightControlSet')){
+        if(Object.keys(globalStorage.styleStorage).length){
+            globalStorage.styleStorage.classTag.map(function (node) {
+                $(msg).addClass(node);
+            });
+            globalStorage.styleStorage.styleTag?$(msg).attr('style',globalStorage.styleStorage.styleTag):false;
+        }else{
+            alert('请先复制相关的样式！');
         }
     }else {
         alert('请选择可绑定关系控件！');
@@ -3150,7 +3204,7 @@ function controlDelete() {
 function showTablesAjax() {
     $.ajax({
         type:"GET",
-        url: "http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?showTables",
+        url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTables",
         data: "",
         success:function (recieve) {
             if (recieve.success) {
@@ -3163,7 +3217,7 @@ function showTablesAjax() {
 function showTableField(tableIdArg) {
     $.ajax({
         type: "GET",
-        url: "http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?showTableField",
+        url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTableField",
         data: {tableId:tableIdArg},
         success: function (recieve) {
             if (recieve.success) {
@@ -3177,7 +3231,7 @@ function fileStringUpload(data) {
     console.log(data);
     $.ajax({
         type:"POST",
-        url:"http://119.23.253.225:8080/lechang-bpm/fileController/stringUpload",
+        url:"http://119.23.253.225:8080/hzl-iomp/fileController/stringUpload",
         data:JSON.stringify(data,null,4),
         contentType: 'application/json',
         success:function (recieve) {
@@ -3198,7 +3252,7 @@ function fileStringUpload(data) {
 function stringSelectAll(e) {
     $.ajax({
         type:"POST",
-        url:"http://119.23.253.225:8080/lechang-bpm/fileController/stringSelectAll",
+        url:"http://119.23.253.225:8080/hzl-iomp/fileController/stringSelectAll",
         data:null,
         contentType: 'application/json',
         success:function (recieve) {
@@ -3225,7 +3279,7 @@ function fileUploadAjax(e) {
         console.log(formData);
         $.ajax({
             type:"POST",
-            url:"http://119.23.253.225:8080/lechang-bpm/fileController/upload",
+            url:"http://119.23.253.225:8080/hzl-iomp/fileController/upload",
             data:formData,
             processData: false,
             contentType: false,
@@ -3246,7 +3300,7 @@ function fileUploadAjax(e) {
 function deleteUploadAjax(obj) {
     $.ajax({
         type:"POST",
-        url:"http://119.23.253.225:8080/lechang-bpm/fileController/stringDelete",
+        url:"http://119.23.253.225:8080/hzl-iomp/fileController/stringDelete",
         data:JSON.stringify(obj,null,4),
         contentType: 'application/json',
         success:function (recieve) {
@@ -3265,7 +3319,7 @@ function deleteUploadAjax(obj) {
 function getJsAjax(jsName){
     var returnTip='';
     $.ajax({
-        url:'http://119.23.253.225:8080/lechang-bpm/js/upload/'+jsName+'js.js',
+        url:'http://119.23.253.225:8080/hzl-iomp/js/upload/'+jsName+'js.js',
         type:'GET',
         data:null,
         async:false,
@@ -3300,7 +3354,7 @@ rolesRelative.prototype={
     prototypeNodes:null,
     getRolesAjax:function(){
         $.ajax({
-            url:'http://119.23.253.225:8080/lechang-bpm/fileController/getAllRoles',
+            url:'http://119.23.253.225:8080/hzl-iomp/fileController/getAllRoles',
             type:'POST',
             data:null,
             contentType: 'application/json',

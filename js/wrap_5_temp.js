@@ -70,7 +70,7 @@ ajaxTemplate.prototype={
           console.log(formDiv);
           var fileUploadObj={
               type: "POST",
-              url: "http://119.23.253.225:8080/lechang-bpm/FMInfoController/upload",
+              url: "http://119.23.253.225:8080/hzl-iomp/FMInfoController/upload",
               // processData: false,
               // contentType: false,
               encType: "multipart/form-data",
@@ -97,7 +97,7 @@ ajaxTemplate.prototype={
       insert:function (selectObj,next) {
           $.ajax({
               type: "POST",
-              url: "http://119.23.253.225:8080/lechang-bpm/tableCRUDController/insert",
+              url: "http://119.23.253.225:8080/hzl-iomp/tableCRUDController/insert",
               data: JSON.stringify(selectObj['json'], null, 4),
               contentType:"application/json",
               success:function (recieve) {
@@ -145,7 +145,7 @@ ajaxTemplate.prototype={
                           // url: "http://localhost:63342/WebRoot/test/select.txt",
                           // data:null,
                           type: "POST",
-                          url: "http://119.23.253.225:8080/lechang-bpm/tableCRUDController/select",
+                          url: "http://119.23.253.225:8080/hzl-iomp/tableCRUDController/select",
                           data: JSON.stringify(selectObj['json'][i], null, 4),
                           async:false,
                           contentType: "application/json;charset=UTF-8",
@@ -208,7 +208,7 @@ ajaxTemplate.prototype={
               // url: "http://localhost:63342/WebRoot/test/select.txt",
               // data:null,
               type: "POST",
-              url: "http://119.23.253.225:8080/lechang-bpm/tableCRUDController/select",
+              url: "http://119.23.253.225:8080/hzl-iomp/tableCRUDController/select",
               data: JSON.stringify(selectJson, null, 4),
               contentType: "application/json",
               success: function (recieve) {
@@ -456,7 +456,7 @@ ajaxTemplate.prototype={
       showTables:function (data,func,object) {
           $.ajax({
               type:"GET",
-              url: "http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?showTables",
+              url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTables",
               data: "",
               async:false,
               success:function (recieve) {
@@ -475,7 +475,7 @@ ajaxTemplate.prototype={
       showTableField:function (data,func,object,id) {
           $.ajax({
               type: "GET",
-              url: "http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?showTableField",
+              url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTableField",
               // url: "http://localhost:63342/WebRoot/test/showTableField.txt",
               data: {tableId: data},
               async:false,
@@ -493,7 +493,7 @@ ajaxTemplate.prototype={
           object=object||{};
           $.ajax({
               type: "POST",
-              url: "http://119.23.253.225:8080/lechang-bpm/tableCRUDController/insert",
+              url: "http://119.23.253.225:8080/hzl-iomp/tableCRUDController/insert",
               data: JSON.stringify(data, null, 4),
               contentType:"application/json",
               success:function (recieve) {
@@ -512,7 +512,7 @@ ajaxTemplate.prototype={
           next=next||{};
           $.ajax({
               type: "POST",
-              url: "http://119.23.253.225:8080/lechang-bpm/tableCRUDController/select",
+              url: "http://119.23.253.225:8080/hzl-iomp/tableCRUDController/select",
               data: JSON.stringify(data, null, 4),
               contentType: "application/json",
               success: function (recieve) {
@@ -548,7 +548,7 @@ ajaxTemplate.prototype={
           object=object||{};
           $.ajax({
               type: "POST",
-              url: "http://119.23.253.225:8080/lechang-bpm/tableCRUDController/select",
+              url: "http://119.23.253.225:8080/hzl-iomp/tableCRUDController/select",
               data: JSON.stringify(data, null, 4),
               async:false,
               contentType: "application/json",
@@ -574,7 +574,7 @@ ajaxTemplate.prototype={
           object=object||{};
           $.ajax({
               type: "POST",
-              url: "http://119.23.253.225:8080/lechang-bpm/tableCRUDController/update",
+              url: "http://119.23.253.225:8080/hzl-iomp/tableCRUDController/update",
               data: JSON.stringify(data, null, 4),
               contentType: "application/json;charset=utf-8",
               success: function (recieve) {
@@ -595,7 +595,7 @@ ajaxTemplate.prototype={
           object=object||{};
           $.ajax({
               type:"POST",
-              url:"http://119.23.253.225:8080/lechang-bpm/tableCRUDController/delete",
+              url:"http://119.23.253.225:8080/hzl-iomp/tableCRUDController/delete",
               data:JSON.stringify(data,null,4),
               contentType:"application/json;charset=utf-8",
               success: function (recieve) {
@@ -620,7 +620,7 @@ ajaxTemplate.prototype={
           object=object||{};
           $.ajax({
               type:"GET",
-              url:"http://119.23.253.225:8080/lechang-bpm/FMInfoController/get",
+              url:"http://119.23.253.225:8080/hzl-iomp/FMInfoController/get",
               data:data.data,
               contentType:"application/json;charset=utf-8",
               success: function (recieve) {
@@ -641,7 +641,7 @@ ajaxTemplate.prototype={
           object=object||{};
           $.ajax({
               type:"POST",
-              url:"http://119.23.253.225:8080/lechang-bpm/FMInfoController/update",
+              url:"http://119.23.253.225:8080/hzl-iomp/FMInfoController/update",
               data:JSON.stringify(data,null,4),
               contentType:"application/json;charset=utf-8",
               success: function (recieve) {
@@ -662,7 +662,7 @@ ajaxTemplate.prototype={
           object=object||{};
           $.ajax({
               type:"POST",
-              url:"http://119.23.253.225:8080/lechang-bpm/FMInfoController/delete",
+              url:"http://119.23.253.225:8080/hzl-iomp/FMInfoController/delete",
               data:JSON.stringify(data,null,4),
               contentType:"application/json;charset=utf-8",
               success: function (recieve) {
@@ -737,11 +737,11 @@ communicating.prototype={
     },
     setWsObj:function(){
         if('WebSocket' in window){
-            this.wsObj=new WebSocket('ws://119.23.253.225:8080/lechang-bpm/websocket/socketServer');
+            this.wsObj=new WebSocket('ws://119.23.253.225:8080/hzl-iomp/websocket/socketServer');
         }else if('MozWebSocket' in window){
-            this.wsObj=new MozWebSocket('ws://119.23.253.225:8080/lechang-bpm/websocket/socketServer');
+            this.wsObj=new MozWebSocket('ws://119.23.253.225:8080/hzl-iomp/websocket/socketServer');
         }else {
-            this.wsObj=new SockJS('http://119.23.253.225:8080/lechang-bpm/socketjs/socketServer');
+            this.wsObj=new SockJS('http://119.23.253.225:8080/hzl-iomp/socketjs/socketServer');
         }
         return this.wsObj;
     },
@@ -841,10 +841,10 @@ communicating.prototype={
         //
         // }else{
         // }
+        wsCommunicating.setWsObj();
     },
     onError:function(event){        //发送错误->反应函数
         // console.log('在线通信中断，请刷新重连');
-        wsCommunicating.setWsObj();
     }
 };
 
@@ -883,7 +883,7 @@ messageControl.prototype={
     getAllMessage:function(){
         $.ajax({
             type:"POST",
-            url:"http://119.23.253.225:8080/lechang-bpm/messageController/getAllMessage",
+            url:"http://119.23.253.225:8080/hzl-iomp/messageController/getAllMessage",
             data:null,
             contentType:"application/json;charset=utf-8",
             success: function (recieve) {
@@ -917,7 +917,7 @@ messageControl.prototype={
     getUnreadMessage:function(){
         $.ajax({
             type:"POST",
-            url:"http://119.23.253.225:8080/lechang-bpm/messageController/getUnreadMessage",
+            url:"http://119.23.253.225:8080/hzl-iomp/messageController/getUnreadMessage",
             data:null,
             contentType:"application/json;charset=utf-8",
             success: function (recieve) {
@@ -952,7 +952,7 @@ messageControl.prototype={
         var result=[];
         $.ajax({
             type:"POST",
-            url:"http://119.23.253.225:8080/lechang-bpm/messageController/getTargetUser",
+            url:"http://119.23.253.225:8080/hzl-iomp/messageController/getTargetUser",
             data:JSON.stringify({roleCode:str},null,4),
             contentType:"application/json;charset=utf-8",
             async:false,
@@ -975,7 +975,7 @@ messageControl.prototype={
     confirmRead:function(data){
         $.ajax({
             type:"POST",
-            url:"http://119.23.253.225:8080/lechang-bpm/messageController/confirmRead",
+            url:"http://119.23.253.225:8080/hzl-iomp/messageController/confirmRead",
             data:JSON.stringify({
                 id:data
             },4,false),
@@ -992,7 +992,7 @@ messageControl.prototype={
     delMessage:function(data){
         $.ajax({
             type:"POST",
-            url:"http://119.23.253.225:8080/lechang-bpm/messageController/delMessage",
+            url:"http://119.23.253.225:8080/hzl-iomp/messageController/delMessage",
             data:JSON.stringify(data,4,false),
             contentType:"application/json;charset=utf-8",
             success: function (recieve) {
@@ -1102,7 +1102,7 @@ fileCtrl.prototype= {
         }
 
         var options = {
-            url: 'http://119.23.253.225:8080/lechang-bpm/FMInfoController/upload',
+            url: 'http://119.23.253.225:8080/hzl-iomp/FMInfoController/upload',
             type: 'POST',
             data: forms,
             processData: false,
@@ -1132,7 +1132,7 @@ fileCtrl.prototype= {
         }
         $.ajax({
             type: "GET",
-            url: "http://119.23.253.225:8080/lechang-bpm/FMInfoController/get",
+            url: "http://119.23.253.225:8080/hzl-iomp/FMInfoController/get",
             data: this.selectJson,
             success: typeof func=='function'?func:function (recieve) {
                 if (recieve.success) {
@@ -1150,7 +1150,7 @@ fileCtrl.prototype= {
     deleteFile:function(num){
         $.ajax({
             type: "POST",
-            url: "http://119.23.253.225:8080/lechang-bpm/FMInfoController/delete",
+            url: "http://119.23.253.225:8080/hzl-iomp/FMInfoController/delete",
             data: JSON.stringify({
                 fmId:parseInt(num)
             }),

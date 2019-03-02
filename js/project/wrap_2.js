@@ -399,7 +399,7 @@ $(document).ready(function(){
         //数据传输
         $.ajax({
             type:"POST",
-            url: "http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?doDbSynch&synMethod=normal",
+            url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?doDbSynch&synMethod=normal",
             data: JSON.stringify(data_json,null,4),
             contentType:"application/json;charset=UTF-8",
             success:function (recieve) {
@@ -440,7 +440,7 @@ $(document).ready(function(){
         //数据传输
         $.ajax({
             type:"POST",
-            url: "http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?doAlter&synMethod=normal",
+            url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?doAlter&synMethod=normal",
             data: JSON.stringify(data_json,null,4),
             contentType:"application/json;charset=UTF-8",
             success:function (recieve) {
@@ -566,7 +566,7 @@ $(document).ready(function(){
         var name = $("#table_name").val();
         $.ajax({
             type:"POST",
-            url: "http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?judge",
+            url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?judge",
             data: {tableName:name},
             success:function (recieve) {
                 if(recieve.success){
@@ -583,7 +583,7 @@ $(document).ready(function(){
         }
         $.ajax({
             type:"POST",
-            url: "http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?rem",
+            url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?rem",
             data: JSON.stringify(data_json,null,4),
             contentType:"application/json",
             success:function (recieve) {
@@ -691,7 +691,7 @@ $(document).ready(function(){
         $(".modal-header").html("字段信息");
         $.ajax({
             type:"GET",
-            url:"http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?showTableField",
+            url:"http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTableField",
             data:{tableId:$(this).attr("id")},
             success:function (recieve) {
                 if(recieve.success) {
@@ -706,7 +706,7 @@ $(document).ready(function(){
 
     $.ajax({
         type:"GET",
-        url: "http://119.23.253.225:8080/lechang-bpm/cgFormHeadController?showTables",
+        url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTables",
         async:false,
         data: "",
         success:function (recieve) {
