@@ -875,3 +875,37 @@ body {
 	margin-left: 1em;
 	width: 5em;
 }
+
+.btnType1{
+	color: white;
+	border-width: 1px;
+	border-style: solid;
+	background-color: rgb(20, 68, 196);
+	border-color: rgb(20, 68, 196);
+}
+.btnType2{
+	border-width: 1px;
+	border-style: solid;
+	background-color: rgb(77, 147, 227);
+	border-color: rgb(20, 68, 196);
+}
+.btnType3{
+	border-width: 1px;
+	border-style: solid;
+	background-color: rgb(255, 255, 255);
+	border-color: rgb(20, 68, 196);
+}
+.btnType4{
+	border-width: 1px;
+	border-style: solid;
+	background-color: rgb(230, 230, 230);
+	border-color: rgb(148, 148, 148);
+	border-radius: 10px;
+}
+.btnType5{
+	border-width: 1px;
+	border-style: solid;
+	background-color: rgb(191, 191, 191);
+	border-color: rgb(148, 148, 148);
+	border-radius: 10px;
+}

@@ -20,6 +20,20 @@ var globalStorage={
     },
     showCopyRowStorage:{}
 };
+
+$.fn.setterBtn = function(){        //一个让字符居中，数字居右的jqeury函数
+    if(!$(this).hasClass('btnType')){
+        return this
+    }
+    let val=Number(this.html());
+    if(isNaN(val)){
+        $(this[0]).removeClass('textRight textLeft').addClass('textCenter');
+    }else {
+        $(this[0]).removeClass('textCenter textLeft').addClass('textRight');
+    }
+    return this
+};
+
 //-------------类和对象---------------
 function el_new(classname,idname,name,domname) {         //el 新建元素类
     this.dom=document.createElement(domname);                   //各种元素
@@ -373,7 +387,7 @@ ajaxTemplate.prototype={
                   if(classObj.localName=='input'||classObj.localName=='button'){
                       $(classObj).val(data[showFields[i].fieldName]);
                   }else{
-                      $(classObj).html(data[showFields[i].fieldName]);
+                      $(classObj).html(data[showFields[i].fieldName]).setterBtn();
                   }
               }
           }
@@ -1640,10 +1654,10 @@ function showOf(id,data,tableName,objCreate) {
         if(classObj.localName=='input'||classObj.localName=='button'){
             $(classObj).val(data);
         }else{
-            $(classObj).html(data);
+            $(classObj).html(data).setterBtn();
         }
     }else if(typeof data !=='object') {
-        $("#" + id).html(data);
+        $("#" + id).html(data).setterBtn();
     }else{
         globalStorage.tableData=data;
         if(globalStorage.showField[globalStorage.tablesId[tableName]]){
