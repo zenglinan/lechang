@@ -324,7 +324,7 @@ $(document).ready(function(){
                   console.log(tg,data[0]);
                   domDiv.dom.id=data[0];
                   $(domDiv.dom).addClass(data[1]+'-rowClass');
-                  $(domDiv.dom).innerHTML=data[2];
+                  domDiv.dom.innerHTML=data[2];
                   domDiv.dom.setAttribute('value',data[3]);
                   if(tg.parents('.td').length!=0){
                       // if($(tg.parents('.td')).hasClass('formTd')){
@@ -481,7 +481,7 @@ $(document).ready(function(){
                   $(tgAccept).css({'font-size':data[4]+'px'});
               }
               if(data[5]){
-                  $(tgAccept).removeClass('default').removeClass('gray').removeClass('primary').removeClass('blue').addClass(data[5]).setterBtn();
+                  $(tgAccept).removeClass('default').removeClass('gray').removeClass('primary').removeClass('blue').removeClass('btnType btnType1 btnType2 btnType3 btnType4 btnType5').addClass(data[5]).setterBtn();
               }
           }else {alert('control-new不可变型!')}
       },
