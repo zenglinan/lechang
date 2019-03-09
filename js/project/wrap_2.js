@@ -1,6 +1,5 @@
 // JavaScript Document
 $(document).ready(function(){
-
 //-----------------------实验用--------------------------------
     function add_btn() {
     }
@@ -20,10 +19,7 @@ $(document).ready(function(){
             $(this).btn.addEventListener(function_action,function_name);
         }
     }
-
-    function add_div() {
-
-    }
+    
 //------------------------全局---------------------------------
     var field_data=new Array(); //字段对象数组
     var table_name_data=new Array(); //表名对象数组
@@ -118,7 +114,7 @@ $(document).ready(function(){
 
         var select_item=new Array();
         var select_item5=new Array();
-        select_item=["string","int"];
+        select_item=["string","int","自增"];
         select_item5=["Y","N"];
 
 
@@ -174,7 +170,7 @@ $(document).ready(function(){
         $("#wrap_2").append(table_set);
         $("#table_set").append(set_title);
         $("#table_set").append(set_field);
-
+// ==========生成定义表控件==========
         if (num <= 0) {
         } else {
             for (var j = 0; j < num; j++) {
@@ -243,6 +239,7 @@ $(document).ready(function(){
             $("#input8_0").attr("value", " ").attr("readonly", true);
             $("#input9_0").attr("value", " ").attr("readonly", true);
             $("#input0").click(function () {
+                // ==========生成表的事件==========
                 if ($("#table_name").val() != "" && $("#table_name").val() != null) {
                     setCookie("table_name", $("#table_name").val(), 1);
                     if (num != 0  && num > 0) {
@@ -377,7 +374,7 @@ $(document).ready(function(){
     }
 
 
-
+// ==========创建表结构的ajax==========
     function ajax_0() {
         $("#input0").attr("disabled","true");
         var num=getCookie("field_num");
@@ -418,7 +415,7 @@ $(document).ready(function(){
             }
         });
     }
-
+// ==========accept修改表结构的ajax==========
     function ajax_1() {
         $("#input0").attr("disabled","true");
         var num=$('.read_only').length;
@@ -459,7 +456,7 @@ $(document).ready(function(){
             }
         });
     }
-
+// ==========cookie缓存设置==========
     function setCookie(cname,cvalue,exdays){
         var d = new Date();
         d.setTime(d.getTime()+(exdays*24*60*60*1000));
@@ -476,7 +473,7 @@ $(document).ready(function(){
         }
         return "";
     }
-
+// ==========获取控件生成后输入的内容(num:行数)==========
     function datas(num){
         var data_array=new Array();
         for(var j=0;j<num;j++){
@@ -513,7 +510,7 @@ $(document).ready(function(){
         data_array[parseInt(num)]=delstatus;
         return data_array;
     }
-
+// ==========初始定义表信息准备生成控件==========
     $("#num_set").click(function(){
         var num = $("#field_num").val();
         field_data=[];
@@ -539,7 +536,7 @@ $(document).ready(function(){
         $("#input0").unbind('click');
         $("#input0").bind('click',ajax_0);
     });
-
+// ==========增加字段按钮的行为==========
     $("#table_add").click(function () {
         $("#set_field").empty();
         num_set(field_data.length-1);
@@ -557,11 +554,11 @@ $(document).ready(function(){
         $("#input0").unbind('click');
         $("#input0").bind('click',ajax_1);
     })
-
+// ==========重复表名测试==========
     $("#check_table").click(function(){
         find_table();
     })
-
+// ==========查找所有表的ajax==========
     function find_table() {
         var name = $("#table_name").val();
         $.ajax({
@@ -575,7 +572,7 @@ $(document).ready(function(){
             }
         });
     }
-
+// ==========删除表==========
     $("#cancel_table").click(function(){
         var name = $("#table_name").val();
         var data_json={
@@ -595,7 +592,7 @@ $(document).ready(function(){
     });
 
     $("#table-new-2").attr("style","display:none");
-
+// ==========切换div的函数==========
     $("#chevron").click(function () {
         if($(this).children("i").attr("class")=="fa fa-chevron-left")
         {
@@ -608,7 +605,7 @@ $(document).ready(function(){
             $("#table-new-2").attr("style","display:none");
         };
     });
-
+// ==========pagination插件==========
     $("#pagination3").pagination({
         currentPage: 1,// 当前页数
         totalPage: 2,// 总页数
@@ -622,7 +619,7 @@ $(document).ready(function(){
             // 回调,current(当前页数)
         }
     });
-
+// ==========查询得到表==========
     //var data_j=[{id:1,content:"嘻嘻",tableName:"xixi"},{id:2,content:"CC",tableName:"xixi"},{id:3,content:"jj",tableName:"xixi"}];
     function insert_table_div(obj) {       //回掉函数所获json数据的处理
         var number=obj.length;
@@ -644,14 +641,10 @@ $(document).ready(function(){
             div_col.append(span_col);
             div_col.addEventListener('click',field_show);
             $("#div_set").append(div_col);
-
         }
     }
 
-    function fill_field(obj) {
-
-    }
-
+// ==========查询该表的字段信息==========
     function insert_tableField_div(obj) {       //回掉函数所获json数据的处理
         var number=obj.length;
         for(var j=1;j<number-1;j++){
@@ -680,9 +673,9 @@ $(document).ready(function(){
             div_col.append(span_col4);
             $("#field_div").append(div_col);
             $("#field_div").append("<br/>");
-
         }
     }
+    // ==========获取该表字段信息的ajax包装函数==========
     function field_show() {
         $("#field_div").empty();
         //alert(this.attr('name'));
@@ -703,7 +696,7 @@ $(document).ready(function(){
     }
 
 
-
+// ==========获取表的ajax==========
     $.ajax({
         type:"GET",
         url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTables",

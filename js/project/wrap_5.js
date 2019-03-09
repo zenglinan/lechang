@@ -20,18 +20,6 @@ $(document).ready(function(){
     };
     var submitIndex=null;
     var jsStr=sessionStorage.getItem('jsStr')?JSON.parse(sessionStorage.getItem('jsStr')):'';                      //极其重要
-    $.fn.setterBtn = function(){        //一个让字符居中，数字居右的jqeury函数
-        if(!$(this).hasClass('btnType')){
-            return this
-        }
-        let val=Number(this.html());
-        if(isNaN(val)){
-            $(this[0]).removeClass('textRight textLeft').addClass('textCenter');
-        }else {
-            $(this[0]).removeClass('textCenter textLeft').addClass('textRight');
-        }
-        return this
-    };
 
     //--------------------------数据结构解析--------------------------------
     var globalStorage=sessionStorage.getItem('globalStorage')?JSON.parse(sessionStorage.getItem('globalStorage')):{
@@ -481,7 +469,7 @@ $(document).ready(function(){
                   $(tgAccept).css({'font-size':data[4]+'px'});
               }
               if(data[5]){
-                  $(tgAccept).removeClass('default').removeClass('gray').removeClass('primary').removeClass('blue').removeClass('btnType btnType1 btnType2 btnType3 btnType4 btnType5').addClass(data[5]).setterBtn();
+                  $(tgAccept).removeClass('default').removeClass('gray').removeClass('primary').removeClass('blue').addClass(data[5]);
               }
           }else {alert('control-new不可变型!')}
       },
@@ -2573,17 +2561,18 @@ function showBlock() {
         }
     }*/
 }
-function secondMenuArray(arg) {
-    var arr=[];
-    for(var i=0;i<arg.length;i++) {
-        var obj = {
-            id:arg[i].find("input:eq(0)").val(),
-            name:arg[i].find("input:eq(1)").val(),
-            type:arg[i].find("select").val()
-        };
-        arr.push(obj);
+    function secondMenuArray(arg) {
+        var arr=[];
+        for(var i=0;i<arg.length;i++) {
+            var obj = {
+                id:arg[i].find("input:eq(0)").val(),
+                name:arg[i].find("input:eq(1)").val(),
+                type:arg[i].find("select").val()
+            };
+            arr.push(obj);
+        }
+        
     }
-}
 function menuSubmitAction3(tg) {
 
 }
@@ -2925,18 +2914,7 @@ function controlShape() {
     var labelDiv6 = new labelAndInput("form-control", "controlColumnType", "", "select", "基本选择:");
     // labelDiv.inputType('text');
     select_add(labelDiv.dom,[{name:'左对齐',value:'textLeft'},{name:'中间对齐',value:'textCenter'},{name:'右对齐',value:'textRight'}],'value','name');
-    select_add(labelDiv6.dom,[
-        {name:'无类型',value:''},
-        {name:'特殊1',value:'btnType btnType1'},
-        {name:'特殊2',value:'btnType btnType2'},
-        {name:'特殊3',value:'btnType btnType3'},
-        {name:'特殊4',value:'btnType btnType4'},
-        {name:'特殊5',value:'btnType btnType5'},
-        {name:'默认型',value:'btnstyle default'},
-        {name:'渐变型',value:'btnstyle gray'},
-        {name:'边框型',value:'btnstyle primary'},
-        {name:'实心型',value:'btnstyle blue'}
-        ],'value','name');
+    select_add(labelDiv6.dom,[{name:'无类型',value:''},{name:'默认型',value:'btnstyle default'},{name:'渐变型',value:'btnstyle gray'},{name:'边框型',value:'btnstyle primary'},{name:'实心型',value:'btnstyle blue'}],'value','name');
     labelDiv2.inputType('number');
     labelDiv3.inputType('number');
     labelDiv4.inputType('number');
@@ -3222,7 +3200,6 @@ function controlDelete() {
         return;
     }
 }
-
 //-------------ajax函数---------------
 function showTablesAjax() {
     $.ajax({
