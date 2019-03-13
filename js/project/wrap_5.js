@@ -2360,7 +2360,7 @@ function websiteSubmitTimeStamp(e) {
     doitAll.removeControlInform();
     var date=new Date();
     var valueName=(globalStorage.htmlShow.iframeSrc.indexOf('client_index') != -1)?'client_index':JSON.stringify(date.getTime());
-    var htmlStr=$(FContent.window.document.getElementsByTagName('html')).prop('outerHTML').replace('../../js/upload/'+globalStorage.htmlShow.iframeVal+'js.js','lechangbpm666');
+    var htmlStr=$(FContent.window.document.getElementsByTagName('html')).prop('outerHTML').replace(/(\.\.\/)+\w+(\.js)/g,'lechangbpm666');
     data={
         html: {
             name:valueName,
