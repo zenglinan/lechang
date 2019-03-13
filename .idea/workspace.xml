@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="16dd100f-32a3-4a25-a4d4-d6a649a9223b" name="默认的" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/project/wrap_5.js" afterPath="$PROJECT_DIR$/js/project/wrap_5.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -366,7 +365,7 @@
       <workItem from="1551873792695" duration="8807000" />
       <workItem from="1551958793839" duration="424000" />
       <workItem from="1551965270154" duration="4172000" />
-      <workItem from="1552456427871" duration="11727000" />
+      <workItem from="1552456427871" duration="12107000" />
     </task>
     <task id="LOCAL-00001" summary="上传20190203版本">
       <created>1549179338907</created>
@@ -501,11 +500,18 @@
       <option name="project" value="LOCAL" />
       <updated>1552464974066</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="20190313x2&#10;新增功能：&#10;1.增加防止重复点击函数">
+      <created>1552485928497</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1552485928497</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="392269000" />
+    <option name="totallyTimeSpent" value="392649000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1386" height="735" extended-state="0" />
@@ -582,7 +588,8 @@
     <MESSAGE value="20190307x1&#10;新增功能：&#10;1.新增五个特殊html模板&#10;2.增添一个jqery函数，用于判断是否居中" />
     <MESSAGE value="20190307x2&#10;新增功能：&#10;1.bug修复" />
     <MESSAGE value="20190313x1&#10;新增功能：&#10;1.行距调整,颜色调整&#10;2.修复行为文件引用bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="20190313x1&#10;新增功能：&#10;1.行距调整,颜色调整&#10;2.修复行为文件引用bug" />
+    <MESSAGE value="20190313x2&#10;新增功能：&#10;1.增加防止重复点击函数" />
+    <option name="LAST_COMMIT_MESSAGE" value="20190313x2&#10;新增功能：&#10;1.增加防止重复点击函数" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
