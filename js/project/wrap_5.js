@@ -124,6 +124,13 @@ $(document).ready(function(){
                 $(obj).css({'background-color':color});
                 this.btnOver=true;
             }
+        },
+        preventFunc:function(that,type){
+            var clickObj = that;
+            var func = type||$._data(clickObj,'preventStatus')||{stat:true};
+            $(clickObj).prop('disabled', func.stat);
+            $._data(clickObj,'preventStatus',{stat: func.stat })
+
         }
     };
     var htmlVersionClass=function() {
@@ -2994,6 +3001,8 @@ function controlActionKeypress(e) {
     var data=modalValue.getDataArr($(".controlColumnBlock"));
     if(e.keyCode==13&&data[1]>0) {
         var obj = new actionKey(data[0], data[1]);
+        var mouseAct = new mouseAction();
+        mouseAct.preventFunc($('#rightControlBtn'),{stat:false});
         console.log(obj);
         $(e.data.modalDiv).append(obj);
     }
@@ -3003,6 +3012,8 @@ function controlActionAccept() {
     var tg=testing.target;
     var modalValue=new modalValueFunc();
     var data=modalValue.getDataArr($(".controlColumnBlock2"));
+    var mouseAct = new mouseAction();
+    mouseAct.preventFunc(this);
     var indexFunc=new indexOfFunc();
     if(!($(tg).parents('.instanceTd').length||$(tg).hasClass('instanceTd')||$(tg).hasClass('rightControlSet'))){
         indexFunc.setRowCopyAction(testing.menuClick,tg,data);
