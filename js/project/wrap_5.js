@@ -2131,6 +2131,7 @@ document.oncontextmenu=function () {
     }
 };
 $(".menu_heading").on("click",menuHeadClick);
+$('.htmlShowDestination').on('change',stringSelectAll)
 $(".span12 li[data-target='#myModal']").on('click',menuTableClick);
 //$(".table-btn").on("click",menuSubmit);
 $("#submitWebsiteBtn .localUpload").on("click",websiteSubmitBtn);
@@ -3287,7 +3288,9 @@ function stringSelectAll(e) {
     $.ajax({
         type:"POST",
         url:"http://119.23.253.225:8080/hzl-iomp/fileController/stringSelectAll",
-        data:null,
+        data:JSON.stringify({
+            destination:$('.htmlShowDestination').val()
+        }),
         contentType: 'application/json',
         success:function (recieve) {
             if(recieve.success&&recieve.msg.indexOf("成功")){

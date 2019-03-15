@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="16dd100f-32a3-4a25-a4d4-d6a649a9223b" name="默认的" comment="20190314x1&#10;新增功能：&#10;1.增加三个入口按钮">
+    <list default="true" id="16dd100f-32a3-4a25-a4d4-d6a649a9223b" name="默认的" comment="20190315x1&#10;新增功能：&#10;1.修复上传页面包含destination选项">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/login.html" afterPath="$PROJECT_DIR$/html/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/wrap_5.css" afterPath="$PROJECT_DIR$/css/wrap_5.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/wrap_5.html" afterPath="$PROJECT_DIR$/html/wrap_5.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/project/wrap_5.js" afterPath="$PROJECT_DIR$/js/project/wrap_5.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,18 +26,18 @@
       <file leaf-file-name="wrap_5.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/wrap_5.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1425">
-              <caret line="75" column="108" lean-forward="false" selection-start-line="75" selection-start-column="108" selection-end-line="75" selection-end-column="108" />
+            <state relative-caret-position="-2426">
+              <caret line="112" column="74" lean-forward="true" selection-start-line="112" selection-start-column="74" selection-end-line="112" selection-end-column="74" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wrap_5.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="wrap_5.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/css/wrap_5.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="40" column="29" lean-forward="false" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
+            <state relative-caret-position="101">
+              <caret line="218" column="41" lean-forward="false" selection-start-line="218" selection-start-column="41" selection-end-line="218" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -44,12 +46,12 @@
       <file leaf-file-name="wrap_5.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/project/wrap_5.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="129" column="76" lean-forward="false" selection-start-line="129" selection-start-column="76" selection-end-line="129" selection-end-column="76" />
+            <state relative-caret-position="-147">
+              <caret line="2132" column="45" lean-forward="true" selection-start-line="2132" selection-start-column="45" selection-end-line="2132" selection-end-column="45" />
               <folding>
-                <marker date="1552485794919" expanded="true" signature="103887:103953" ph="..." />
-                <marker date="1552485794919" expanded="true" signature="107244:107270" ph="..." />
-                <marker date="1552485794919" expanded="true" signature="153830:153896" ph="..." />
+                <marker date="1552643790237" expanded="true" signature="103887:103953" ph="..." />
+                <marker date="1552643790237" expanded="true" signature="107299:107325" ph="..." />
+                <marker date="1552643790237" expanded="true" signature="153964:154030" ph="..." />
               </folding>
             </state>
           </provider>
@@ -70,7 +72,7 @@
       <file leaf-file-name="style-1.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/client/style-1.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10032">
+            <state relative-caret-position="19">
               <caret line="528" column="9" lean-forward="false" selection-start-line="528" selection-start-column="9" selection-end-line="528" selection-end-column="9" />
               <folding />
             </state>
@@ -80,8 +82,8 @@
       <file leaf-file-name="wrap_5_temp.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/wrap_5_temp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3615">
-              <caret line="84" column="29" lean-forward="true" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+            <state relative-caret-position="1596">
+              <caret line="84" column="29" lean-forward="false" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
               <folding>
                 <marker date="1551889216077" expanded="true" signature="60477:60509" ph="..." />
                 <marker date="1551889216077" expanded="true" signature="60602:60634" ph="..." />
@@ -103,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="189" column="12" lean-forward="false" selection-start-line="189" selection-start-column="12" selection-end-line="189" selection-end-column="12" />
+            <state relative-caret-position="334">
+              <caret line="309" column="77" lean-forward="false" selection-start-line="309" selection-start-column="68" selection-end-line="309" selection-end-column="77" />
               <folding>
                 <element signature="n#style#0;n#div#3;n#form#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -118,7 +120,7 @@
       <file leaf-file-name="wrap_2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/wrap_2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1444">
+            <state relative-caret-position="19">
               <caret line="76" column="76" lean-forward="false" selection-start-line="76" selection-start-column="76" selection-end-line="76" selection-end-column="76" />
               <folding />
             </state>
@@ -129,8 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setSelect</find>
-      <find>flashHtml</find>
       <find>iframeSrc</find>
       <find>iframeVal</find>
       <find>socket</find>
@@ -159,6 +159,8 @@
       <find>click</find>
       <find>func</find>
       <find>preventFunc</find>
+      <find>100px</find>
+      <find>stringSelectAll</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -169,8 +171,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/css/wrap_4.css" />
-        <option value="$PROJECT_DIR$/css/wrap_5.css" />
-        <option value="$PROJECT_DIR$/html/wrap_5.html" />
         <option value="$PROJECT_DIR$/html/wrap_4.html" />
         <option value="$PROJECT_DIR$/html/wrap_3.html" />
         <option value="$PROJECT_DIR$/html/wrap_2.html" />
@@ -184,8 +184,10 @@
         <option value="$PROJECT_DIR$/js/wrap_5_temp.js" />
         <option value="$PROJECT_DIR$/html/client/client_temp.html" />
         <option value="$PROJECT_DIR$/css/client/style-1.css" />
-        <option value="$PROJECT_DIR$/js/project/wrap_5.js" />
         <option value="$PROJECT_DIR$/html/login.html" />
+        <option value="$PROJECT_DIR$/html/wrap_5.html" />
+        <option value="$PROJECT_DIR$/css/wrap_5.css" />
+        <option value="$PROJECT_DIR$/js/project/wrap_5.js" />
       </list>
     </option>
   </component>
@@ -203,8 +205,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="614" />
-    <option name="width" value="765" />
+    <option name="x" value="-7" />
+    <option name="width" value="1386" />
     <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -223,6 +225,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -285,7 +288,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -369,7 +371,8 @@
       <workItem from="1551958793839" duration="424000" />
       <workItem from="1551965270154" duration="4172000" />
       <workItem from="1552456427871" duration="13295000" />
-      <workItem from="1552563240496" duration="4665000" />
+      <workItem from="1552563240496" duration="4723000" />
+      <workItem from="1552642922925" duration="1158000" />
     </task>
     <task id="LOCAL-00001" summary="上传20190203版本">
       <created>1549179338907</created>
@@ -518,18 +521,25 @@
       <option name="project" value="LOCAL" />
       <updated>1552486248573</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="20190314x1&#10;新增功能：&#10;1.增加三个入口按钮">
+      <created>1552570691966</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1552570691966</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="398502000" />
+    <option name="totallyTimeSpent" value="399718000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="614" y="0" width="765" height="735" extended-state="0" />
+    <frame x="-7" y="0" width="1386" height="735" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295626" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2851064" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15384616" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
@@ -601,7 +611,8 @@
     <MESSAGE value="20190313x1&#10;新增功能：&#10;1.行距调整,颜色调整&#10;2.修复行为文件引用bug" />
     <MESSAGE value="20190313x2&#10;新增功能：&#10;1.增加防止重复点击函数" />
     <MESSAGE value="20190314x1&#10;新增功能：&#10;1.增加三个入口按钮" />
-    <option name="LAST_COMMIT_MESSAGE" value="20190314x1&#10;新增功能：&#10;1.增加三个入口按钮" />
+    <MESSAGE value="20190315x1&#10;新增功能：&#10;1.修复上传页面包含destination选项" />
+    <option name="LAST_COMMIT_MESSAGE" value="20190315x1&#10;新增功能：&#10;1.修复上传页面包含destination选项" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -630,9 +641,9 @@
         <state relative-caret-position="28975">
           <caret line="1525" column="44" lean-forward="false" selection-start-line="1525" selection-start-column="44" selection-end-line="1525" selection-end-column="44" />
           <folding>
-            <marker date="1552485794919" expanded="true" signature="103887:103953" ph="..." />
-            <marker date="1552485794919" expanded="true" signature="107244:107270" ph="..." />
-            <marker date="1552485794919" expanded="true" signature="153830:153896" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="103887:103953" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="107299:107325" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="153964:154030" ph="..." />
           </folding>
         </state>
       </provider>
@@ -671,9 +682,9 @@
         <state relative-caret-position="28937">
           <caret line="1523" column="40" lean-forward="false" selection-start-line="1523" selection-start-column="40" selection-end-line="1523" selection-end-column="40" />
           <folding>
-            <marker date="1552485794919" expanded="true" signature="103887:103953" ph="..." />
-            <marker date="1552485794919" expanded="true" signature="107244:107270" ph="..." />
-            <marker date="1552485794919" expanded="true" signature="153830:153896" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="103887:103953" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="107299:107325" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="153964:154030" ph="..." />
           </folding>
         </state>
       </provider>
@@ -733,9 +744,9 @@
         <state relative-caret-position="29203">
           <caret line="1537" column="96" lean-forward="false" selection-start-line="1537" selection-start-column="96" selection-end-line="1537" selection-end-column="96" />
           <folding>
-            <marker date="1552485794919" expanded="true" signature="103887:103953" ph="..." />
-            <marker date="1552485794919" expanded="true" signature="107244:107270" ph="..." />
-            <marker date="1552485794919" expanded="true" signature="153830:153896" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="103887:103953" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="107299:107325" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="153964:154030" ph="..." />
           </folding>
         </state>
       </provider>
@@ -928,35 +939,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/wrap_2.html">
+    <entry file="file://$PROJECT_DIR$/js/wrap_5_temp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1444">
-          <caret line="76" column="76" lean-forward="false" selection-start-line="76" selection-start-column="76" selection-end-line="76" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/wrap_5.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="40" column="29" lean-forward="false" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/client/style-1.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10032">
-          <caret line="528" column="9" lean-forward="false" selection-start-line="528" selection-start-column="9" selection-end-line="528" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/wrap_5.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1425">
-          <caret line="75" column="108" lean-forward="false" selection-start-line="75" selection-start-column="108" selection-end-line="75" selection-end-column="108" />
-          <folding />
+        <state relative-caret-position="1596">
+          <caret line="84" column="29" lean-forward="false" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+          <folding>
+            <marker date="1551889216077" expanded="true" signature="60477:60509" ph="..." />
+            <marker date="1551889216077" expanded="true" signature="60602:60634" ph="..." />
+            <marker date="1551889216077" expanded="true" signature="61940:61950" ph="..." />
+            <marker date="1551889216077" expanded="true" signature="62077:62087" ph="..." />
+            <marker date="1551889216077" expanded="true" signature="62217:62227" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -970,39 +963,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/project/wrap_5.js">
+    <entry file="file://$PROJECT_DIR$/html/wrap_2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
-          <caret line="129" column="76" lean-forward="false" selection-start-line="129" selection-start-column="76" selection-end-line="129" selection-end-column="76" />
-          <folding>
-            <marker date="1552485794919" expanded="true" signature="103887:103953" ph="..." />
-            <marker date="1552485794919" expanded="true" signature="107244:107270" ph="..." />
-            <marker date="1552485794919" expanded="true" signature="153830:153896" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/wrap_5_temp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3615">
-          <caret line="84" column="29" lean-forward="true" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
-          <folding>
-            <marker date="1551889216077" expanded="true" signature="60477:60509" ph="..." />
-            <marker date="1551889216077" expanded="true" signature="60602:60634" ph="..." />
-            <marker date="1551889216077" expanded="true" signature="61940:61950" ph="..." />
-            <marker date="1551889216077" expanded="true" signature="62077:62087" ph="..." />
-            <marker date="1551889216077" expanded="true" signature="62217:62227" ph="..." />
-          </folding>
+          <caret line="76" column="76" lean-forward="false" selection-start-line="76" selection-start-column="76" selection-end-line="76" selection-end-column="76" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="189" column="12" lean-forward="false" selection-start-line="189" selection-start-column="12" selection-end-line="189" selection-end-column="12" />
+        <state relative-caret-position="334">
+          <caret line="309" column="77" lean-forward="false" selection-start-line="309" selection-start-column="68" selection-end-line="309" selection-end-column="77" />
           <folding>
             <element signature="n#style#0;n#div#3;n#form#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/client/style-1.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="528" column="9" lean-forward="false" selection-start-line="528" selection-start-column="9" selection-end-line="528" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/wrap_5.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2426">
+          <caret line="112" column="74" lean-forward="true" selection-start-line="112" selection-start-column="74" selection-end-line="112" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/project/wrap_5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-147">
+          <caret line="2132" column="45" lean-forward="true" selection-start-line="2132" selection-start-column="45" selection-end-line="2132" selection-end-column="45" />
+          <folding>
+            <marker date="1552643790237" expanded="true" signature="103887:103953" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="107299:107325" ph="..." />
+            <marker date="1552643790237" expanded="true" signature="153964:154030" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/wrap_5.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="218" column="41" lean-forward="false" selection-start-line="218" selection-start-column="41" selection-end-line="218" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
