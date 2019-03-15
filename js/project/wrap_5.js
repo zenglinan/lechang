@@ -2140,8 +2140,11 @@ $("#submitWebsiteBtn .timeStampUpload").on("click",function(e){
     $("#dlg > div").empty();
     var modalDiv=$("#dlg > div");
     var labeldiv=new labelAndInput("form-control","websiteUploadDescription","","input","页面标识:");
-    $(labeldiv.dom).css({'width':'85%','max-width':'100%'});
-    $(labeldiv.labelEl).css({'width':'100%'});
+    $(labeldiv.dom).css({'width':'80%','max-width':'80%'});
+    $(labeldiv.labelEl).css({'width':'80%'});
+    var labeldiv0=new el_new("form-control","websiteUploadDestination","","select");
+    select_add(labeldiv0.dom,[{id:'MSM',value:'营销管理平台MSM'},{id:'TPM',value:'目标与计划管理系统TPM'},{id:'HRM',value:'人力资源管理系统'}],'id','value');
+    $(labeldiv0.dom).css({'width':'20%','float':'right'});
     var labeldiv1=new labelAndInput("form-control","websiteUploadUserCode","","input","用户编码:");
     $(labeldiv1.dom).css({'width':'70%','max-width':'100%'});
     $(labeldiv1.dom).val('default');
@@ -2164,6 +2167,7 @@ $("#submitWebsiteBtn .timeStampUpload").on("click",function(e){
     $(labeldiv3.dom).css({'width':'70%','max-width':'100%'});
     $(labeldiv3.labelEl).css({'width':'50%','float':'right'});
     modalDiv[0].append(labeldiv.labelEl);
+    modalDiv[0].append(labeldiv0.dom);
     modalDiv[1].append(labeldiv1.labelEl);
     // modalDiv[1].append(labeldiv2.dom);
     modalDiv[1].append(labeldiv3.labelEl);
@@ -2375,7 +2379,8 @@ function websiteSubmitTimeStamp(e) {
             content: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
             +htmlStr,
             description:$("#websiteUploadDescription").val(),
-            role:$('#websiteUploadUserCode').val()
+            role:$('#websiteUploadUserCode').val(),
+            destination:$('#websiteUploadDestination').val()
         },
         js:{
             name:valueName+'js',
