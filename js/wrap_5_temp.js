@@ -18,7 +18,8 @@ var globalStorage={
     sortInformation:{
         preOrder:'up'
     },
-    showCopyRowStorage:{}
+    showCopyRowStorage:{},
+    JSESSIONID:''
 };
 
 $.fn.setterBtn = function(){        //一个让字符居中，数字居右的jqeury函数
@@ -56,6 +57,31 @@ el_new.prototype={
         this.dom.setAttribute("style",this.style+";"+style);
     }
 };
+function recordSession(){
+    Object.call(this)
+    let code = document.location.pathname.split('/').reverse()[1];
+    this.setCookie('_JSESSIONID',code,1/(24*30))
+}
+recordSession.prototype={
+    clearRecord () {
+        this.setCookie('_JSESSIONID','',1)
+    },
+    setCookie (cname,cvalue,exdays) {
+        var d = new Date();
+        d.setTime(d.getTime()+(exdays*24*60*60*1000));
+        var expires = "expires="+d.toGMTString();
+        document.cookie = cname+"="+escape(cvalue)+"; "+expires;
+    },
+    getCookie (cname) {
+        var name = escape(cname) + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(name)==0) { return unescape(c.substring(name.length,c.length)); }
+        }
+        return "";
+    }
+}
 
 function mouseAction() {
 }
@@ -1513,128 +1539,7 @@ dataFormat.prototype={
     dateObect:null,
 }
 
-//-------------事件函数---------------
-var msCtrlWin=new messageControl();
-var msShowWin=new messageShow('.msg-tb.receive > tbody');     //全局messageControl（内置dataBindFunc 数据变化检测对象）
-msShowWin.setter('unReadNum',0,function(value){       //变量检测变化函数
-    this.unReadNum_x=value;
-    $('.info-num').html(value);
-    $('a .receive span').html(value);
-});
-msShowWin.setter('onShowStatus','unReadMessage',function(value){        //改变当前显示列表——触发更改排序对象数据
-    this.onShowStatus_x=value;
-    var storage=[];
-    delete msCtrlWin[value].type;
-    for(var i in msCtrlWin[value]){
-        storage.push(msCtrlWin[value][i]);
-    }
-    msCtrlWin.__proto__[value+'Arr']=storage.slice();
-    delete storage;
-    msShowWin.__proto__['msSort']=(function(contentType){       //闭包内部缓存定义-this为windows
-        var direction=true,     //以true为顺排，false为逆排
-            storageType = 'default';
-        if(storageType != contentType){
-            direction=false;
-        }
-        return function(value){         //携带着缓存数据的闭包外调函数-this为messageShow对象
-            var msCtrl = new messageControl();
-            direction = direction == true ? false : true;
-            var storage= msCtrl[contentType+'Arr'].slice();
-            if(storage instanceof Array){
-                return storage.sort(function(objA,objB){        //排序逻辑（字符与数字的不同情形）
-                    if(!parseInt(objA[value]) && !parseInt(objB[value])){
-                        return direction ? objA[value] > objB[value] : objB[value] > objA[value];
-                    }else {
-                        return direction ? objA[value] - objB[value] : objB[value] - objA[value];
-                    }
-                });
-            }else{
-                throw SyntaxError('不是数组？？？');
-            }
-        }
-    })(this.onShowStatus_x);
-});
 
-
-//allMessage赋值时的数组生成,给引用型数据赋setter并不好，不能直接修改allMessage
-// msCtrlWin.setter('allMessage',msCtrlWin.allMessage,function(value){
-//     var allMessage_x=value;
-//     var storage=[];
-//     delete value.type;
-//     for(var i in value){
-//         storage.push(value[i]);
-//     }
-//     msCtrlWin.__proto__['allMessageArr']=storage.slice();
-//     delete storage;
-// });
-// msCtrlWin.setter('unReadMessage',msCtrlWin.unReadMessage,function(value){        //unReadMessage赋值时的数组生成
-//     var unReadMessage_x=value;
-//     var storage=[];
-//     delete value.type;
-//     for(var i in value){
-//         storage.push(value[i]);
-//     }
-//     msCtrlWin.__proto__['unReadMessageArr']=storage.slice();
-//     delete storage;
-//     });
-var wsCommunicating=new communicating();
-msCtrlWin.getUnreadMessage();
-msCtrlWin.getAllMessage();
-msShowWin.onshow();
-$('.send').click(msCtrlWin.reflashSend);
-linkClick=function(messageCode,type){      //点击附件跳转——外部调用函数
-    var msCtrl=new messageControl();
-    var link={
-        link:msCtrl.allMessage[messageCode].mLink,
-        file:msCtrl.allMessage[messageCode].mFile
-    };
-    if(messageCode in msCtrl.unReadMessage){
-        msCtrl.confirmRead(messageCode);
-        delete msCtrl.unReadMessage[messageCode];
-        messageShow.prototype.unReadNum--;
-        msShowWin.onshow();
-    }
-    window.open(link[type]);
-};
-$('.msg-tb tr').on('click',msShowWin.headerCtrl);
-$('.btns').on('click','button',msShowWin.onshow);
-$(".open-tap-top").bind("click",open_tap_top);
-open_tap_i();
-$(".right-tree .open-tap").bind("click", function (e) {
-    var tg=$(e.target);
-    //alert(tg.prop("tagName"));
-    if(tg.prop("tagName")=="I"){
-        $("#myModal").modal("hide");
-    }else {
-        $("#myModal").modal("show");
-    }
-});
-$(".rightControlSet[mouseoncolor]").hover(function () {
-    if(this.btnOverObj){
-    }else {
-        var obj=new mouseAction();
-        this.btnOverObj=obj;
-    }this.btnOverObj.mouseOnBackgroundAnimate(this,$(this).attr('mouseoncolor'));
-});
-$('.data_show').on('click','th',function (e) {
-    var tg=$(e.target);
-    console.log(tg,tg.parents('.rightControlSet').attr('id'),tg.attr('name'));
-    var idName=tg.parents('.rightControlSet').attr('id');
-    var tableName=$(".page_"+idName).attr('name');
-    var data=$.extend({},globalStorage.lastSelectStr[idName].json[0]);
-    for(var i=0;i<globalStorage.lastSelectStr[idName].json.length;i++){
-        if(tableName==globalStorage.lastSelectStr[idName].json[i].tableName){
-            data=$.extend({},globalStorage.lastSelectStr[idName].json[i]);
-        }
-    }
-    if(globalStorage.lastSelectData[idName][0][tableName].colum==tg.attr('name')){
-        data.order=(data.order===globalStorage.sortInformation.preOrder)?'down':'up';
-    }else {
-        data.colum=tg.attr('name');
-        data.order=globalStorage.sortInformation.preOrder;
-    }
-    ajaxTemplate.prototype.ajaxPackage.select(data,pageSetCallback,{lastSelectStr:globalStorage.lastSelectStr[idName],tableName:tableName,id:idName},null);
-});
 //-------------非ajax函数-------------
 function select_add(select,select_array,key1,key2){                 //到时修改select_array
     if(!key1&&!key2){
@@ -1895,7 +1800,135 @@ function open_tap_top(e) {
     }
 }
 //-------------ajax函数---------------
+//-------------事件函数---------------
+    var recode = new recordSession();
+    var msCtrlWin=new messageControl();
+    var msShowWin=new messageShow('.msg-tb.receive > tbody');     //全局messageControl（内置dataBindFunc 数据变化检测对象）
+    msShowWin.setter('unReadNum',0,function(value){       //变量检测变化函数
+        this.unReadNum_x=value;
+        $('.info-num').html(value);
+        $('a .receive span').html(value);
+    });
+    msShowWin.setter('onShowStatus','unReadMessage',function(value){        //改变当前显示列表——触发更改排序对象数据
+        this.onShowStatus_x=value;
+        var storage=[];
+        delete msCtrlWin[value].type;
+        for(var i in msCtrlWin[value]){
+            storage.push(msCtrlWin[value][i]);
+        }
+        msCtrlWin.__proto__[value+'Arr']=storage.slice();
+        delete storage;
+        msShowWin.__proto__['msSort']=(function(contentType){       //闭包内部缓存定义-this为windows
+            var direction=true,     //以true为顺排，false为逆排
+                storageType = 'default';
+            if(storageType != contentType){
+                direction=false;
+            }
+            return function(value){         //携带着缓存数据的闭包外调函数-this为messageShow对象
+                var msCtrl = new messageControl();
+                direction = direction == true ? false : true;
+                var storage= msCtrl[contentType+'Arr'].slice();
+                if(storage instanceof Array){
+                    return storage.sort(function(objA,objB){        //排序逻辑（字符与数字的不同情形）
+                        if(!parseInt(objA[value]) && !parseInt(objB[value])){
+                            return direction ? objA[value] > objB[value] : objB[value] > objA[value];
+                        }else {
+                            return direction ? objA[value] - objB[value] : objB[value] - objA[value];
+                        }
+                    });
+                }else{
+                    throw SyntaxError('不是数组？？？');
+                }
+            }
+        })(this.onShowStatus_x);
+    });
 
+
+//allMessage赋值时的数组生成,给引用型数据赋setter并不好，不能直接修改allMessage
+// msCtrlWin.setter('allMessage',msCtrlWin.allMessage,function(value){
+//     var allMessage_x=value;
+//     var storage=[];
+//     delete value.type;
+//     for(var i in value){
+//         storage.push(value[i]);
+//     }
+//     msCtrlWin.__proto__['allMessageArr']=storage.slice();
+//     delete storage;
+// });
+// msCtrlWin.setter('unReadMessage',msCtrlWin.unReadMessage,function(value){        //unReadMessage赋值时的数组生成
+//     var unReadMessage_x=value;
+//     var storage=[];
+//     delete value.type;
+//     for(var i in value){
+//         storage.push(value[i]);
+//     }
+//     msCtrlWin.__proto__['unReadMessageArr']=storage.slice();
+//     delete storage;
+//     });
+    var wsCommunicating=new communicating();
+    var record = new recordSession();
+    msCtrlWin.getUnreadMessage();
+    msCtrlWin.getAllMessage();
+    msShowWin.onshow();
+    $('.send').click(msCtrlWin.reflashSend);
+
+    logout = function () {
+        record.clearRecord();
+        $.ajax('http://119.23.253.225:8080/hzl-iomp/logout.action');
+    }
+    linkClick = function(messageCode,type){      //点击附件跳转——外部调用函数
+        var msCtrl=new messageControl();
+        var link={
+            link:msCtrl.allMessage[messageCode].mLink,
+            file:msCtrl.allMessage[messageCode].mFile
+        };
+        if(messageCode in msCtrl.unReadMessage){
+            msCtrl.confirmRead(messageCode);
+            delete msCtrl.unReadMessage[messageCode];
+            messageShow.prototype.unReadNum--;
+            msShowWin.onshow();
+        }
+        window.open(link[type]);
+    };
+    $('.msg-tb tr').on('click',msShowWin.headerCtrl);
+    $('.btns').on('click','button',msShowWin.onshow);
+    $(".open-tap-top").bind("click",open_tap_top);
+    open_tap_i();
+    $(".right-tree .open-tap").bind("click", function (e) {
+        var tg=$(e.target);
+        //alert(tg.prop("tagName"));
+        if(tg.prop("tagName")=="I"){
+            $("#myModal").modal("hide");
+        }else {
+            $("#myModal").modal("show");
+        }
+    });
+    $(".rightControlSet[mouseoncolor]").hover(function () {
+        if(this.btnOverObj){
+        }else {
+            var obj=new mouseAction();
+            this.btnOverObj=obj;
+        }this.btnOverObj.mouseOnBackgroundAnimate(this,$(this).attr('mouseoncolor'));
+    });
+    $('.data_show').on('click','th',function (e) {
+        var tg=$(e.target);
+        console.log(tg,tg.parents('.rightControlSet').attr('id'),tg.attr('name'));
+        var idName=tg.parents('.rightControlSet').attr('id');
+        var tableName=$(".page_"+idName).attr('name');
+        var data=$.extend({},globalStorage.lastSelectStr[idName].json[0]);
+        for(var i=0;i<globalStorage.lastSelectStr[idName].json.length;i++){
+            if(tableName==globalStorage.lastSelectStr[idName].json[i].tableName){
+                data=$.extend({},globalStorage.lastSelectStr[idName].json[i]);
+            }
+        }
+        if(globalStorage.lastSelectData[idName][0][tableName].colum==tg.attr('name')){
+            data.order=(data.order===globalStorage.sortInformation.preOrder)?'down':'up';
+        }else {
+            data.colum=tg.attr('name');
+            data.order=globalStorage.sortInformation.preOrder;
+        }
+        ajaxTemplate.prototype.ajaxPackage.select(data,pageSetCallback,{lastSelectStr:globalStorage.lastSelectStr[idName],tableName:tableName,id:idName},null);
+    });
 
 
 

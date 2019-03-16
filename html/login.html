@@ -69,7 +69,7 @@
 			margin:auto;
 		}
 		.gyl{
-			width:510px;
+			width:500px;
 			height: 237px;
 			color: #FFFFFF;
 			font-size: 60px;
@@ -81,6 +81,7 @@
 		}
 		.gy2{
 			color: #3c3c3c;
+			float: right;
 			margin-left: 6px;
 			font-size: 25px;
 			text-align: center;
@@ -182,13 +183,18 @@
 			text-align: center;
 			width: 100%;
 		}
+		.choose_destination{
+			float: left;
+			margin-top: 10px;
+		}
 		.choose_destination div{
 			position: relative;
 			float: left;
+			font-size: small;
+			text-align: center;
 			color: white;
 			cursor: pointer;
-			width: -webkit-fit-content;
-			width: -moz-fit-content;
+			width: 130px;
 			padding: 5px;
 			margin: 2px 8px;
 			background-color: #2f70a9;
@@ -204,7 +210,7 @@
 
 		@media (min-width:1201px) and (max-width:1500px){
 			.gyl{
-				width: 420px;
+				width: 500px;
 				font-size: 60px;
 				top: 16%;
 			}
@@ -254,12 +260,12 @@
 <div class="hd" style="padding: .7em;background-color: #2f70a9;color:white">目标与计划管理平台</div>
 <div class="bg1"></div>
 <div class="gyl">
-	海之力公司
-	<div class="gy2">营销管理平台MSM </div>
+	海之力机械
+	<div class="gy2">一体化运营管理平台 </div>
 	<div class="choose_destination">
-		<div value="MSM">MSM</div>
-		<div value="TPM">TPM</div>
-		<div value="HRM">HRM</div>
+		<div value="MSM">营销管理MSM</div>
+		<div value="TPM">目标与计划管理TPM</div>
+		<div value="HRM">人力资源管理HRM</div>
 	</div>
 </div>
 <div class="bg">
@@ -301,15 +307,41 @@
 </body>
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script>
+    function recordSession(){
+        Object.call(this)
+        this.code = this.getCookie('_JSESSIONID')
+    }
+    recordSession.prototype={
+        setCookie (cname,cvalue,exdays) {
+            var d = new Date();
+            d.setTime(d.getTime()+(exdays*24*60*60*1000));
+            var expires = "expires="+d.toGMTString();
+            document.cookie = cname+"="+escape(cvalue)+"; "+expires;
+        },
+        getCookie (cname) {
+            var name = escape(cname) + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name)==0) { return unescape(c.substring(name.length,c.length)); }
+            }
+            return "";
+        }
+    }
+
 	$('.choose_destination').on('click','div',function(){
-	    if($(this).hasClass('choose_click')){
+	    let recode = new recordSession()
+	    if(recode.code){
+            let arr = {MSM: './MSM/'+recode.code+'/client_index.html', TPM: './TPM/'+recode.code+'/client_index.html', HRM: './HRM/'+recode.code+'/client_index.html'}
+            let val = $(this).attr('value');
+            window.location.reload(arr[val]);
+		}else if($(this).hasClass('choose_click')){
             $('.destination_input').val('default')
             $('.choose_destination div').removeClass('choose_click')
 		}else {
             $('.choose_destination div').removeClass('choose_click')
-            let arr = {MSM: '营销管理平台MSM', TPM: '目标与计划管理系统TPM', HRM: '人力资源管理HRM'}
+
             let val = $(this).addClass('choose_click').attr('value');
-            $('.gy2').html(arr[val])
             $('.destination_input').val(val)
         }
 	})

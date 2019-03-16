@@ -884,10 +884,7 @@ body {
 	border-color: rgb(8, 129, 185);
 }
 .btnType2{
-	border-width: 1px;
-	border-style: solid;
 	background-color: rgb(144, 177, 229);
-	border-color: rgb(13, 138, 196);
 }
 .btnType3{
 	border-width: 1px;
@@ -905,7 +902,7 @@ body {
 .btnType5{
 	border-width: 1px;
 	border-style: solid;
-	background-color: rgb(168, 168, 168);
+	background-color: rgb(196, 196, 196);
 	border-color: rgb(119, 119, 119);
 	border-radius: 10px;
 }
