@@ -129,8 +129,13 @@ $(document).ready(function(){
             var clickObj = that;
             var func = type||$._data(clickObj,'preventStatus')||{stat:true};
             $(clickObj).prop('disabled', func.stat);
-            $._data(clickObj,'preventStatus',{stat: func.stat })
-
+            if(func.stat){
+                window.timeOt = setTimeout(function () {
+                    $(clickObj).prop('disabled', !func.stat);
+                    $._data(clickObj,'preventStatus',{stat: func.stat })
+                    Reflect.deleteProperty(window,'timeOt')
+                },3000)
+            }
         }
     };
     var htmlVersionClass=function() {

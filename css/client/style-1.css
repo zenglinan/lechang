@@ -90,7 +90,7 @@ body {
 }
 
 .setting>.setting-main {
-	width: 130px;
+	width: 190px;
 	padding: 0px;
 	float: left;
 }
@@ -113,15 +113,16 @@ body {
 	color: #fff;
 }
 
-.setting-main>.quit>a {
+.setting-main>.quit>a.lagout {
+	background: url(../../images/Client/quit.png);
+}
+.setting-main>.quit a{
 	width: 14px;
 	height: 14px;
 	margin: 17px 0 0 11px;
 	float: left;
-	background: url(../../images/Client/quit.png);
 	cursor: pointer;
 }
-
 .hd-nav {
 	position: relative;
 	padding: 0 80px 0 55px;
@@ -884,7 +885,10 @@ body {
 	border-color: rgb(8, 129, 185);
 }
 .btnType2{
+	border-width: 1px;
+	border-style: solid;
 	background-color: rgb(144, 177, 229);
+	border-color: rgb(144, 177, 229);
 }
 .btnType3{
 	border-width: 1px;
