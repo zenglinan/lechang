@@ -33,7 +33,7 @@ $(document).ready(function () {
         }
     }
     function ele(eleName) {
-        return ele(eleName);
+        return document.createElement(eleName);
     }
     // ==========查询得到表==========
     //var data_j=[{id:1,content:"嘻嘻",tableName:"xixi"},{id:2,content:"CC",tableName:"xixi"},{id:3,content:"jj",tableName:"xixi"}];
@@ -110,6 +110,7 @@ $(document).ready(function () {
         });
     }
     function create_input(name, type, classname, idname, width, div_width) {
+        // width删？
         var input1 = ele("input");
         var span1 = ele("label");
         var div_o = ele("div");
@@ -132,7 +133,7 @@ $(document).ready(function () {
         select.setAttribute("id", idname);
         select.setAttribute("style", "width:100%");
         for (var i in select_array) {
-            select.add(new Option(select_array[i], select_array[i]), null);
+            select.add(new Option(select_array[i], select_array[i]), null); // null参数 删？
         }
         div_o.setAttribute("class", "col-md-" + div_width);
         div_o.appendChild(span1);
@@ -171,6 +172,15 @@ $(document).ready(function () {
                 jformVersion: "1",
                 description: $("#description").val(),
                 columns: datas(num)
+            },
+            tag: 1,
+            compsiteField:{
+                name: "组合字段名", //该名字必须在上面的columns出现过
+                expr: "组合字段表达式" //组成该组合字段的表达式，若组合字段由id字段与name字段构成，则此处应为 "expr"="id,name" ,中间用,分隔字段
+            },
+            "dateField":{
+                "name":"日期字段名",//该名字必须在上面的columns出现过，在colum中设置日期字段时，将日期字段类型设为string即可
+                "type":数字 //每种数字代表一种时间类型，比如0代表 yyyy,1代表yyyymmmm,2代表yyyymmmmdddd,3代表yyyymmmmdddd-hhhh,具体的数字与日期格式映射表由前端进行设置
             }
         };
         //数据传输
@@ -301,7 +311,7 @@ $(document).ready(function () {
     }
     function num_set(num) {
         // p_index: "新建数据表" 和 "数据表设置"的容器
-        //索引变化
+        // 创建"数据表设置"label
         var p_sym = document.createTextNode(">>");
         var p_index = $("#p_index");
         var p_set = ele("label");
@@ -320,13 +330,12 @@ $(document).ready(function () {
         select_item5 = ["Y", "N"];
 
         //替换内容
-        var table_new = $("#table_new");
         hide(["#table_new"]);
         var table_set = ele("div");
         table_set.setAttribute("id", "table_set");
         show([table_set]);
 
-        //表名及添加
+        // "数据表名"input
         var table_head = ele("div");
         table_head.setAttribute("class", "form-inline");
         table_head.setAttribute("style", "padding:12px");
@@ -339,7 +348,7 @@ $(document).ready(function () {
         table_head.appendChild(label_name);
         table_head.appendChild(input_name);
         table_set.appendChild(table_head);
-        //
+        // "添加"input
         var label_col = ele("label");
         label_col.innerHTML = "添加：";
         label_col.setAttribute("style", "margin-left:10px");
@@ -362,12 +371,13 @@ $(document).ready(function () {
         btn_set.setAttribute("class", "btn btn-sm");
         btn_set.setAttribute("id", "btn_set");
         table_head.appendChild(btn_set);
-        //
+        // 主体表的表头和表体
         var set_title = ele("div");
         set_title.setAttribute("class", "panel-heading bg-primary");
         var set_field = ele("div");
         set_field.setAttribute("id", "set_field");
         set_field.setAttribute("class", "panel-body");
+
         $("#wrap_2").append(table_set);
         $("#table_set").append(set_title);
         $("#table_set").append(set_field);
