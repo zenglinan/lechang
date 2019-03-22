@@ -38,6 +38,7 @@ $(document).ready(function () {
     // ==========查询得到表==========
     //var data_j=[{id:1,content:"嘻嘻",tableName:"xixi"},{id:2,content:"CC",tableName:"xixi"},{id:3,content:"jj",tableName:"xixi"}];
     function insert_table_div(obj) {       //回掉函数所获json数据的处理
+        // 生成的东西？
         var number = obj.length;
         for (var j = 0; j < number; j++) {
             var div_col = ele("div");
@@ -174,13 +175,13 @@ $(document).ready(function () {
                 columns: datas(num)
             },
             tag: 1,
-            compsiteField:{
+            compsiteField: {
                 name: "组合字段名", //该名字必须在上面的columns出现过
                 expr: "组合字段表达式" //组成该组合字段的表达式，若组合字段由id字段与name字段构成，则此处应为 "expr"="id,name" ,中间用,分隔字段
             },
-            "dateField":{
-                "name":"日期字段名",//该名字必须在上面的columns出现过，在colum中设置日期字段时，将日期字段类型设为string即可
-                "type":数字 //每种数字代表一种时间类型，比如0代表 yyyy,1代表yyyymmmm,2代表yyyymmmmdddd,3代表yyyymmmmdddd-hhhh,具体的数字与日期格式映射表由前端进行设置
+            "dateField": {
+                "name": "日期字段名",//该名字必须在上面的columns出现过，在colum中设置日期字段时，将日期字段类型设为string即可
+                "type": 数字 //每种数字代表一种时间类型，比如0代表 yyyy,1代表yyyymmmm,2代表yyyymmmmdddd,3代表yyyymmmmdddd-hhhh,具体的数字与日期格式映射表由前端进行设置
             }
         };
         //数据传输
@@ -526,7 +527,7 @@ $(document).ready(function () {
                         div_o.setAttribute("id", "div_" + n);
                         div_o.setAttribute("style", "height:50px");
                         div_o.setAttribute("style", "width:100%");
-                        //alert(div_o.id);
+                        // alert(div_o.id);
                         var br = ele("br");
                         $("#set_field").append(br);
                         var input0 = ele("input");
@@ -549,7 +550,7 @@ $(document).ready(function () {
                         $("#input5_0").attr("value", " ").attr("readonly", true);
                         $("#input7_0").attr("value", " ").attr("readonly", true);
                         $("#input8_0").attr("value", " ").attr("readonly", true);
-                        $("#input9_0").attr("value", " ").attr("readonly", true)
+                        $("#input9_0").attr("value", " ").attr("readonly", true);
                         if ($("#table_name").val() != "" && $("#table_name").val() != null) {
                             setCookie("table_name", $(".input_name").val(), 1);
                             if (num > 0) {
@@ -564,7 +565,7 @@ $(document).ready(function () {
 
                         }
                         //ajax_0(n + 1);   //ajax发送
-
+                        // 退出按钮
                         $("#input_out").click(function () {
                             var p_index = $("#p_index");
                             p_index.empty();
@@ -584,11 +585,9 @@ $(document).ready(function () {
         }
     }
     //------------------------全局---------------------------------
-    var field_data = new Array(); //字段对象数组
-    var table_name_data = new Array(); //表名对象数组
     // #field_num: "字段数"文本框
     // #table_name: "数据表名"文本框
-    // #set_field
+    // #set_field: "数据表设置"的表主体
     // #set_index: "数据表设置"
     // #new_index: "新建数据表"
     // #num_set: "新建数据表"中的"确定"按钮
@@ -596,14 +595,53 @@ $(document).ready(function () {
     // #tablecontent: "新建数据表"页面的 "< 详细"里的表识别名
     // #input0: "数据表设置页面的accept按钮
     //-----------------------CSS实现-------------------------------
+    var field_data = new Array(); //字段对象数组
+    var table_name_data = new Array(); //表名对象数组
+    var select1 = ["1", "2"];
+    var select2 = ["NATIVE", "。。。"];
+    var select3 = ["single", "。。。"];
+    select_add($("#jformType"), select1);
+    select_add($("#jformPkType"), select2);
+    select_add($("#querymode"), select3);
 
-    $(".li_2").click(function () {    // 左边栏切换
+    $("#table-new-2").attr("style", "display:none");
+    // ==========pagination插件==========
+    $("#pagination3").pagination({
+        // 删？
+        currentPage: 1,// 当前页数
+        totalPage: 2,// 总页数
+        isShow: true,// 是否显示首尾页
+        count: 2,// 显示个数
+        homePageText: "首页",// 首页文本
+        endPageText: "尾页",// 尾页文本
+        prevPageText: "上一页",// 上一页文本
+        nextPageText: "下一页",// 下一页文本
+        callback: function (current) {
+            // 回调,current(当前页数)
+        }
+    });
+
+    // ==========获取表的ajax==========
+    $.ajax({
+        type: "GET",
+        url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTables",
+        async: false,
+        data: "",
+        success: function (recieve) {
+            if (recieve.success) {
+                table_name_data = recieve.obj;
+                insert_table_div(recieve.obj);
+            }
+        }
+    });
+    // 左边栏切换
+    $(".li_2").click(function () {    
         $("#table_nav").html("数据表定义管理");
         show(["#wrap_2"]);
         hide(["#wrap_1", "#wrap_3", "#wrap_4", "#wrap_5", "#wrap_6"]);
     });
-
-    $("#new_index").click(function () {   //轮换 新建数据表 和 数据表设置
+    //轮换 新建数据表 和 数据表设置
+    $("#new_index").click(function () {   
         show(["#table_new"]);
         hide(["#table_set"]);
         if (typeof ($("#set_index")).attr("id") != "undefined") {
@@ -614,7 +652,7 @@ $(document).ready(function () {
             show(["#table_set"]);
         });
     });
-    // ==========点击"详细"==========
+    // 点击"详细"
     $("#chevron").click(function () {
         if ($(this).children("i").attr("class") == "fa fa-chevron-left") {
             $(this).children("i").attr("class", "fa fa-chevron-down");
@@ -625,8 +663,7 @@ $(document).ready(function () {
             hide(["#table-new-2"]);
         };
     });
-
-    // ==========点击"确定"检索表是否存在并生成表信息==========
+    // 点击"确定"检索表是否存在并生成表信息
     $("#num_set").click(function () {
         var num = $("#field_num").val();
         field_data = [];
@@ -652,15 +689,6 @@ $(document).ready(function () {
         $("#input0").unbind('click');
         $("#input0").bind('click', ajax_0);
     });
-
-    var select1 = ["1", "2"];
-    var select2 = ["NATIVE", "。。。"];
-    var select3 = ["single", "。。。"];
-    select_add($("#jformType"), select1);
-    select_add($("#jformPkType"), select2);
-    select_add($("#querymode"), select3);
-
-
     // ==========已有模板中增加字段按钮的行为==========
     $("#table_add").click(function () {
         $("#set_field").empty();
@@ -703,38 +731,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#table-new-2").attr("style", "display:none");
-
-    // ==========pagination插件==========
-    $("#pagination3").pagination({
-        currentPage: 1,// 当前页数
-        totalPage: 2,// 总页数
-        isShow: true,// 是否显示首尾页
-        count: 2,// 显示个数
-        homePageText: "首页",// 首页文本
-        endPageText: "尾页",// 尾页文本
-        prevPageText: "上一页",// 上一页文本
-        nextPageText: "下一页",// 下一页文本
-        callback: function (current) {
-            // 回调,current(当前页数)
-        }
-    });
-
-
-
-    // ==========获取表的ajax==========
-    $.ajax({
-        type: "GET",
-        url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?showTables",
-        async: false,
-        data: "",
-        success: function (recieve) {
-            if (recieve.success) {
-                table_name_data = recieve.obj;
-                insert_table_div(recieve.obj);
-            }
-        }
-    });
+    
 })
 
 
