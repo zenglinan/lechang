@@ -139,7 +139,16 @@ $(document).ready(function () {
         div_o.appendChild(select);
         return div_o;
     }
-
+    function addCookie(name, value, expiresHours) {
+        var cookieString = name + "=" + escape(value);
+        //判断是否设置过期时间 
+        if (expiresHours > 0) {
+            var date = new Date();
+            date.setTime(date.getTime + expiresHours * 3600 * 1000);
+            cookieString = cookieString + "; expires=" + date.toUTCString();
+        }
+        document.cookie = cookieString;
+    }
     function select_add(select, select_array) {
         for (var i in select_array) {
             select.append(new Option(select_array[i], select_array[i]));
@@ -247,10 +256,6 @@ $(document).ready(function () {
     function datas(num) {
         var data_array = new Array();
         for (var j = 0; j < num; j++) {
-            //setCookie("input9_"+j,$("#input9_"+j).val(),1);
-            //setCookie("input1_"+j,$("#input1_"+j).val(),1);
-            //setCookie("input2_"+j,$("#input2_"+j).val(),1);
-            //setCookie("input3_"+j,$("#input3_"+j).val(),1);
             var data_element = {
                 id: (j + 1).toString(),
                 fieldName: $("#input1_" + j).val(),
@@ -295,7 +300,7 @@ $(document).ready(function () {
         });
     }
     function num_set(num) {
-
+        // p_index: "新建数据表" 和 "数据表设置"的容器
         //索引变化
         var p_sym = document.createTextNode(">>");
         var p_index = $("#p_index");
@@ -305,23 +310,21 @@ $(document).ready(function () {
         p_index.append(p_sym);
         p_index.append(p_set);
         $("#set_index").click(function () {
-            $("#table_new").attr("style", "display:none");
-            $("#table_set").attr("style", "display:block");
+            hide(["#table_new"]);
+            show(["#table_set"]);
         });
-        //alert("正在加载..");
 
         var select_item = new Array();
         var select_item5 = new Array();
         select_item = ["string", "int", "自增"];
         select_item5 = ["Y", "N"];
 
-
         //替换内容
         var table_new = $("#table_new");
-        table_new.attr("style", "display:none");
+        hide(["#table_new"]);
         var table_set = ele("div");
         table_set.setAttribute("id", "table_set");
-        table_set.setAttribute("style", "display:block");
+        show([table_set]);
 
         //表名及添加
         var table_head = ele("div");
@@ -573,7 +576,15 @@ $(document).ready(function () {
     //------------------------全局---------------------------------
     var field_data = new Array(); //字段对象数组
     var table_name_data = new Array(); //表名对象数组
-
+    // #field_num: "字段数"文本框
+    // #table_name: "数据表名"文本框
+    // #set_field
+    // #set_index: "数据表设置"
+    // #new_index: "新建数据表"
+    // #num_set: "新建数据表"中的"确定"按钮
+    // #chevron: "< 详细"
+    // #tablecontent: "新建数据表"页面的 "< 详细"里的表识别名
+    // #input0: "数据表设置页面的accept按钮
     //-----------------------CSS实现-------------------------------
 
     $(".li_2").click(function () {    // 左边栏切换
@@ -604,10 +615,7 @@ $(document).ready(function () {
             hide(["#table-new-2"]);
         };
     });
-    // #field_num: "字段数"文本框
-    // #table_name: "数据表名"文本框
-    // #set_field
-    // 
+
     // ==========点击"确定"检索表是否存在并生成表信息==========
     $("#num_set").click(function () {
         var num = $("#field_num").val();
@@ -623,7 +631,7 @@ $(document).ready(function () {
             return 0;
         }
         $("#set_field").empty();
-        setCookie("field_num", $("#field_num").val(), 1);
+        setCookie("field_num", $("#field_num").val(), 1);   // 这里为什么要用field_num作为记录的cookie
         if ($("#tablecontent").val() == "") {
             $("#tablecontent").attr("value", " ");
         }
@@ -634,6 +642,7 @@ $(document).ready(function () {
         $("#input0").unbind('click');
         $("#input0").bind('click', ajax_0);
     });
+
     var select1 = ["1", "2"];
     var select2 = ["NATIVE", "。。。"];
     var select3 = ["single", "。。。"];
@@ -641,8 +650,8 @@ $(document).ready(function () {
     select_add($("#jformPkType"), select2);
     select_add($("#querymode"), select3);
 
-    
-    // ==========增加字段按钮的行为==========
+
+    // ==========已有模板中增加字段按钮的行为==========
     $("#table_add").click(function () {
         $("#set_field").empty();
         num_set(field_data.length - 1);
