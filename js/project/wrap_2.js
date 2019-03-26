@@ -1,24 +1,7 @@
 // JavaScript Document
 $(document).ready(function () {
     //-----------------------实验用--------------------------------
-    function add_btn() {
-    }
-    add_btn.prototype = {
-        id: null,
-        name: null,
-        value: "#",
-        inclass: "btn ",
-        btn: ele("button"),
-        constructor: function (id, name, value, onclass) {
-            $(this).btn.setAttribute("id", id);
-            $(this).btn.setAttribute("name", name);
-            $(this).btn.innerHTML = value;
-            $(this).btn.setAttribute("class", $(this).inclass + onclass + " ");
-        },
-        add_ajax: function (function_action, function_name) {
-            $(this).btn.addEventListener(function_action, function_name);
-        }
-    }
+    
 
 
     // ================================工具函数================================
@@ -176,12 +159,12 @@ $(document).ready(function () {
             },
             tag: 1,
             compsiteField: {
-                name: "组合字段名", //该名字必须在上面的columns出现过
-                expr: "组合字段表达式" //组成该组合字段的表达式，若组合字段由id字段与name字段构成，则此处应为 "expr"="id,name" ,中间用,分隔字段
+                name: datas(num)[1]["fieldName"], //该名字必须在上面的columns出现过
+                expr: "id,"+datas(num)[2]["fieldName"]+"" //组成该组合字段的表达式，若组合字段由id字段与name字段构成，则此处应为 "expr"="id,name" ,中间用,分隔字段
             },
             "dateField": {
-                "name": "日期字段名",//该名字必须在上面的columns出现过，在colum中设置日期字段时，将日期字段类型设为string即可
-                "type": 数字 //每种数字代表一种时间类型，比如0代表 yyyy,1代表yyyymmmm,2代表yyyymmmmdddd,3代表yyyymmmmdddd-hhhh,具体的数字与日期格式映射表由前端进行设置
+                "name": ""+datas(num)[2]["fieldName"],//该名字必须在上面的columns出现过，在colum中设置日期字段时，将日期字段类型设为string即可
+                "type": 0 //每种数字代表一种时间类型，比如0代表 yyyy,1代表yyyymmmm,2代表yyyymmmmdddd,3代表yyyymmmmdddd-hhhh,具体的数字与日期格式映射表由前端进行设置
             }
         };
         //数据传输
@@ -327,7 +310,7 @@ $(document).ready(function () {
 
         var select_item = new Array();
         var select_item5 = new Array();
-        select_item = ["string", "int", "自增"];
+        select_item = ["string", "int", "Date"];
         select_item5 = ["Y", "N"];
 
         //替换内容
@@ -606,20 +589,20 @@ $(document).ready(function () {
 
     $("#table-new-2").attr("style", "display:none");
     // ==========pagination插件==========
-    $("#pagination3").pagination({
-        // 删？
-        currentPage: 1,// 当前页数
-        totalPage: 2,// 总页数
-        isShow: true,// 是否显示首尾页
-        count: 2,// 显示个数
-        homePageText: "首页",// 首页文本
-        endPageText: "尾页",// 尾页文本
-        prevPageText: "上一页",// 上一页文本
-        nextPageText: "下一页",// 下一页文本
-        callback: function (current) {
-            // 回调,current(当前页数)
-        }
-    });
+    // $("#pagination3").pagination({
+    //     // 删？
+    //     currentPage: 1,// 当前页数
+    //     totalPage: 2,// 总页数
+    //     isShow: true,// 是否显示首尾页
+    //     count: 2,// 显示个数
+    //     homePageText: "首页",// 首页文本
+    //     endPageText: "尾页",// 尾页文本
+    //     prevPageText: "上一页",// 上一页文本
+    //     nextPageText: "下一页",// 下一页文本
+    //     callback: function (current) {
+    //         // 回调,current(当前页数)
+    //     }
+    // });
 
     // ==========获取表的ajax==========
     $.ajax({
@@ -711,7 +694,6 @@ $(document).ready(function () {
     $("#check_table").click(function () {
         find_table();
     })
-
     // ==========删除表==========
     $("#cancel_table").click(function () {
         var name = $("#table_name").val();
@@ -730,8 +712,6 @@ $(document).ready(function () {
             }
         });
     });
-
-    
 })
 
 
