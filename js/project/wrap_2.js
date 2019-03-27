@@ -1,7 +1,7 @@
 // JavaScript Document
 $(document).ready(function () {
     //-----------------------实验用--------------------------------
-    
+
 
 
     // ================================工具函数================================
@@ -117,7 +117,11 @@ $(document).ready(function () {
         select.setAttribute("id", idname);
         select.setAttribute("style", "width:100%");
         for (var i in select_array) {
-            select.add(new Option(select_array[i], select_array[i]), null); // null参数 删？
+            if (select_array[i] === "string" || select_array[i] === "date") {
+                select.add(new Option(select_array[i], "string"), null);
+            } else {
+                select.add(new Option(select_array[i], select_array[i]), null);
+            }
         }
         div_o.setAttribute("class", "col-md-" + div_width);
         div_o.appendChild(span1);
@@ -143,6 +147,16 @@ $(document).ready(function () {
     function ajax_0() {
         $("#input0").attr("disabled", "true");
         var num = getCookie("field_num");
+        var tag;
+        if(hasTime === false && hasCombine === false){
+            tag = 0;
+        }else if(hasTime === false && hasCombine === true){
+            tag = 1;
+        }else if(hasTime === true && hasCombine === false){
+            tag = 2;
+        }else {
+            tag = 3;
+        }
         var data_json = {
             cgFormHead: {
                 tableName: $(".input_name").val(),
@@ -157,14 +171,14 @@ $(document).ready(function () {
                 description: $("#description").val(),
                 columns: datas(num)
             },
-            tag: 1,
+            tag: tag,
             compsiteField: {
-                name: datas(num)[1]["fieldName"], //该名字必须在上面的columns出现过
-                expr: "id,"+datas(num)[2]["fieldName"]+"" //组成该组合字段的表达式，若组合字段由id字段与name字段构成，则此处应为 "expr"="id,name" ,中间用,分隔字段
+                name: combineTypeName, 
+                expr: combineType 
             },
             "dateField": {
-                "name": ""+datas(num)[2]["fieldName"],//该名字必须在上面的columns出现过，在colum中设置日期字段时，将日期字段类型设为string即可
-                "type": 0 //每种数字代表一种时间类型，比如0代表 yyyy,1代表yyyymmmm,2代表yyyymmmmdddd,3代表yyyymmmmdddd-hhhh,具体的数字与日期格式映射表由前端进行设置
+                "name": timeTypeName,
+                "type": timeType 
             }
         };
         //数据传输
@@ -255,14 +269,34 @@ $(document).ready(function () {
                 fieldName: $("#input1_" + j).val(),
                 type: $("#input2_" + j).val(),
                 length: parseInt($("#input3_" + j).val()),
-                mainTable: $("#input4_" + j).val(),
-                mainField: $("#input5_" + j).val(),
+                mainTable: "",
+                mainField: "",
                 isNull: $("#input6_" + j).val(),
                 description: $("#input7_" + j).val(),
                 fieldDefault: $("#input8_" + j).val(),
                 content: $("#input9_" + j).val()
             }
             data_array[j] = data_element;
+            var typeVal = $("#input2_" + j).val();  // 字段类型
+            combineType = $("#input4_" + j).val();  // 组合字段的组合方式
+            if(combineType !== ""){
+                hasCombine = true;
+                combineTypeName = data_element['fieldName'];
+            }
+            if (typeVal === "date") {
+                timeTypeName = data_element['fieldName'];
+                hasTime = true;
+                switch ($("#input5_" + j).val()) {
+                    case "年": timeType = 0;
+                        break;
+                    case "年月": timeType = 1;
+                        break;
+                    case "年月日": timeType = 2;
+                        break;
+                    case "年月日时": timeType = 3;
+                        break;
+                }
+            }
         }
         var delstatus = {
             id: (parseInt(num) + 1).toString(),
@@ -310,7 +344,7 @@ $(document).ready(function () {
 
         var select_item = new Array();
         var select_item5 = new Array();
-        select_item = ["string", "int", "Date"];
+        select_item = ["string", "int", "date"];
         select_item5 = ["Y", "N"];
 
         //替换内容
@@ -377,8 +411,8 @@ $(document).ready(function () {
                 }
                 var input2 = create_select("类型", select_item, "form-control form_select", "input2_" + m, 100, 1);
                 var input3 = create_input("长度", "number", "form-control form_input", "input3_" + m, 100, 1);
-                var input4 = create_input("主表", "text", "form-control form_input", "input4_" + m, 100, 6);
-                var input5 = create_input("主字段", "text", "form-control form_input", "input5_" + m, 100, 6);
+                var input4 = create_input("组合方式", "text", "form-control form_input", "input4_" + m, 100, 6);
+                var input5 = create_input("日期方式", "text", "form-control form_input", "input5_" + m, 100, 6);
                 var input6 = create_select("为空", select_item5, "form-control form_select", "input6_" + m, 100, 1);
                 var input7 = create_input("注释", "text", "form-control form_input", "input7_" + m, 200, 4);
                 var input8 = create_input("字段默认值", "text", "form-control form_input", "input8_" + m, 200, 4);
@@ -578,6 +612,12 @@ $(document).ready(function () {
     // #tablecontent: "新建数据表"页面的 "< 详细"里的表识别名
     // #input0: "数据表设置页面的accept按钮
     //-----------------------CSS实现-------------------------------
+    var hasTime = false;
+    var timeType = 0;
+    var timeTypeName = "";
+    var hasCombine = false;
+    var combineType = "";   // 组合字段方式
+    var combineTypeName = ""; // 组合字段的那个字段名
     var field_data = new Array(); //字段对象数组
     var table_name_data = new Array(); //表名对象数组
     var select1 = ["1", "2"];
@@ -618,13 +658,13 @@ $(document).ready(function () {
         }
     });
     // 左边栏切换
-    $(".li_2").click(function () {    
+    $(".li_2").click(function () {
         $("#table_nav").html("数据表定义管理");
         show(["#wrap_2"]);
         hide(["#wrap_1", "#wrap_3", "#wrap_4", "#wrap_5", "#wrap_6"]);
     });
     //轮换 新建数据表 和 数据表设置
-    $("#new_index").click(function () {   
+    $("#new_index").click(function () {
         show(["#table_new"]);
         hide(["#table_set"]);
         if (typeof ($("#set_index")).attr("id") != "undefined") {
