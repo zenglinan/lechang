@@ -31,7 +31,7 @@
 
 .styleChoose{ position: relative; }
 
-.submitWebsite>select { width: 100px; }
+.submitWebsite>select { width: 70px; }
 
 .styleChoose>.btn,
 .submitWebsite>*,.submitWebsite>.btn-group>.btn {

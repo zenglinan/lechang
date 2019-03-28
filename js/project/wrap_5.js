@@ -112,6 +112,18 @@ $(document).ready(function(){
                 $(obj).css({'background-color':color});
                 this.btnOver=true;
             }
+        },
+        preventFunc:function(that,type){
+            var clickObj = that;
+            var func = type||$._data(clickObj,'preventStatus')||{stat:true};
+            $(clickObj).prop('disabled', func.stat);
+            if(func.stat){
+                window.timeOt = setTimeout(function () {
+                    $(clickObj).prop('disabled', !func.stat);
+                    $._data(clickObj,'preventStatus',{stat: func.stat })
+                    Reflect.deleteProperty(window,'timeOt')
+                },3000)
+            }
         }
     };
     var htmlVersionClass=function() {
@@ -2112,6 +2124,7 @@ document.oncontextmenu=function () {
     }
 };
 $(".menu_heading").on("click",menuHeadClick);
+$('.htmlShowDestination').on('change',stringSelectAll)
 $(".span12 li[data-target='#myModal']").on('click',menuTableClick);
 //$(".table-btn").on("click",menuSubmit);
 $("#submitWebsiteBtn .localUpload").on("click",websiteSubmitBtn);
@@ -2120,8 +2133,11 @@ $("#submitWebsiteBtn .timeStampUpload").on("click",function(e){
     $("#dlg > div").empty();
     var modalDiv=$("#dlg > div");
     var labeldiv=new labelAndInput("form-control","websiteUploadDescription","","input","页面标识:");
-    $(labeldiv.dom).css({'width':'85%','max-width':'100%'});
-    $(labeldiv.labelEl).css({'width':'100%'});
+    $(labeldiv.dom).css({'width':'80%','max-width':'80%'});
+    $(labeldiv.labelEl).css({'width':'80%'});
+    var labeldiv0=new el_new("form-control","websiteUploadDestination","","select");
+    select_add(labeldiv0.dom,[{id:'MSM',value:'营销管理平台MSM'},{id:'TPM',value:'目标与计划管理系统TPM'},{id:'HRM',value:'人力资源管理系统'}],'id','value');
+    $(labeldiv0.dom).css({'width':'20%','float':'right'});
     var labeldiv1=new labelAndInput("form-control","websiteUploadUserCode","","input","用户编码:");
     $(labeldiv1.dom).css({'width':'70%','max-width':'100%'});
     $(labeldiv1.dom).val('default');
@@ -2144,6 +2160,7 @@ $("#submitWebsiteBtn .timeStampUpload").on("click",function(e){
     $(labeldiv3.dom).css({'width':'70%','max-width':'100%'});
     $(labeldiv3.labelEl).css({'width':'50%','float':'right'});
     modalDiv[0].append(labeldiv.labelEl);
+    modalDiv[0].append(labeldiv0.dom);
     modalDiv[1].append(labeldiv1.labelEl);
     // modalDiv[1].append(labeldiv2.dom);
     modalDiv[1].append(labeldiv3.labelEl);
@@ -2348,14 +2365,15 @@ function websiteSubmitTimeStamp(e) {
     doitAll.removeControlInform();
     var date=new Date();
     var valueName=(globalStorage.htmlShow.iframeSrc.indexOf('client_index') != -1)?'client_index':JSON.stringify(date.getTime());
-    var htmlStr=$(FContent.window.document.getElementsByTagName('html')).prop('outerHTML').replace('../../js/upload/'+globalStorage.htmlShow.iframeVal+'js.js','lechangbpm666');
+    var htmlStr=$(FContent.window.document.getElementsByTagName('html')).prop('outerHTML').replace(/(\.\.\/)+\w+(\.js)/g,'lechangbpm666');
     data={
         html: {
             name:valueName,
             content: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
             +htmlStr,
             description:$("#websiteUploadDescription").val(),
-            role:$('#websiteUploadUserCode').val()
+            role:$('#websiteUploadUserCode').val(),
+            destination:$('#websiteUploadDestination').val()
         },
         js:{
             name:valueName+'js',
@@ -2972,6 +2990,8 @@ function controlActionKeypress(e) {
     var data=modalValue.getDataArr($(".controlColumnBlock"));
     if(e.keyCode==13&&data[1]>0) {
         var obj = new actionKey(data[0], data[1]);
+        var mouseAct = new mouseAction();
+        mouseAct.preventFunc($('#rightControlBtn'),{stat:false});
         console.log(obj);
         $(e.data.modalDiv).append(obj);
     }
@@ -2981,6 +3001,8 @@ function controlActionAccept() {
     var tg=testing.target;
     var modalValue=new modalValueFunc();
     var data=modalValue.getDataArr($(".controlColumnBlock2"));
+    var mouseAct = new mouseAction();
+    mouseAct.preventFunc(this);
     var indexFunc=new indexOfFunc();
     if(!($(tg).parents('.instanceTd').length||$(tg).hasClass('instanceTd')||$(tg).hasClass('rightControlSet'))){
         indexFunc.setRowCopyAction(testing.menuClick,tg,data);
@@ -3253,7 +3275,9 @@ function stringSelectAll(e) {
     $.ajax({
         type:"POST",
         url:"http://119.23.253.225:8080/hzl-iomp/fileController/stringSelectAll",
-        data:null,
+        data:JSON.stringify({
+            destination:$('.htmlShowDestination').val()
+        }),
         contentType: 'application/json',
         success:function (recieve) {
             if(recieve.success&&recieve.msg.indexOf("成功")){

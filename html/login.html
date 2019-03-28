@@ -6,15 +6,262 @@
 	<title>MSM</title>
 	<link rel="stylesheet" type="text/css" href="../css/index.css">
 
-	<style type="text/css"></style>
+	<style type="text/css">
+		*{
+			font-family:"Hiragino Sans GB";
+			font-size: 16px;
+			border: 0;
+			padding: 0;
+			margin: 0;
+			color: #666;
+			box-sizing:border-box;
+			-moz-box-sizing:border-box;
+			-webkit-box-sizing:border-box;
+		}
+		html,body{
+			width:100%;
+		}
+		body{
+			background: no-repeat;
+			background-size: 100%;
+		}
+		.bg1{
+			width:100%;
+			height: 237px;
+			background: #347ebc;
+			opacity: 0.6;
+			position:absolute;
+			left:0;
+			top:0px;
+			right:0px;
+			bottom:0px;
+			margin:auto;
+		}
+		.gyl{
+			width:500px;
+			height: 237px;
+			color: #FFFFFF;
+			font-size: 60px;
+			position:absolute;
+			left:15%;
+			top:11%;
+			bottom:0px;
+			margin:auto;
+		}
+		.gy2pro{
+			color: #fffcfc;
+			float: left;
+			margin-left: 6px;
+			font-size: 50px;
+			text-align: left;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.gy2{
+			color: #fffcfc;
+			float: left;
+			margin-left: 6px;
+			font-size: 25px;
+			text-align: center;
+			margin-top: 35px;
+			margin-bottom: 10px;
+		}
+		.bg{
+			width: 375px;
+			height: 337px;
+			background: #fff;
+			position: relative;
+			position:absolute;
+			left:56%;
+			top:0px;
+			right:0px;
+			bottom:0px;
+			margin:auto;
+			z-index: 1;
+			box-shadow:0px 0px 50px rgba(0, 0, 0, 0.4);
+			border-radius: 5px;
+		}
+		.password{
+			position: absolute;
+			top: 9.5rem;
+			right: 2.5rem;
+			display: flex;
+		}
+		.btn{
+			position: absolute;
+			top: 16rem;
+			right: 2.5rem;
+			border: none;
+			color: #fff;
+			width: 18.825rem;
+			text-align: center;
+			background-color: #347ebc;
+			text-indent: 0rem;
+		}
+		.img{
+			width: 100%;
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+			z-index: -1;
+		}
+		.wel{
+			width: 375px;
+			height: 35px;
+			color: #347ebc;
+			font-size: 1.5rem;
+			position: absolute;
+			top: 2rem;
+			text-align: center;
+		}
+		input{
+			border-bottom:0.0625rem solid #347ebc;
+			height: 2.5625rem;
+			width: 15.8125rem;
+			text-indent: 3.125rem;
+			outline:none;
+		}
+		.user{
+			position: absolute;
+			top: 6rem;
+			right: 2.5rem;
+			display: flex;
+
+		}
+		.rem{
+			position: absolute;
+			top: 12.5rem;
+			right: 17.2rem;
+			border: none;
+			color: #323333;
+		}
+		.rem input{
+			width: 0.8125rem;
+		}
+		.fg{
+			position: absolute;
+			top: 12.5rem;
+			right: 2.5rem;
+			border: none;
+			color: #323333;
+		}
+		#yonghu{
+			border-bottom:1px solid #347ebc;
+			height: 41px;
+			line-height: 41px;
+		}
+		#reb{
+			margin-top: -33px;
+			margin-left: 20px;
+			font-size: 11px;
+		}
+		.ft {
+			bottom: 10%;
+			position: absolute;
+			text-align: center;
+			width: 100%;
+		}
+		.choose_destination{
+			float: left;
+			margin-top: 10px;
+		}
+		.choose_destination div{
+			position: relative;
+			float: left;
+			font-size: small;
+			text-align: center;
+			color: white;
+			cursor: pointer;
+			width: 130px;
+			padding: 5px;
+			margin: 2px 8px;
+			background-color: #2f70a9;
+			box-shadow:2px 2px 10px rgba(0,0,0,0.6);
+			border-radius: 5px;
+			transition: background-color 1s,box-shadow 1s;
+		}
+
+		.choose_destination div.choose_click{
+			background-color: #1a4289;
+			box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+		}
+
+		@media (min-width:1201px) and (max-width:1500px){
+			.gyl{
+				width: 500px;
+				font-size: 60px;
+				top: 16%;
+			}
+		}
+		@media (min-width:800px) and (max-width:1200px)
+
+		{
+			.bg{
+				width: 355px;
+				height: 300px;
+			}
+			.gyl{
+				font-size: 50px;
+			}
+			.wel{
+				width: 355px;
+			}
+			.user{
+				top: 5rem;
+				right: 3.5rem;
+			}
+			.password{
+				top: 8rem;
+				right: 3.5rem;
+			}
+			input{
+
+				width: 12rem;
+			}
+			.rem{
+				top: 11rem;
+				right: 14.3rem;
+			}
+			.fg{
+				top: 11rem;
+				right: 3.5rem;
+			}
+			.btn{
+				top: 14rem;
+				width: 15rem;
+			}
+
+		}
+	</style>
 </head>
 
 <body>
+<<<<<<< HEAD
 	<div class="hd">目标与计划管理平台</div>
 	<div class="bg1"></div>
 	<div class="gyl">
 		海之力公司
 		<div class="gy2">营销管理平台MSM </div>
+=======
+<div class="hd" style="padding: .7em;background-color: #2f70a9;color:white">目标与计划管理平台</div>
+<div class="bg1"></div>
+<div class="gyl">
+	<div class="gy2pro">海之力机械</div>
+	<div class="gy2">一体化运营管理平台 </div>
+	<div class="choose_destination">
+		<div value="MSM">营销管理MSM</div>
+		<div value="TPM">目标与计划管理TPM</div>
+		<div value="HRM">人力资源管理HRM</div>
+	</div>
+</div>
+<div class="bg">
+	<form class="login-wrap" action="/hzl-iomp/loginController/login" method="post">
+	<div class="wel">用户登录</div>
+	<div class="user">
+		<div id="yonghu" style="">用户名</div>
+		<input type="text" name="username" value="">
+>>>>>>> upstream/master
 	</div>
 	<div class="bg">
 		<form class="login-wrap" action="/hzl-iomp/loginController/login" method="post">
@@ -41,12 +288,66 @@
 			<input class="btn" type="submit" name="登录" value="登录">
 		</form>
 	</div>
+<<<<<<< HEAD
 	<div class="ft">
 		<p>有些路很远，走下去会很累，可是不走会后悔</p>
 		<p>志在峰巅的攀登者，不会陶醉在沿途的某个脚印之中</p>
 		<p>再长的路，一步步也能走完，再短的路，不迈开双脚也无法到达</p>
+=======
+	<div style="display: none">
+		<input class="destination_input" name="destination" value="default">
+	</div>
+	<div class="rem">
+		<input type="checkbox" name="" id="" value="">
+		<div id="reb">
+			记住密码
+		</div>
+>>>>>>> upstream/master
 	</div>
 	<div id="rememberry__extension__root" style="all: unset;"></div>
 </body>
 
+<div id="rememberry__extension__root" style="all: unset;"></div>
+</body>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script>
+    function recordSession(){
+        Object.call(this)
+        this.code = this.getCookie('_JSESSIONID')
+    }
+    recordSession.prototype={
+        setCookie (cname,cvalue,exdays) {
+            var d = new Date();
+            d.setTime(d.getTime()+(exdays*24*60*60*1000));
+            var expires = "expires="+d.toGMTString();
+            document.cookie = cname+"="+escape(cvalue)+"; "+expires;
+        },
+        getCookie (cname) {
+            var name = escape(cname) + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name)==0) { return unescape(c.substring(name.length,c.length)); }
+            }
+            return "";
+        }
+    }
+
+	$('.choose_destination').on('click','div',function(){
+	    let recode = new recordSession()
+	    if(recode.code){
+            let arr = {MSM: './MSM/'+recode.code+'/client_index.html', TPM: './TPM/'+recode.code+'/client_index.html', HRM: './HRM/'+recode.code+'/client_index.html'}
+            let val = $(this).attr('value');
+            window.location.reload(arr[val]);
+		}else if($(this).hasClass('choose_click')){
+            $('.destination_input').val('default')
+            $('.choose_destination div').removeClass('choose_click')
+		}else {
+            $('.choose_destination div').removeClass('choose_click')
+
+            let val = $(this).addClass('choose_click').attr('value');
+            $('.destination_input').val(val)
+        }
+	})
+</script>
 </html>
