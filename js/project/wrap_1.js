@@ -1,6 +1,5 @@
 // JavaScript Document
 $(document).ready(function(){
-
 //----------------CSS实现---------------------
 
 $(".li_1").click(function(){
