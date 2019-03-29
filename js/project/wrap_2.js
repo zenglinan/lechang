@@ -147,16 +147,7 @@ $(document).ready(function () {
     function ajax_0() {
         $("#input0").attr("disabled", "true");
         var num = getCookie("field_num");
-        var tag;
-        if(hasTime === false && hasCombine === false){
-            tag = 0;
-        }else if(hasTime === false && hasCombine === true){
-            tag = 1;
-        }else if(hasTime === true && hasCombine === false){
-            tag = 2;
-        }else {
-            tag = 3;
-        }
+
         var data_json = {
             cgFormHead: {
                 tableName: $(".input_name").val(),
@@ -173,12 +164,12 @@ $(document).ready(function () {
             },
             tag: tag,
             compsiteField: {
-                name: combineTypeName, 
-                expr: combineType 
+                name: combineTypeName,
+                expr: combineType
             },
             "dateField": {
                 "name": timeTypeName,
-                "type": timeType 
+                "type": timeType
             }
         };
         //数据传输
@@ -277,9 +268,9 @@ $(document).ready(function () {
                 content: $("#input9_" + j).val()
             }
             data_array[j] = data_element;
-            var typeVal = $("#input2_" + j).val();  // 字段类型
+            var typeVal = $('#input2_1 :selected').text()  // 获取被选中的字段类型
             combineType = $("#input4_" + j).val();  // 组合字段的组合方式
-            if(combineType !== ""){
+            if (combineType !== " ") {
                 hasCombine = true;
                 combineTypeName = data_element['fieldName'];
             }
@@ -311,7 +302,19 @@ $(document).ready(function () {
             content: "删除状态",
         };
         data_array[parseInt(num)] = delstatus;
+        justTag();
         return data_array;
+    }
+    function justTag() {
+        if (hasTime === false && hasCombine === false) {
+            tag = 0;
+        } else if (hasTime === false && hasCombine === true) {
+            tag = 1;
+        } else if (hasTime === true && hasCombine === false) {
+            tag = 2;
+        } else {
+            tag = 3;
+        }
     }
     // ==========查找所有表的ajax==========
     function find_table() {
@@ -512,8 +515,8 @@ $(document).ready(function () {
                         }
                         var input2 = create_select("类型", select_item, "form-control form_select", "input2_" + n, 100, 1);
                         var input3 = create_input("长度", "number", "form-control form_input", "input3_" + n, 100, 1);
-                        var input4 = create_input("主表", "text", "form-control form_input", "input4_" + n, 100, 6);
-                        var input5 = create_input("主字段", "text", "form-control form_input", "input5_" + n, 100, 6);
+                        var input4 = create_input("组合方式", "text", "form-control form_input", "input4_" + n, 100, 6);
+                        var input5 = create_input("日期方式", "text", "form-control form_input", "input5_" + n, 100, 6);
                         var input6 = create_select("为空", select_item5, "form-control form_select", "input6_" + n, 100, 1);
                         var input7 = create_input("注释", "text", "form-control form_input", "input7_" + n, 200, 4);
                         var input8 = create_input("字段默认值", "text", "form-control form_input", "input8_" + n, 200, 4);
@@ -612,6 +615,7 @@ $(document).ready(function () {
     // #tablecontent: "新建数据表"页面的 "< 详细"里的表识别名
     // #input0: "数据表设置页面的accept按钮
     //-----------------------CSS实现-------------------------------
+    var tag = 0;    // 创建表发送给后台的tag
     var hasTime = false;
     var timeType = 0;
     var timeTypeName = "";
