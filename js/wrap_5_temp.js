@@ -45,8 +45,8 @@ el_new.prototype={
 };
 function recordSession(){
     Object.call(this)
-    let code = document.location.pathname.split('/').reverse()[1];
-    this.setCookie('_JSESSIONID',code,1/(24*30))
+    var code = document.location.pathname.split('/').reverse()[1];
+    this.setCookie('_JSESSIONID',code,1)
 }
 recordSession.prototype={
     clearRecord () {

@@ -26,379 +26,341 @@
 </head>
 
 <body>
-	<header class="dt-header">
-		<h1 class="dt-logo txt@">平台设计系统</h1>
-		<div class="dt-setting">
-			<i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
-			<i class="fa fa-commenting"></i>
-			<i class="fa fa-mail-reply"></i>
-			<i class="fa fa-search"></i>
-			<ul class="dropdown-menu pull-right" role="menu">
-				<li>
-					<a href="#">选项一</a>
-				</li>
-				<li>
-					<a href="#">选项二</a>
-				</li>
-				<li class="divider"></li>
-				<li>
-					<a href="http://119.23.253.225:8080/hzl-iomp/logout.action">注销</a>
-				</li>
-				<li>
-					<a href="#">退出</a>
-				</li>
-			</ul>
-		</div>
-	</header>
+<header class="dt-header">
+	<h1 class="dt-logo txt@">平台设计系统</h1>
+	<div class="dt-setting">
+		<i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+		<i class="fa fa-commenting"></i>
+		<i class="fa fa-mail-reply"></i>
+		<i class="fa fa-search"></i>
+		<ul class="dropdown-menu pull-right" role="menu">
+			<li>
+				<a href="#">选项一</a>
+			</li>
+			<li>
+				<a href="#">选项二</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="http://119.23.253.225:8080/hzl-iomp/logout.action">注销</a>
+			</li>
+			<li>
+				<a href="#">退出</a>
+			</li>
+		</ul>
+	</div>
+</header>
 
-	<div class="dt-main">
-		<div class="dt-sidebar">
-			<div class="sidebar__content">
-				<div class="panel-heading">
-					<a href="#">&nbsp;
-						<i class="fa fa-angle-double-left" style="float:right; font-size:26px; margin-right:4px;"></i></a>
+<div class="dt-main">
+	<div class="dt-sidebar">
+		<div class="sidebar__content">
+			<div class="panel-heading">
+				<a href="#">&nbsp;
+					<i class="fa fa-angle-double-left" style="float:right; font-size:26px; margin-right:4px;"></i></a>
+			</div>
+			<div class="function-menu">
+				<ul class="nav nav-list ">
+					<li class="function-item">
+						<a href="#" class="li_1">
+							<i class="fa fa-minus"></i>
+							<span>平台信息管理</span>
+						</a>
+					</li>
+					<li class="function-item">
+						<a href="http://119.23.253.225:8080/hzl-iomp/html/wrap_2.html" class="li_2">
+							<i class="fa fa-edit"></i>
+							<span>数据表定义管理</span>
+						</a>
+					</li>
+					<li class="function-item">
+						<a href="http://119.23.253.225:8080/hzl-iomp/html/wrap_3.html" class="li_3">
+							<i class="fa fa-table"></i>
+							<span>数据信息管理</span>
+						</a>
+					</li>
+					<li class="function-item">
+						<a href="http://119.23.253.225:8080/hzl-iomp/html/wrap_4.html" class="li_4">
+							<i class="fa fa-database"></i>
+							<span>数据项关系管理</span>
+						</a>
+					</li>
+					<li class="function-item">
+						<a href="http://119.23.253.225:8080/hzl-iomp/html/wrap_5.html" class="li_5">
+							<i class="fa fa-check-circle"></i>
+							<span>界面定义管理</span>
+						</a>
+					</li>
+					<li class="function-item">
+						<a href="#" class="li_6">
+							<i class="fa fa-user-plus"></i>
+							<span>用户管理</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	<div class="dt-container">
+		<div class="dt-title wrap-5">
+			<strong class="page-path">http://119.23.253.225:8080/hzl-iomp/html/client/client_temp.html</strong>
+			<div class="client-setting">
+				<div class="submitWebsite" id="submitWebsiteBtn">
+					<button class="btn btn-danger deleteUpload">删除</button>
+					<select class="form-control htmlShow"></select>
+					<select class="form-control htmlShowRole"></select>
+					<select class="form-control htmlShowDestination">
+						<option value="MSM">营销管理平台MSM</option>
+						<option value="TPM">目标与计划管理系统TPM</option>
+						<option value="HRM">人力资源管理HRM</option>
+					</select>
+					<div class="btn-group">
+						<button class="btn btn-primary localUpload" data-toggle="modal" data-target="#myModal">本地上传</button>
+						<button class="btn btn-primary timeStampUpload" data-toggle="modal" data-target="#myModal">在线上传</button>
+					</div>
 				</div>
-				<div class="function-menu">
-					<ul class="nav nav-list ">
-						<li class="function-item">
-							<a href="#" class="li_1">
-								<i class="fa fa-minus"></i>
-								<span>平台信息管理</span>
-							</a>
-						</li>
-						<li class="function-item">
-							<a href="http://119.23.253.225:8080/hzl-iomp/html/wrap_2.html" class="li_2">
-								<i class="fa fa-edit"></i>
-								<span>数据表定义管理</span>
-							</a>
-						</li>
-						<li class="function-item">
-							<a href="http://119.23.253.225:8080/hzl-iomp/html/wrap_3.html" class="li_3">
-								<i class="fa fa-table"></i>
-								<span>数据信息管理</span>
-							</a>
-						</li>
-						<li class="function-item">
-							<a href="http://119.23.253.225:8080/hzl-iomp/html/wrap_4.html" class="li_4">
-								<i class="fa fa-database"></i>
-								<span>数据项关系管理</span>
-							</a>
-						</li>
-						<li class="function-item">
-							<a href="http://119.23.253.225:8080/hzl-iomp/html/wrap_5.html" class="li_5">
-								<i class="fa fa-check-circle"></i>
-								<span>界面定义管理</span>
-							</a>
-						</li>
-						<li class="function-item">
-							<a href="#" class="li_6">
-								<i class="fa fa-user-plus"></i>
-								<span>用户管理</span>
-							</a>
-						</li>
+				<div class="styleChoose">
+					<button class="btn btn-info" data-toggle="dropdown">风格选择</button>
+					<ul class="dropdown-menu pull-right" role="menu">
+						<li class="styleitem"><a href="#">默认风格</a></li>
+						<li class="styleitem"><a href="#">蓝色商务</a></li>
 					</ul>
 				</div>
 			</div>
-
 		</div>
-		<div class="dt-container">
-			<div class="dt-title wrap-5">
-				<strong class="page-path">http://119.23.253.225:8080/hzl-iomp/html/client/client_temp.html</strong>
-				<div class="client-setting">
-					<div class="submitWebsite" id="submitWebsiteBtn">
-						<button class="btn btn-danger deleteUpload">删除</button>
-						<select class="form-control htmlShow"></select>
-						<select class="form-control htmlShowRole"></select>
-						<div class="btn-group">
-							<button class="btn btn-primary localUpload" data-toggle="modal" data-target="#myModal">本地上传</button>
-							<button class="btn btn-primary timeStampUpload" data-toggle="modal" data-target="#myModal">在线上传</button>
-						</div>
-					</div>
-					<div class="styleChoose">
-						<button class="btn btn-info" data-toggle="dropdown">风格选择</button>
-						<ul class="dropdown-menu pull-right" role="menu">
-							<li class="styleitem"><a href="#">默认风格</a></li>
-							<li class="styleitem"><a href="#">蓝色商务</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="dt-container">
-				<div class="dt-title wrap-5">
-                        <strong class="page-path">http://119.23.253.225:8080/hzl-iomp/html/client/client_temp.html</strong>
-                        <div class="client-setting">
-                            <div class="submitWebsite" id="submitWebsiteBtn">
-                                <button class="btn btn-danger deleteUpload">删除</button>
-                                <select class="form-control htmlShow"></select>
-								<select class="form-control htmlShowRole"></select>
-								<select class="form-control htmlShowDestination">
-									<option value="MSM">营销管理平台MSM</option>
-									<option value="TPM">目标与计划管理系统TPM</option>
-									<option value="HRM">人力资源管理HRM</option>
-								</select>
-                                <div class="btn-group">
-                                    <button class="btn btn-primary localUpload" data-toggle="modal" data-target="#myModal">本地上传</button>
-                                    <button class="btn btn-primary timeStampUpload" data-toggle="modal" data-target="#myModal">在线上传</button>
-                                </div>
-                            </div>
-                            <div class="styleChoose">
-                                <button class="btn btn-info" data-toggle="dropdown">风格选择</button>
-                                <ul class="dropdown-menu pull-right" role="menu">
-                                    <li class="styleitem"><a href="#">默认风格</a></li>
-                                    <li class="styleitem"><a href="#">蓝色商务</a></li>
-                                </ul>
-                            </div>
-                        </div>
-				</div>
 
-				<div class="dt-content" style="display: block">
-					<div class="panel-heading"></div>
-					<div class="panel-body" id="frame_set">
-						 <!--<iframe class="frame-of" id="iframe" frameborder="0" src="http://localhost:8080/lechang1923/html/client/client_temp.html"> -->
-						<!--<iframe class="frame-of" id="iframe" frameborder="0" src="http://119.23.253.225:8080/hzl-iomp/html/client/client_temp.html">-->
-                         <iframe class="frame-of" id="iframe" frameborder="0" src="./HRM/client_temp.html">
-                        </iframe>
-					</div>
-					<hr class="frame-hr" />
-					<div id="pagination3" class="page fl col-sm-12"></div>
-					<!-- 翻页控件-->
-				</div>
-				<hr class="frame-hr" />
-				<div id="pagination3" class="page fl col-sm-12"></div>
-				<!-- 翻页控件-->
+		<div class="dt-content" style="display: block">
+			<div class="panel-heading"></div>
+			<div class="panel-body" id="frame_set">
+				<!--<iframe class="frame-of" id="iframe" frameborder="0" src="http://localhost:8080/lechang1923/html/client/client_temp.html"> -->
+				<!--<iframe class="frame-of" id="iframe" frameborder="0" src="http://119.23.253.225:8080/hzl-iomp/html/client/client_temp.html">-->
+				<iframe class="frame-of" id="iframe" frameborder="0" src="./HRM/client_temp.html">
+				</iframe>
 			</div>
+			<hr class="frame-hr" />
+			<div id="pagination3" class="page fl col-sm-12"></div>
+			<!-- 翻页控件-->
 		</div>
 	</div>
+</div>
 
-	<div id="contextmenu" class="floatClearBoth absolute fitContent menuDiv">
-		<ul class="menu-list menuDivUl">
-		</ul>
-	</div>
+<div id="contextmenu" class="floatClearBoth absolute fitContent menuDiv">
+	<ul class="menu-list menuDivUl">
+	</ul>
+</div>
 
-	<div id="contextmenu2" class="floatClearBoth absolute fitContent menuDiv">
-		<ul class="menu-list2 menuDivUl">
-		</ul>
-	</div>
-	<!--
-	模块1 ---三级菜单设置模块框
+<div id="contextmenu2" class="floatClearBoth absolute fitContent menuDiv">
+	<ul class="menu-list2 menuDivUl">
+	</ul>
+</div>
+<!--
+模块1 ---三级菜单设置模块框
 -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-md">
-				<div class="modal-header">
-					<i class="fa fa-angle-double-left back"></i>
-					<strong></strong>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel"></h4>
-				</div>
-				<div id="dlg" class="modal-body">
-					<div class="col-sm-12"></div>
-					<div class="col-sm-12"></div>
-					<div class="col-sm-12"></div>
-					<div class="col-sm-12"></div>
-				</div>
-				<div id="dlg2" class="modal-body" style="display: none">
-					<div class="col-sm-12"></div>
-					<div class="col-sm-12"></div>
-					<div class="col-sm-12"></div>
-					<div class="col-sm-12"></div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" id='rightControlBtn' class="btn btn-primary table-btn">提交更改</button>
-				</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content modal-md">
+			<div class="modal-header">
+				<i class="fa fa-angle-double-left back"></i>
+				<strong></strong>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel"></h4>
+			</div>
+			<div id="dlg" class="modal-body">
+				<div class="col-sm-12"></div>
+				<div class="col-sm-12"></div>
+				<div class="col-sm-12"></div>
+				<div class="col-sm-12"></div>
+			</div>
+			<div id="dlg2" class="modal-body" style="display: none">
+				<div class="col-sm-12"></div>
+				<div class="col-sm-12"></div>
+				<div class="col-sm-12"></div>
+				<div class="col-sm-12"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" id='rightControlBtn' class="btn btn-primary table-btn">提交更改</button>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<!--
-	模块2 ---二级菜单设置模块框
+<!--
+模块2 ---二级菜单设置模块框
 -->
 
-	<div class="modal fade" id="Modal_2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-md">
-				<div class="modal-header">
-					<i class="fa fa-angle-double-left back"></i>
-					<h4><strong></strong></h4>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="ModalLabel_2">
-					</h4>
-				</div>
-
-				<div class="ModalBodyContents">
-					<div id="dlg_1" class="modal-body" style="display: block;">
-						<div class="col-sm-12 col-warp">
-							<label class="col-sm-3">同级增加：</label><input type="number" id="Sibling_num"></input><br>
-							<br>
-							<label class="col-sm-3">次级增加：</label><input type="number" id="Chilren_num"></input>
-						</div>
-					</div>
-					<div id="dlg_2" class="modal-body" style="display: none">
-						<div class="col-sm-12 col-warp">
-							<label class="col-sm-3">静态名字:</label>
-							<input type="text" class="form-control" id="LiName_input"></input><br>
-							<br>
-							<label class="col-sm-3">关联页面地址：</label>
-							<input type="text" class="form-control" id="connect-url_2"></input>
-						</div>
-					</div>
-					<div id="dlg_3" class="modal-body" style="display: none">
-						<div class="col-sm-12 col-warp">
-						</div>
-					</div>
-				</div>
-				<!--ModalBodyContents-->
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-					</button>
-					<button type="button" id="setbtn" class="btn btn-primary table-btn">
-						提交更改
-					</button>
-				</div>
+<div class="modal fade" id="Modal_2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content modal-md">
+			<div class="modal-header">
+				<i class="fa fa-angle-double-left back"></i>
+				<h4><strong></strong></h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="ModalLabel_2">
+				</h4>
 			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
-	</div>
 
-	<!--
-	模块1 ---一级菜单设置模块框
--->
-
-	<div class="modal fade" id="Modal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-md">
-				<div class="modal-header">
-					<i class="fa fa-angle-double-left back"></i>
-					<h4><strong>导航设置</strong></h4>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="ModalLabel_2">
-					</h4>
+			<div class="ModalBodyContents">
+				<div id="dlg_1" class="modal-body" style="display: block;">
+					<div class="col-sm-12 col-warp">
+						<label class="col-sm-3">同级增加：</label><input type="number" id="Sibling_num"></input><br>
+						<br>
+						<label class="col-sm-3">次级增加：</label><input type="number" id="Chilren_num"></input>
+					</div>
 				</div>
-
-				<div id="dlg__3" class="modal-body" style="display: block;">
+				<div id="dlg_2" class="modal-body" style="display: none">
 					<div class="col-sm-12 col-warp">
 						<label class="col-sm-3">静态名字:</label>
-						<input type="text" class="form-control" id="NavName_input"></input><br>
+						<input type="text" class="form-control" id="LiName_input"></input><br>
 						<br>
 						<label class="col-sm-3">关联页面地址：</label>
-						<input type="text" class="form-control" id="connect-url_1"></input>
+						<input type="text" class="form-control" id="connect-url_2"></input>
 					</div>
 				</div>
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-					</button>
-					<button type="button" id="navbtn" class="btn btn-primary table-btn">
-						提交更改
-					</button>
+				<div id="dlg_3" class="modal-body" style="display: none">
+					<div class="col-sm-12 col-warp">
+					</div>
 				</div>
 			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
-	</div>
+			<!--ModalBodyContents-->
 
-	<!-- 计算模块模态框 -->
-	<div class="modal fade" id="calcModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<!-- 模态框头部 -->
-				<div class="modal-header">
-					<h5 style="display: inline;"><span class="current">计算</span>>><span>缓存任务</span></h5>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" id="setbtn" class="btn btn-primary table-btn">
+					提交更改
+				</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+
+<!--
+模块1 ---一级菜单设置模块框
+-->
+
+<div class="modal fade" id="Modal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content modal-md">
+			<div class="modal-header">
+				<i class="fa fa-angle-double-left back"></i>
+				<h4><strong>导航设置</strong></h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="ModalLabel_2">
+				</h4>
+			</div>
+
+			<div id="dlg__3" class="modal-body" style="display: block;">
+				<div class="col-sm-12 col-warp">
+					<label class="col-sm-3">静态名字:</label>
+					<input type="text" class="form-control" id="NavName_input"></input><br>
+					<br>
+					<label class="col-sm-3">关联页面地址：</label>
+					<input type="text" class="form-control" id="connect-url_1"></input>
 				</div>
-				<!-- 模态框主体 -->
-				<div class="modal-body">
-					<div class="calc-body">
-						<div class="binddiv">
-							<h5><strong>导入字段:</strong><span></span></h5>
-							<div class="bindvalue"><i class="fa fa-plus-circle"></i>
-								<p class="item">
-									<label>a:</label>
-									<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text"
-										class="rightControlSet field" placeholder="选取字段名"></input><input type="text" class="rightControlSet"
-										placeholder="字段截取条件"></input><span></span>
-									<p />
-									<p class="item">
-										<label>b:</label>
-										<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text"
-											class="rightControlSet field" placeholder="选取字段名"></input><input type="text"
-											class="rightControlSet" placeholder="字段截取条件"></input><span></span>
-									</p>
-							</div>
-						</div>
-						<div class="exprdiv">
-							<h5><strong>计算类型选择:</strong></h5>
-							<div class="exprtype">
-								<label>计算平均值</label><label>计算和</label><label>计算乘积</label><label>计算差值</label><label>计算商</label>
-								<br><label>字段排序</label><label>字段统计</label><label>自行绑定</label>
-								<!--         			<span>*其余计算类型自行绑定计算表达式</span> -->
-							</div>
-						</div>
-						<div class="autofilldiv">
-							<h5><strong>设置参数/计算表达式:</strong></h5>
-							<div class="autofill">
-								<p><label>字段参数*:</label><input type="text" class="rightControlSet"
-										placeholder="输入所需统计的字段名"></input><span>*可选</span>
-									<p>
-										<p><label>计算表达式:</label><input type="text" class="rightControlSet calc-expr"
-												id="calc_expr"></input><span></span></p>
-							</div>
-						</div>
-						<div class="resultdiv">
-							<h5><strong>设置导出字段:</strong></h5>
-							<div class="returnresult">
-								<input type="text" class="rightControlSet" id="field_name" placeholder="导出字段名"></input><input
-									type="text" class="rightControlSet" id="field_desc" placeholder="字段描述"></input>
-								<button class="btn btn-primary" id="cachebtn">缓存计算任务</button>
-							</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" id="navbtn" class="btn btn-primary table-btn">
+					提交更改
+				</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+
+<!-- 计算模块模态框 -->
+<div class="modal fade" id="calcModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- 模态框头部 -->
+			<div class="modal-header">
+				<h5 style="display: inline;"><span class="current">计算</span>>><span>缓存任务</span></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<!-- 模态框主体 -->
+			<div class="modal-body">
+				<div class="calc-body">
+					<div class="binddiv">
+						<h5><strong>导入字段:</strong><span></span></h5>
+						<div class="bindvalue"><i class="fa fa-plus-circle"></i>
+							<p class="item">
+								<label>a:</label>
+								<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet field" placeholder="选取字段名"></input><input type="text" class="rightControlSet" placeholder="字段截取条件"></input><span></span>
+							<p/>
+							<p class="item">
+								<label>b:</label>
+								<input type="text" class="rightControlSet tb" placeholder="选取表名"></input><input type="text" class="rightControlSet field" placeholder="选取字段名"></input><input type="text" class="rightControlSet" placeholder="字段截取条件"></input><span></span>
+							</p>
 						</div>
 					</div>
-					<!--calc-body-->
-					<div class="cache-body">
-						<div class="cachediv">
-							<h5><strong>已缓存以下计算任务:</strong></h5>
-							<table class="calctask">
-								<thead>
-									<tr>
-										<th>计算表达式</th>
-										<th>导出字段名</th>
-										<th>导出字段描述</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
-						</div>
-						<div class="outputdiv">
-							<h5><strong>导出计算任务:</strong></h5>
-							<div class="outputtask">
-								<p><label>表联立条件:</label><input type="text" class="rightControlSet calc-condition" id="calc_condition"
-										placeholder="表名.字段名=表名.字段名,.."></input><span>*注意为所有计算任务共享</span></p>
-								<p><label>共(<span id="task_num"></span>)条计算任务</label><button class="btn btn-primary"
-										id="outputbtn">全部导出到中间表</button></p>
-							</div>
+					<div class="exprdiv">
+						<h5><strong>计算类型选择:</strong></h5>
+						<div class="exprtype">
+							<label>计算平均值</label><label>计算和</label><label>计算乘积</label><label>计算差值</label><label>计算商</label>
+							<br><label>字段排序</label><label>字段统计</label><label>自行绑定</label>
+							<!--         			<span>*其余计算类型自行绑定计算表达式</span> -->
 						</div>
 					</div>
-					<!--cache-body-->
-				</div>
-				<!-- 模态框底部 -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary tocalc" id="tocalc">确定</button>
-				</div>
+					<div class="autofilldiv">
+						<h5><strong>设置参数/计算表达式:</strong></h5>
+						<div class="autofill">
+							<p><label>字段参数*:</label><input type="text" class="rightControlSet" placeholder="输入所需统计的字段名"></input><span>*可选</span><p>
+							<p><label>计算表达式:</label><input type="text" class="rightControlSet calc-expr" id="calc_expr"></input><span></span></p>
+						</div>
+					</div>
+					<div class="resultdiv">
+						<h5><strong>设置导出字段:</strong></h5>
+						<div class="returnresult">
+							<input type="text" class="rightControlSet" id="field_name" placeholder="导出字段名"></input><input type="text" class="rightControlSet" id="field_desc" placeholder="字段描述"></input>
+							<button class="btn btn-primary" id="cachebtn">缓存计算任务</button>
+						</div>
+					</div>
+				</div><!--calc-body-->
+				<div class="cache-body">
+					<div class="cachediv">
+						<h5><strong>已缓存以下计算任务:</strong></h5>
+						<table class="calctask">
+							<thead>
+							<tr>
+								<th>计算表达式</th>
+								<th>导出字段名</th>
+								<th>导出字段描述</th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+					<div class="outputdiv">
+						<h5><strong>导出计算任务:</strong></h5>
+						<div class="outputtask">
+							<p><label>表联立条件:</label><input type="text" class="rightControlSet calc-condition" id="calc_condition" placeholder="表名.字段名=表名.字段名,.."></input><span>*注意为所有计算任务共享</span></p>
+							<p><label>共(<span id="task_num"></span>)条计算任务</label><button class="btn btn-primary" id="outputbtn">全部导出到中间表</button></p>
+						</div>
+					</div>
+				</div><!--cache-body-->
+			</div>
+			<!-- 模态框底部 -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary tocalc" id="tocalc">确定</button>
 			</div>
 		</div>
 	</div>
+</div>
 
 </body>
 
