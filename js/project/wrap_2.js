@@ -2,8 +2,6 @@
 $(document).ready(function () {
     //-----------------------实验用--------------------------------
 
-
-
     // ================================工具函数================================
     function hide(idArr) {  // 隐藏传入的数组中的每个元素
         for (let i = 0; i < idArr.length; i++) {
@@ -185,7 +183,6 @@ $(document).ready(function () {
                         $("#input0").removeAttr("disabled");
                     } else {
                         alert(recieve.msg);
-                        location.reload();
                     }
                 }
             },
@@ -270,7 +267,7 @@ $(document).ready(function () {
             data_array[j] = data_element;
             var typeVal = $('#input2_1 :selected').text()  // 获取被选中的字段类型
             combineType = $("#input4_" + j).val();  // 组合字段的组合方式
-            if (combineType !== " ") {
+            if (combineType !== "") {
                 hasCombine = true;
                 combineTypeName = data_element['fieldName'];
             }
