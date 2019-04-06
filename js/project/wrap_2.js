@@ -183,6 +183,7 @@ $(document).ready(function () {
                         $("#input0").removeAttr("disabled");
                     } else {
                         alert(recieve.msg);
+                        $("#input0").removeAttr("disabled");
                     }
                 }
             },
