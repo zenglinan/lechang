@@ -173,7 +173,7 @@ $(document).ready(function () {
         //数据传输
         $.ajax({
             type: "POST",
-            url: "https://d62330bd-2e9b-4dd1-8cdd-d398f7843c30.mock.pstmn.io",
+            url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?doDbSynch&synMethod=normal",
             data: JSON.stringify(data_json, null, 4),
             contentType: "application/json;charset=UTF-8",
             success: function (recieve) {
