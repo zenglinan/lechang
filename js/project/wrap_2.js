@@ -173,7 +173,7 @@ $(document).ready(function () {
         //数据传输
         $.ajax({
             type: "POST",
-            url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?doDbSynch&synMethod=normal",
+            url: "https://d62330bd-2e9b-4dd1-8cdd-d398f7843c30.mock.pstmn.io",
             data: JSON.stringify(data_json, null, 4),
             contentType: "application/json;charset=UTF-8",
             success: function (recieve) {
@@ -265,9 +265,9 @@ $(document).ready(function () {
                 content: $("#input9_" + j).val()
             }
             data_array[j] = data_element;
-            var typeVal = $('#input2_1 :selected').text()  // 获取被选中的字段类型
+            var typeVal = $('#input2_' + j + ' :selected').text()  // 获取被选中的字段类型
             combineType = $("#input4_" + j).val();  // 组合字段的组合方式
-            if (combineType !== "") {
+            if (combineType !== "" && combineType !== " ") {
                 hasCombine = true;
                 combineTypeName = data_element['fieldName'];
             }
