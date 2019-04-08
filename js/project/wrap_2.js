@@ -145,7 +145,7 @@ $(document).ready(function () {
     function ajax_0() {
         $("#input0").attr("disabled", "true");
         var num = getCookie("field_num");
-
+        var pro = new Promise(find_table)
         var data_json = {
             cgFormHead: {
                 tableName: $(".input_name").val(),
@@ -171,26 +171,28 @@ $(document).ready(function () {
             }
         };
         //数据传输
-        $.ajax({
-            type: "POST",
-            url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?doDbSynch&synMethod=normal",
-            data: JSON.stringify(data_json, null, 4),
-            contentType: "application/json;charset=UTF-8",
-            success: function (recieve) {
-                if (!recieve.success) {
-                } else {
-                    if (!recieve.msg.indexOf("成功")) {
-                        $("#input0").removeAttr("disabled");
+        pro.then(function () {
+            $.ajax({
+                type: "POST",
+                url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?doDbSynch&synMethod=normal",
+                data: JSON.stringify(data_json, null, 4),
+                contentType: "application/json;charset=UTF-8",
+                success: function (recieve) {
+                    if (!recieve.success) {
                     } else {
-                        alert(recieve.msg);
-                        $("#input0").removeAttr("disabled");
+                        if (recieve.msg.indexOf("成功")) {
+                            location.reload()
+                        } else {
+                            alert(recieve.msg);
+                            $("#input0").removeAttr("disabled");
+                        }
                     }
+                },
+                error: function (unrecieve) {
+                    $("#input0").removeAttr("disabled");
                 }
-            },
-            error: function (unrecieve) {
-                $("#input0").removeAttr("disabled");
-            }
-        });
+            });
+        })
     }
     // ==========accept修改表结构的ajax==========
     function ajax_1() {
@@ -315,15 +317,18 @@ $(document).ready(function () {
         }
     }
     // ==========查找所有表的ajax==========
-    function find_table() {
-        var name = $("#table_name").val();
+    function find_table(resolve,reject) {
+        var name = $("#table_name").val().toString();
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?judge",
             data: { tableName: name },
             success: function (recieve) {
                 if (recieve.success) {
                     alert(recieve.msg);
+                    resolve()
+                }else{
+                    reject()
                 }
             }
         });
