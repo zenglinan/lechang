@@ -167,7 +167,8 @@ $(document).ready(function () {
             },
             "dateField": {
                 "name": timeTypeName,
-                "type": timeType
+                "type": timeType,
+                "isauto": 1
             }
         };
         //数据传输
