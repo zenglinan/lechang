@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="16dd100f-32a3-4a25-a4d4-d6a649a9223b" name="默认的" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/project/wrap_2.js" afterPath="$PROJECT_DIR$/js/project/wrap_2.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -100,8 +99,8 @@
       <file leaf-file-name="wrap_2.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/project/wrap_2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="87" column="27" lean-forward="true" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
+            <state relative-caret-position="212">
+              <caret line="83" column="91" lean-forward="true" selection-start-line="83" selection-start-column="91" selection-end-line="83" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -452,7 +451,7 @@
       <workItem from="1554011390324" duration="1800000" />
       <workItem from="1554736111318" duration="3896000" />
       <workItem from="1554802986229" duration="366000" />
-      <workItem from="1554818915111" duration="3292000" />
+      <workItem from="1554818915111" duration="3452000" />
     </task>
     <task id="LOCAL-00001" summary="上传20190203版本">
       <created>1549179338907</created>
@@ -664,11 +663,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554820171430</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="20190409x3&#10;新增功能：&#10;1.新增isauto字段">
+      <created>1554823289731</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1554823289801</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="438311000" />
+    <option name="totallyTimeSpent" value="438471000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1386" height="735" extended-state="0" />
@@ -727,7 +733,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="20190214版本1&#10;新增功能：&#10;1.修改多表多字段的联查模式(两层)&#10;2.新增通过查询结构树来查询对应页面" />
     <MESSAGE value="20190214版本1&#10;新增功能：&#10;1.修复文件管理功能&#10;2.修复信息发送功能&#10;3.修复网页管理获取" />
     <MESSAGE value="20190218版本1&#10;新增功能：&#10;1.上传管理细节修复&#10;2.添加已发送信息列表" />
     <MESSAGE value="20190218版本2&#10;新增功能：&#10;2.修复已发送信息列表" />
@@ -752,7 +757,8 @@
     <MESSAGE value="20190331x1&#10;新增功能：&#10;1.合并login wrap_5_temp client_index" />
     <MESSAGE value="20190409x1&#10;新增功能：&#10;1.修改了重复表测试，成功即跳转" />
     <MESSAGE value="20190409x2&#10;新增功能：&#10;1.修复了wrap5的重复界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="20190409x2&#10;新增功能：&#10;1.修复了wrap5的重复界面" />
+    <MESSAGE value="20190409x3&#10;新增功能：&#10;1.新增isauto字段" />
+    <option name="LAST_COMMIT_MESSAGE" value="20190409x3&#10;新增功能：&#10;1.新增isauto字段" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1103,8 +1109,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/project/wrap_2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="87" column="27" lean-forward="true" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
+        <state relative-caret-position="212">
+          <caret line="83" column="91" lean-forward="true" selection-start-line="83" selection-start-column="91" selection-end-line="83" selection-end-column="91" />
           <folding />
         </state>
       </provider>
