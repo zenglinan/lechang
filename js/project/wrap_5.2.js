@@ -66,6 +66,7 @@ function RownavItem(idname, classname, contenttext, type) { //传一个类型值
 }
 RownavItem.prototype = new el_Create();
 
+
 //-------RightControlDiv
 function RightControlDiv(menuDiv, menuArry, type) { //传一个类型值判断
 	this.menuAttr = menuArry;
@@ -208,13 +209,17 @@ function e1_appendChildrenNodes(e) {
 function e2_setElementsName() {
 	if($(Modalmousetg).text() == "定义设置") {
 		var text = $("#LiName_input").val();
-		if(mousetg.hasClass("nav-li")) { //菜单单元
+		if(mousetg.hasClass("nav-li") && text) { //菜单单元
 			var span = mousetg.children().children("span");
 			$(span).text(text);
 		}
 		var url = $("#connect-url_2").val();
-		if(url) {
+		if(url) { //url处理
 			mousetg.find('a').attr("href",url);
+		}
+		var type = $("#link_type_2").val(); // 类型处理
+		if (type === 'static'){
+			mousetg.addClass("staic");
 		}
 	}
 }
@@ -288,16 +293,27 @@ function fn1_newRownavItem(e) {
 		var li = new RownavItem("", "row-li", "[navitem]", "0");
 		$(mousetg).parents(".hd-nav").find(".row-nav").append(li.dom);
 	} else if($(mousetg).parents(".nav-follow").length != 0) {
+		var currentnav = $(mousetg).parents(".follow-content").children("ul:visible");
 		var followli = new RownavItem("", "follow-item", "[followitem]", "1");
-		var parentli = fn2_createFollownav.current;
-		parentli.followitem.push(followli);
-		$(mousetg).parents(".follow-content").children("ul:visible").append(followli.dom);
+		var _parentli = $(mousetg).parents(".hd").find('.hd-nav').find('li.current');
+		var parentli = fn2_createFollownav.current || _parentli;
+		if (parentli.followitem){
+			parentli.followitem.push(followli);
+		}else{
+			parentli.followitem = [];
+			parentli.followitem.length = currentnav.children('li').length;
+			parentli.followitem.length ++;
+		}
+		if (parentli.hasClass('static')) {
+			$(followli.dom).addClass('static');
+		}
+		currentnav.append(followli.dom);
 	}
 }
 
 //新建二级导航
 function fn2_createFollownav(e) {
-	if(mousetg.hasClass("current")) {
+	if(mousetg.hasClass("current") && mousetg[0].dataset.set != 'true') {
 		var followArry = [];
 		mousetg.followitem = followArry;
 		var dataset = "map-" + randomForData();
@@ -317,13 +333,29 @@ function fn2_createFollownav(e) {
 	}
 }
 
-//定义导航名称
+//定义导航设置
 function fn3_setItemName(e) {
 	var itemname = $("#NavName_input").val();
-	$(mousetg).children().text(itemname);
+	if (itemname) {
+		$(mousetg).children().text(itemname);
+	}
 	var url = $("#connect-url_1").val();
-	if(url) {
+	if(url) { //url处理
 		mousetg.find('a').attr("href",url);
+	}
+	var type = $("#link_type_1").val(); // 类型处理
+	if (type === 'static'){
+		mousetg.addClass("static");
+		if (mousetg[0].dataset.set == 'true') {
+			var followul = mousetg.parents("#hd").find(".nav-follow").find('ul');
+			followul.each(function(index, element) {
+				if(element.dataset.item == mousetg[0].dataset.map) {
+					$(element).children('li').each((i,el) => {
+						$(el).addClass('static');
+					})
+				}
+			})
+		}
 	}
 }
 

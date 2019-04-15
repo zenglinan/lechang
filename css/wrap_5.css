@@ -107,6 +107,7 @@ label>select {
 	margin-left: 10px;
 }
 
+.col-warp select,
 .col-warp input[type=text] {
 	width: 200px; 
 	display: inline;

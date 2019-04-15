@@ -267,6 +267,18 @@ body {
 	font-weight: bold;
 }
 
+.row-nav li.static.current>a {
+	color: #4f4f4f;
+	font-weight: bold;
+}
+
+.follow-item.static.current>a {
+	color: #4f4f4f;
+	font-weight: normal;
+}
+.follow-item.static.current {
+	border: none
+}
 
 /** body **/
 
