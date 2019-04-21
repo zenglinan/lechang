@@ -298,7 +298,7 @@ $(document).ready(function () {
                         break;
                     case "年月日": timeType = 2;
                         break;
-                    case "年月日时": timeType = 3;
+                    case "年月日时分秒": timeType = 3;
                         break;
                 }
             }
