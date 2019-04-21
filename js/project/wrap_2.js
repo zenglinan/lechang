@@ -115,7 +115,7 @@ $(document).ready(function () {
         select.setAttribute("id", idname);
         select.setAttribute("style", "width:100%");
         for (var i in select_array) {
-            if (select_array[i] === "string" || select_array[i] === "date") {
+            if (select_array[i] === "string" || select_array[i] === "date" || select_array[i] === "userDate") {
                 select.add(new Option(select_array[i], "string"), null);
             } else {
                 select.add(new Option(select_array[i], select_array[i]), null);
@@ -165,15 +165,16 @@ $(document).ready(function () {
                 name: combineTypeName,
                 expr: combineType
             },
-            "dateField": {
-                "name": timeTypeName,
-                "type": timeType
-            }
+            dateField: [{
+                name: timeTypeName,
+                type: timeType,
+                isauto: isauto
+            }]
         };
         //数据传输
         $.ajax({
             type: "POST",
-            url: "http://119.23.253.225:8080/hzl-iomp/cgFormHeadController?doDbSynch&synMethod=normal",
+            url: "/xxx",
             data: JSON.stringify(data_json, null, 4),
             contentType: "application/json;charset=UTF-8",
             success: function (recieve) {
@@ -273,6 +274,21 @@ $(document).ready(function () {
                 combineTypeName = data_element['fieldName'];
             }
             if (typeVal === "date") {
+                isauto =  0;  
+                timeTypeName = data_element['fieldName'];
+                hasTime = true;
+                switch ($("#input5_" + j).val()) {
+                    case "年": timeType = 0;
+                        break;
+                    case "年月": timeType = 1;
+                        break;
+                    case "年月日": timeType = 2;
+                        break;
+                    case "年月日时": timeType = 3;
+                        break;
+                }
+            }else if(typeVal === "userDate"){
+                isauto =  0;  
                 timeTypeName = data_element['fieldName'];
                 hasTime = true;
                 switch ($("#input5_" + j).val()) {
@@ -345,7 +361,7 @@ $(document).ready(function () {
 
         var select_item = new Array();
         var select_item5 = new Array();
-        select_item = ["string", "int", "date"];
+        select_item = ["string", "int", "date", "userDate"];
         select_item5 = ["Y", "N"];
 
         //替换内容
@@ -625,6 +641,7 @@ $(document).ready(function () {
     var select1 = ["1", "2"];
     var select2 = ["NATIVE", "。。。"];
     var select3 = ["single", "。。。"];
+    var isauto = 0;
     select_add($("#jformType"), select1);
     select_add($("#jformPkType"), select2);
     select_add($("#querymode"), select3);
