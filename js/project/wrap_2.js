@@ -286,6 +286,9 @@ $(document).ready(function () {
                         break;
                     case "年月日时": timeType = 3;
                         break;
+                    default: alert(`日期方式输入错误！\n只支持"年"、"年月"、"年月日"、"年月日时"`);
+                    hasTime = false;
+                    break;
                 }
             }else if(typeVal === "userDate"){
                 isauto =  0;  
@@ -300,7 +303,9 @@ $(document).ready(function () {
                         break;
                     case "年月日时分秒": timeType = 3;
                         break;
-                    default: alert(`日期方式输入错误，只支持"年"、"年月"、"年月日"、""`)
+                    default: alert(`日期方式输入错误！\n只支持"年"、"年月"、"年月日"、"年月日时分秒"`);
+                    hasTime = false;
+                    break;
                 }
             }
         }
@@ -430,7 +435,7 @@ $(document).ready(function () {
                 var input2 = create_select("类型", select_item, "form-control form_select", "input2_" + m, 100, 1);
                 var input3 = create_input("长度", "number", "form-control form_input", "input3_" + m, 100, 1);
                 var input4 = create_input("组合方式", "text", "form-control form_input", "input4_" + m, 100, 6);
-                var input5 = create_input("日期方式", "text", "form-control form_input", "input5_" + m, 100, 6);
+                var input5 = create_input("日期方式", "text", "form-control form_input", "input5_" + m, 120, 6);
                 var input6 = create_select("为空", select_item5, "form-control form_select", "input6_" + m, 100, 1);
                 var input7 = create_input("注释", "text", "form-control form_input", "input7_" + m, 200, 4);
                 var input8 = create_input("字段默认值", "text", "form-control form_input", "input8_" + m, 200, 4);
