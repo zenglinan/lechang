@@ -274,7 +274,7 @@ $(document).ready(function () {
                 combineTypeName = data_element['fieldName'];
             }
             if (typeVal === "date") {
-                isauto =  0;  
+                isauto =  1;  
                 timeTypeName = data_element['fieldName'];
                 hasTime = true;
                 switch ($("#input5_" + j).val()) {
@@ -300,6 +300,7 @@ $(document).ready(function () {
                         break;
                     case "年月日时分秒": timeType = 3;
                         break;
+                    default: alert(`日期方式输入错误，只支持"年"、"年月"、"年月日"、""`)
                 }
             }
         }
