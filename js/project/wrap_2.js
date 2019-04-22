@@ -115,7 +115,7 @@ $(document).ready(function () {
         select.setAttribute("id", idname);
         select.setAttribute("style", "width:100%");
         for (var i in select_array) {
-            if (select_array[i] === "string" || select_array[i] === "date") {
+            if (select_array[i] === "string" || select_array[i] === "date" || select_array[i] === "userDate") {
                 select.add(new Option(select_array[i], "string"), null);
             } else {
                 select.add(new Option(select_array[i], select_array[i]), null);
@@ -276,6 +276,7 @@ $(document).ready(function () {
                 combineTypeName = data_element['fieldName'];
             }
             if (typeVal === "date") {
+                isauto =  1;  
                 timeTypeName = data_element['fieldName'];
                 hasTime = true;
                 switch ($("#input5_" + j).val()) {
@@ -287,6 +288,26 @@ $(document).ready(function () {
                         break;
                     case "年月日时": timeType = 3;
                         break;
+                    default: alert(`日期方式输入错误！\n只支持"年"、"年月"、"年月日"、"年月日时"`);
+                    hasTime = false;
+                    break;
+                }
+            }else if(typeVal === "userDate"){
+                isauto =  0;  
+                timeTypeName = data_element['fieldName'];
+                hasTime = true;
+                switch ($("#input5_" + j).val()) {
+                    case "年": timeType = 0;
+                        break;
+                    case "年月": timeType = 1;
+                        break;
+                    case "年月日": timeType = 2;
+                        break;
+                    case "年月日时分秒": timeType = 3;
+                        break;
+                    default: alert(`日期方式输入错误！\n只支持"年"、"年月"、"年月日"、"年月日时分秒"`);
+                    hasTime = false;
+                    break;
                 }
             }
         }
@@ -351,7 +372,7 @@ $(document).ready(function () {
 
         var select_item = new Array();
         var select_item5 = new Array();
-        select_item = ["string", "int", "date"];
+        select_item = ["string", "int", "date", "userDate"];
         select_item5 = ["Y", "N"];
 
         //替换内容
@@ -419,7 +440,7 @@ $(document).ready(function () {
                 var input2 = create_select("类型", select_item, "form-control form_select", "input2_" + m, 100, 1);
                 var input3 = create_input("长度", "number", "form-control form_input", "input3_" + m, 100, 1);
                 var input4 = create_input("组合方式", "text", "form-control form_input", "input4_" + m, 100, 6);
-                var input5 = create_input("日期方式", "text", "form-control form_input", "input5_" + m, 100, 6);
+                var input5 = create_input("日期方式", "text", "form-control form_input", "input5_" + m, 120, 6);
                 var input6 = create_select("为空", select_item5, "form-control form_select", "input6_" + m, 100, 1);
                 var input7 = create_input("注释", "text", "form-control form_input", "input7_" + m, 200, 4);
                 var input8 = create_input("字段默认值", "text", "form-control form_input", "input8_" + m, 200, 4);
@@ -631,6 +652,7 @@ $(document).ready(function () {
     var select1 = ["1", "2"];
     var select2 = ["NATIVE", "。。。"];
     var select3 = ["single", "。。。"];
+    var isauto = 0;
     select_add($("#jformType"), select1);
     select_add($("#jformPkType"), select2);
     select_add($("#querymode"), select3);
