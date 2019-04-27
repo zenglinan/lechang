@@ -145,7 +145,7 @@ $(document).ready(function () {
     function ajax_0() {
         $("#input0").attr("disabled", "true");
         var num = getCookie("field_num");
-        var pro = new Promise(find_table)
+        var pro = new Promise(find_table)    
         var data_json = {
             cgFormHead: {
                 tableName: $(".input_name").val(),
@@ -165,11 +165,7 @@ $(document).ready(function () {
                 name: combineTypeName,
                 expr: combineType
             },
-            "dateField": {
-                "name": timeTypeName,
-                "type": timeType,
-                "isauto": 1
-            }
+            "dateField": dateField
         };
         //数据传输
         pro.then(function () {
@@ -256,6 +252,7 @@ $(document).ready(function () {
     function datas(num) {
         var data_array = new Array();
         for (var j = 0; j < num; j++) {
+            let dateFieldObj = {}
             var data_element = {
                 id: (j + 1).toString(),
                 fieldName: $("#input1_" + j).val(),
@@ -276,38 +273,44 @@ $(document).ready(function () {
                 combineTypeName = data_element['fieldName'];
             }
             if (typeVal === "date") {
-                isauto =  1;  
-                timeTypeName = data_element['fieldName'];
+                dateFieldObj.name = data_element['fieldName'];
+                dateFieldObj.isauto = 1;
                 hasTime = true;
                 switch ($("#input5_" + j).val()) {
-                    case "年": timeType = 0;
+                    case "年": dateFieldObj.type = 0;
                         break;
-                    case "年月": timeType = 1;
+                    case "年月": dateFieldObj.type = 1;
                         break;
-                    case "年月日": timeType = 2;
+                    case "年月日": dateFieldObj.type = 2;
                         break;
-                    case "年月日时": timeType = 3;
+                    case "年月日时": dateFieldObj.type = 3;
                         break;
                     default: alert(`日期方式输入错误！\n只支持"年"、"年月"、"年月日"、"年月日时"`);
                     hasTime = false;
                     break;
                 }
+                if(hasTime){
+                    dateField.push(dateFieldObj)
+                }
             }else if(typeVal === "userDate"){
-                isauto =  0;  
-                timeTypeName = data_element['fieldName'];
+                dateFieldObj.name = data_element['fieldName'];
+                dateFieldObj.isauto = 0;
                 hasTime = true;
                 switch ($("#input5_" + j).val()) {
-                    case "年": timeType = 0;
+                    case "年": dateFieldObj.type = 0;
                         break;
-                    case "年月": timeType = 1;
+                    case "年月": dateFieldObj.type = 1;
                         break;
-                    case "年月日": timeType = 2;
+                    case "年月日": dateFieldObj.type = 2;
                         break;
-                    case "年月日时分秒": timeType = 3;
+                    case "年月日时分秒": dateFieldObj.type = 3;
                         break;
                     default: alert(`日期方式输入错误！\n只支持"年"、"年月"、"年月日"、"年月日时分秒"`);
                     hasTime = false;
                     break;
+                }
+                if(hasTime){
+                    dateField.push(dateFieldObj)
                 }
             }
         }
@@ -606,6 +609,7 @@ $(document).ready(function () {
                         if ($("#input1_1").attr("readonly") == "readonly" || field_data.length == 2) {
                             $("#input0").bind('click', ajax_1);
                         } else {
+                            console.log('here')
                             $("#input0").bind('click', ajax_0);
 
                         }
@@ -639,11 +643,9 @@ $(document).ready(function () {
     // #chevron: "< 详细"
     // #tablecontent: "新建数据表"页面的 "< 详细"里的表识别名
     // #input0: "数据表设置页面的accept按钮
-    //-----------------------CSS实现-------------------------------
+    var dateField = [];
     var tag = 0;    // 创建表发送给后台的tag
     var hasTime = false;
-    var timeType = 0;
-    var timeTypeName = "";
     var hasCombine = false;
     var combineType = "";   // 组合字段方式
     var combineTypeName = ""; // 组合字段的那个字段名
@@ -652,27 +654,11 @@ $(document).ready(function () {
     var select1 = ["1", "2"];
     var select2 = ["NATIVE", "。。。"];
     var select3 = ["single", "。。。"];
-    var isauto = 0;
     select_add($("#jformType"), select1);
     select_add($("#jformPkType"), select2);
     select_add($("#querymode"), select3);
 
     $("#table-new-2").attr("style", "display:none");
-    // ==========pagination插件==========
-    // $("#pagination3").pagination({
-    //     // 删？
-    //     currentPage: 1,// 当前页数
-    //     totalPage: 2,// 总页数
-    //     isShow: true,// 是否显示首尾页
-    //     count: 2,// 显示个数
-    //     homePageText: "首页",// 首页文本
-    //     endPageText: "尾页",// 尾页文本
-    //     prevPageText: "上一页",// 上一页文本
-    //     nextPageText: "下一页",// 下一页文本
-    //     callback: function (current) {
-    //         // 回调,current(当前页数)
-    //     }
-    // });
 
     // ==========获取表的ajax==========
     $.ajax({
